@@ -1,0 +1,42 @@
+{
+	"name": "windwalker/starter",
+	"description": "Windwalker Starter.",
+	"homepage": "https://github.com/ventoviro/windwalker",
+	"license": "GNU Lesser General Public License",
+	"minimum-stability": "beta",
+	"authors": [
+		{
+			"name": "Simon Asika",
+			"email": "asika32764@gmail.com"
+		}
+	],
+	"require": {
+		"windwalker/core" : "~2.0@stable",
+		"symfony/yaml" : "2.*@stable",
+		"filp/whoops": "1.*@stable",
+		"fzaninotto/faker": "~1.0@stable",
+		"asika/faker-zhtw": "*@stable",
+
+		"twig/twig" : "~1.0@stable",
+		"asika/muse": "1.*@stable"
+	},
+	"require-dev": {
+		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/ventoviro/phpunit-skeleton-generator"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"": "src/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master" : "2.1-dev"
+		}
+	}
+}

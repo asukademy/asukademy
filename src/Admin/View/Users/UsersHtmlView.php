@@ -8,8 +8,6 @@
 
 namespace Admin\View\Users;
 
-use Riki\Asset\Asset;
-use Riki\Uri\Uri;
 use Windwalker\Core\View\BladeHtmlView;
 
 /**

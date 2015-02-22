@@ -11,7 +11,7 @@
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/admin/main.css" />
+    <link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/admin/main.css?{{{ \Riki\Asset\Asset::getVersion() }}}" />
     @yield('style')
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

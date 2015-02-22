@@ -53,6 +53,13 @@ class AssetManager
 	protected $version;
 
 	/**
+	 * Property indents.
+	 *
+	 * @var  string
+	 */
+	protected $indents = '    ';
+
+	/**
 	 * addStyle
 	 *
 	 * @param string $url
@@ -63,7 +70,7 @@ class AssetManager
 	 */
 	public function addStyle($url, $version = null, $attribs = array())
 	{
-		if (!$version)
+		if (!$version && $version !== false))
 		{
 			$version = $this->getVersion();
 		}
@@ -90,7 +97,7 @@ class AssetManager
 	 */
 	public function addScript($url, $version = null, $attribs = array())
 	{
-		if (!$version)
+		if (!$version && $version !== false)
 		{
 			$version = $this->getVersion();
 		}
@@ -154,6 +161,11 @@ class AssetManager
 
 			$attribs = array_merge($defaultAttribs, $style['attribs']);
 
+			if ($style['version'] !== false)
+			{
+				$attribs['href'] .= '?' . $style['version'];
+			}
+
 			$html[] = (string) new HtmlElement('link', null, $attribs);
 		}
 
@@ -162,7 +174,7 @@ class AssetManager
 			$html[] = (string) new HtmlElement('style', $this->renderInternalStyles());
 		}
 
-		return implode("\n", $html);
+		return implode("\n" . $this->indents, $html);
 	}
 
 	/**
@@ -184,6 +196,11 @@ class AssetManager
 
 			$attribs = array_merge($defaultAttribs, $script['attribs']);
 
+			if ($script['version'] !== false)
+			{
+				$attribs['src'] .= '?' . $script['version'];
+			}
+
 			$html[] = (string) new HtmlElement('script', null, $attribs);
 		}
 
@@ -192,7 +209,7 @@ class AssetManager
 			$html[] = (string) new HtmlElement('script', $this->renderInternalScripts());
 		}
 
-		return implode("\n", $html);
+		return implode("\n" . $this->indents, $html);
 	}
 
 	/**
@@ -235,5 +252,139 @@ class AssetManager
 		}
 
 		return $this->version = trim(file_get_contents($sumFile));
+	}
+
+	/**
+	 * Method to set property version
+	 *
+	 * @param   string $version
+	 *
+	 * @return  static  Return self to support chaining.
+	 */
+	public function setVersion($version)
+	{
+		$this->version = $version;
+
+		return $this;
+	}
+
+	/**
+	 * Method to get property Styles
+	 *
+	 * @return  array
+	 */
+	public function getStyles()
+	{
+		return $this->styles;
+	}
+
+	/**
+	 * Method to set property styles
+	 *
+	 * @param   array $styles
+	 *
+	 * @return  static  Return self to support chaining.
+	 */
+	public function setStyles($styles)
+	{
+		$this->styles = $styles;
+
+		return $this;
+	}
+
+	/**
+	 * Method to get property Scripts
+	 *
+	 * @return  array
+	 */
+	public function getScripts()
+	{
+		return $this->scripts;
+	}
+
+	/**
+	 * Method to set property scripts
+	 *
+	 * @param   array $scripts
+	 *
+	 * @return  static  Return self to support chaining.
+	 */
+	public function setScripts($scripts)
+	{
+		$this->scripts = $scripts;
+
+		return $this;
+	}
+
+	/**
+	 * Method to get property InternalStyles
+	 *
+	 * @return  array
+	 */
+	public function getInternalStyles()
+	{
+		return $this->internalStyles;
+	}
+
+	/**
+	 * Method to set property internalStyles
+	 *
+	 * @param   array $internalStyles
+	 *
+	 * @return  static  Return self to support chaining.
+	 */
+	public function setInternalStyles($internalStyles)
+	{
+		$this->internalStyles = $internalStyles;
+
+		return $this;
+	}
+
+	/**
+	 * Method to get property InternalScripts
+	 *
+	 * @return  array
+	 */
+	public function getInternalScripts()
+	{
+		return $this->internalScripts;
+	}
+
+	/**
+	 * Method to set property internalScripts
+	 *
+	 * @param   array $internalScripts
+	 *
+	 * @return  static  Return self to support chaining.
+	 */
+	public function setInternalScripts($internalScripts)
+	{
+		$this->internalScripts = $internalScripts;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set property indents
+	 *
+	 * @param   string $indents
+	 *
+	 * @return  static  Return self to support chaining.
+	 */
+	public function setIndents($indents)
+	{
+		$this->indents = $indents;
+
+		return $this;
+	}
+
+	/**
+	 * Method to get property Indents
+	 *
+	 * @return  string
+	 */
+	public function getIndents()
+	{
+		return $this->indents;
 	}
 }

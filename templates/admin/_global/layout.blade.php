@@ -4,6 +4,8 @@ use Riki\Asset\Asset;
 use Riki\Uri\Uri;
 
 Asset::addScript(Uri::media(true) . 'riki/js/form.js');
+
+Asset::setIndents("    ");
 ?>
 @extends('admin._global.html')
 

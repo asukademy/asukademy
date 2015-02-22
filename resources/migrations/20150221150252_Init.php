@@ -9,6 +9,7 @@
 use Windwalker\Core\Migration\AbstractMigration;
 use Windwalker\Database\Schema\Column;
 use Windwalker\Database\Schema\DataType;
+use Windwalker\Table\Table;
 
 /**
  * Migration class, version: 20150221150252
@@ -20,7 +21,7 @@ class Init extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->db->getTable('users')
+		$this->db->getTable(Table::USERS)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Varchar('name'))
 			->addColumn(new Column\Varchar('username'))
@@ -40,7 +41,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('categories')
+		$this->db->getTable(Table::CATEGORIES)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Varchar('alias'))
@@ -49,14 +50,12 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('courses')
+		$this->db->getTable(Table::COURSES)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Integer('catid'))
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Varchar('alias'))
 			->addColumn(new Column\Varchar('subtitle'))
-			->addColumn(new Column\Timestamp('start'))
-			->addColumn(new Column\Timestamp('end'))
 			->addColumn(new Column\Varchar('image'))
 			->addColumn(new Column\Text('introtext'))
 			->addColumn(new Column\Text('fulltext'))
@@ -70,7 +69,19 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('tutors')
+		$this->db->getTable(Table::STAGES)
+			->addColumn(new Column\Primary('id'))
+			->addColumn(new Column\Integer('course_id'))
+			->addColumn(new Column\Varchar('title'))
+			->addColumn(new Column\Varchar('alias'))
+			->addColumn(new Column\Text('description'))
+			->addColumn(new Column\Tinyint('state', 1))
+			->addColumn(new Column\Timestamp('start'))
+			->addColumn(new Column\Timestamp('end'))
+			->addColumn(new Column\Text('params'))
+			->create(true);
+
+		$this->db->getTable(Table::TUTORS)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Integer('user_id'))
 			->addColumn(new Column\Varchar('name'))
@@ -81,14 +92,14 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('tutor_course_maps')
+		$this->db->getTable(Table::TUTOR_COURSE_MAPS)
 			->addColumn(new Column\Integer('tutor_id'))
 			->addColumn(new Column\Integer('course_id'))
 			->create(true);
 
-		$this->db->getTable('plans')
+		$this->db->getTable(Table::PLANS)
 			->addColumn(new Column\Primary('id'))
-			->addColumn(new Column\Integer('course_id'))
+			->addColumn(new Column\Integer('stage_id'))
 			->addColumn(new Column\Varchar('title'))
 			->addColumn('price', DataType::DECIMAL, Column::UNSIGNED, Column::NOT_NULL, 0)
 			->addColumn('origin_price', DataType::DECIMAL, Column::UNSIGNED, Column::NOT_NULL, 0)
@@ -100,7 +111,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('classes')
+		$this->db->getTable(Table::CLASSES)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Integer('course_id'))
 			->addColumn(new Column\Varchar('title'))
@@ -113,7 +124,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('positions')
+		$this->db->getTable(Table::POSITIONS)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Varchar('url'))
@@ -126,7 +137,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('orders')
+		$this->db->getTable(Table::ORDERS)
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Integer('user_id'))
 			->addColumn(new Column\Integer('course_id'))
@@ -147,7 +158,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
-		$this->db->getTable('tags')
+		$this->db->getTable(Table::TAGS)
 			->addColumn(new Column\Integer('course_id'))
 			->addColumn(new Column\Varchar('title'))
 			->create(true);
@@ -158,15 +169,15 @@ class Init extends AbstractMigration
 	 */
 	public function down()
 	{
-		$this->db->getTable('categories')->drop(true);
-		$this->db->getTable('classes')->drop(true);
-		$this->db->getTable('courses')->drop(true);
-		$this->db->getTable('orders')->drop(true);
-		$this->db->getTable('plans')->drop(true);
-		$this->db->getTable('positions')->drop(true);
-		$this->db->getTable('tags')->drop(true);
-		$this->db->getTable('tutor_course_maps')->drop(true);
-		$this->db->getTable('tutors')->drop(true);
-		$this->db->getTable('users')->drop(true);
+		$this->db->getTable(Table::CATEGORIES)->drop(true);
+		$this->db->getTable(Table::CLASSES)->drop(true);
+		$this->db->getTable(Table::COURSES)->drop(true);
+		$this->db->getTable(Table::ORDERS)->drop(true);
+		$this->db->getTable(Table::PLANS)->drop(true);
+		$this->db->getTable(Table::POSITIONS)->drop(true);
+		$this->db->getTable(Table::TAGS)->drop(true);
+		$this->db->getTable(Table::TUTOR_COURSE_MAPS)->drop(true);
+		$this->db->getTable(Table::TUTORS)->drop(true);
+		$this->db->getTable(Table::USERS)->drop(true);
 	}
 }

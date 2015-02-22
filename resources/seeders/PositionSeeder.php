@@ -7,6 +7,7 @@
  */
 
 use Windwalker\Core\Seeder\AbstractSeeder;
+use Windwalker\Table\Table;
 
 /**
  * The DatabaseSeeder class.
@@ -45,8 +46,11 @@ class PositionSeeder extends AbstractSeeder
 			$data['note'] = $faker->sentence(7);
 			$data['state'] = 1;
 
-			$this->db->getWriter()->insertOne('positions', $data);
+			$this->command->out('.', false);
+			$this->db->getWriter()->insertOne(Table::POSITIONS, $data);
 		}
+
+		$this->command->out();
 	}
 
 	/**

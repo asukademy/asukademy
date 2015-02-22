@@ -8,6 +8,7 @@
 
 use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\DataMapper\DataMapper;
+use Windwalker\Table\Table;
 
 /**
  * The DatabaseSeeder class.
@@ -31,18 +32,9 @@ class CourseSeeder extends AbstractSeeder
 		$faker->addProvider(new Faker\Provider\zh_TW\PhoneNumber($faker));
 		$faker->addProvider(new Faker\Provider\zh_TW\Text($faker));
 
-		$tutors = (new DataMapper('tutors'))->findColumn('id');
-		$positions = (new DataMapper('positions'))->findColumn('id');
-		$categories = (new DataMapper('categories'))->findAll();
-
-		$courseTimes = [
-			// 8 hours
-			'PT8H',
-			// 2 weeks and 8 hours
-			'P14DT8H'
-		];
-
-		$date = new DateTime('2015-' . $faker->month . '-' . $faker->dayOfMonth . ' 09:30:00');
+		$tutors = (new DataMapper(Table::TUTORS))->findColumn('id');
+		$positions = (new DataMapper(Table::POSITIONS))->findColumn('id');
+		$categories = (new DataMapper(Table::CATEGORIES))->findAll();
 
 		$images = [
 			'https://cloud.githubusercontent.com/assets/1639206/5489440/5513a530-8704-11e4-9907-06954ef6b448.jpg',
@@ -62,11 +54,6 @@ class CourseSeeder extends AbstractSeeder
 				$data['title']    = $title = $faker->sentence(4);
 				$data['alias']    = $title;
 				$data['subtitle'] = $faker->sentence(6);
-				$data['start']    = $date->format('Y-m-d H:i:s');
-
-				$date->add(new \DateInterval($faker->randomElement($courseTimes)));
-				$data['end'] = $date->format('Y-m-d H:i:s');
-
 				$data['image']       = $faker->randomElement($images);
 				$data['introtext']   = file_get_contents(__DIR__ . '/fixtures/intro.md');
 				$data['fulltext']    = file_get_contents(__DIR__ . '/fixtures/full.md');
@@ -78,7 +65,8 @@ class CourseSeeder extends AbstractSeeder
 				$data['note']        = $faker->paragraph();
 				$data['state']       = 1;
 
-				$this->db->getWriter()->insertOne('courses', $data, 'id');
+				$this->command->out('.', false);
+				$this->db->getWriter()->insertOne(Table::COURSES, $data, 'id');
 
 				foreach ($faker->randomElements($tutors, rand(1, 3)) as $tutor)
 				{
@@ -86,10 +74,13 @@ class CourseSeeder extends AbstractSeeder
 					$map['tutor_id'] = $tutor;
 					$map['course_id'] = $data['id'];
 
-					$this->db->getWriter()->insertOne('tutor_course_maps', $map);
+					$this->command->out('.', false);
+					$this->db->getWriter()->insertOne(Table::TUTOR_COURSE_MAPS, $map);
 				}
 			}
 		}
+
+		$this->command->out('');
 	}
 
 	/**

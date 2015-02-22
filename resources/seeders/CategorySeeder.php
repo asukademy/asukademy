@@ -7,6 +7,7 @@
  */
 
 use Windwalker\Core\Seeder\AbstractSeeder;
+use Windwalker\Table\Table;
 
 /**
  * The DatabaseSeeder class.
@@ -31,8 +32,11 @@ class CategorySeeder extends AbstractSeeder
 			$data['state'] = 1;
 			$data['ordering'] = $k + 1;
 
-			$this->db->getWriter()->insertOne('categories', $data);
+			$this->command->out('.', false);
+			$this->db->getWriter()->insertOne(Table::CATEGORIES, $data);
 		}
+
+		$this->command->out();
 	}
 
 	/**

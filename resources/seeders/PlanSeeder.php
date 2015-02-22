@@ -7,6 +7,8 @@
  */
 
 use Windwalker\Core\Seeder\AbstractSeeder;
+use Windwalker\DataMapper\DataMapper;
+use Windwalker\Table\Table;
 
 /**
  * The DatabaseSeeder class.
@@ -24,13 +26,7 @@ class UserSeeder extends AbstractSeeder
 	{
 		$faker = \Faker\Factory::create('zh_TW');
 
-		$faker->addProvider(new Faker\Provider\zh_TW\Address($faker));
-		$faker->addProvider(new Faker\Provider\zh_TW\Company($faker));
-		$faker->addProvider(new Faker\Provider\zh_TW\Person($faker));
-		$faker->addProvider(new Faker\Provider\zh_TW\PhoneNumber($faker));
-		$faker->addProvider(new Faker\Provider\zh_TW\Text($faker));
-
-		//$courses
+		$stages = (new DataMapper(Table::STAGES))->findAll();
 
 		foreach (range(1, rand(1, 3)) as $i)
 		{

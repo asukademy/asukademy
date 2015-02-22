@@ -7,6 +7,7 @@
  */
 
 use Windwalker\Core\Seeder\AbstractSeeder;
+use Windwalker\Table\Table;
 
 /**
  * The DatabaseSeeder class.
@@ -49,8 +50,11 @@ class UserSeeder extends AbstractSeeder
 			$data['registered'] = $faker->dateTime->format('Y-m-d H:s:i');
 			$data['last_login'] = $faker->dateTime->format('Y-m-d H:s:i');
 
-			$this->db->getWriter()->insertOne('users', $data);
+			$this->command->out('.', false);
+			$this->db->getWriter()->insertOne(Table::USERS, $data);
 		}
+
+		$this->command->out();
 	}
 
 	/**

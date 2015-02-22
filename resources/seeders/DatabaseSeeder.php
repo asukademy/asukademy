@@ -7,6 +7,7 @@
  */
 
 use Windwalker\Core\Seeder\AbstractSeeder;
+use Windwalker\Table\Table;
 
 /**
  * The DatabaseSeeder class.
@@ -27,6 +28,7 @@ class DatabaseSeeder extends AbstractSeeder
 		$this->execute('PositionSeeder');
 		$this->execute('TutorSeeder');
 		$this->execute('CourseSeeder');
+		$this->execute('StageSeeder');
 	}
 
 	/**
@@ -36,16 +38,17 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doClean()
 	{
-		$this->db->getTable('categories')->truncate();
-		$this->db->getTable('classes')->truncate();
-		$this->db->getTable('courses')->truncate();
-		$this->db->getTable('orders')->truncate();
-		$this->db->getTable('plans')->truncate();
-		$this->db->getTable('positions')->truncate();
-		$this->db->getTable('tags')->truncate();
-		$this->db->getTable('tutor_course_maps')->truncate();
-		$this->db->getTable('tutors')->truncate();
-		$this->db->getTable('users')->truncate();
+		$this->db->getTable(Table::CATEGORIES)->truncate();
+		$this->db->getTable(Table::CLASSES)->truncate();
+		$this->db->getTable(Table::COURSES)->truncate();
+		$this->db->getTable(Table::ORDERS)->truncate();
+		$this->db->getTable(Table::PLANS)->truncate();
+		$this->db->getTable(Table::POSITIONS)->truncate();
+		$this->db->getTable(Table::STAGES)->truncate();
+		$this->db->getTable(Table::TAGS)->truncate();
+		$this->db->getTable(Table::TUTOR_COURSE_MAPS)->truncate();
+		$this->db->getTable(Table::TUTORS)->truncate();
+		$this->db->getTable(Table::USERS)->truncate();
 	}
 }
  

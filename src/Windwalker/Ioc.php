@@ -8,6 +8,8 @@
 
 namespace Windwalker;
 
+use Windwalker\Profiler\Profiler;
+
 /**
  * The Ioc class.
  * 
@@ -15,4 +17,13 @@ namespace Windwalker;
  */
 abstract class Ioc extends \Windwalker\Core\Ioc
 {
+	/**
+	 * getConfig
+	 *
+	 * @return  Profiler
+	 */
+	public static function getProfiler()
+	{
+		return static::get('system.profiler');
+	}
 }

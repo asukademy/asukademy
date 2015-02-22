@@ -17,7 +17,7 @@
 		"fzaninotto/faker": "~1.0@stable",
 		"asika/faker-zhtw": "*@stable",
 
-		"twig/twig" : "~1.0@stable",
+		"illuminate/view" : "~4.0@stable",
 		"asika/muse": "1.*@stable"
 	},
 	"require-dev": {

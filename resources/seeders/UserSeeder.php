@@ -37,8 +37,9 @@ class UserSeeder extends AbstractSeeder
 		foreach (range(1, 50) as $i)
 		{
 			$data['name'] = $faker->name;
-			$data['username'] = $faker->username;
+			$data['username'] = ($i == 1) ? 'admin' : $faker->username;
 			$data['password'] = $pass;
+			$data['group'] = ($i == 1) ? 1 : 0;
 			$data['email'] = $faker->email;
 			$data['nick'] = $faker->firstName;
 			$data['mobile'] = $phone = $faker->phoneNumber;

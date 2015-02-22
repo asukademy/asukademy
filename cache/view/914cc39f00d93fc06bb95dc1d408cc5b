@@ -1,25 +1,25 @@
-{{-- Part of starter project. --}}
+<?php /* Part of starter project. */ ?>
 <!doctype html>
 <html lang="zh-tw">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('page_title')</title>
+    <title><?php echo $__env->yieldContent('siteTitle'); ?></title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['base.path'] }}media/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $uri['base.path']; ?>media/images/favicon.ico" />
     <meta name="generator" content="Formosa | Windwalker Framework" />
-    @yield('meta')
+    <?php echo $__env->yieldContent('meta'); ?>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/acme/main.css" />
-    @yield('style')
+    <link rel="stylesheet" href="<?php echo $uri['base.path']; ?>media/css/acme/main.css" />
+    <?php echo $__env->yieldContent('style'); ?>
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    @yield('script')
+    <?php echo $__env->yieldContent('script'); ?>
 
 </head>
 <body>
-    @section('navbar')
+    <?php $__env->startSection('navbar'); ?>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,26 +28,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ $uri['base.path'] }}">Windwalker</a>
+                <a class="navbar-brand" href="<?php echo $uri['base.path']; ?>">Windwalker</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                     @section('nav')
-                        <li class="active"><a href="{{ $uri['base.path'] }}">Home</a></li>
-                     @show
+                     <?php $__env->startSection('nav'); ?>
+                        <li class="active"><a href="<?php echo $uri['base.path']; ?>">Home</a></li>
+                     <?php echo $__env->yieldSection(); ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{-- <li class="pull-right"><a href="{{ $uri['base.path'] }}admin">Admin</a></li> --}}
+                    <?php /* <li class="pull-right"><a href="<?php echo $uri['base.path']; ?>admin">Admin</a></li> */ ?>
                 </ul>
             </div>
             <!--/.nav-collapse -->
         </div>
     </div>
-    @show
+    <?php echo $__env->yieldSection(); ?>
 
-    @yield('body', 'Content')
+    <?php echo $__env->yieldContent('body', 'Content'); ?>
 
-    @section('copyright')
+    <?php $__env->startSection('copyright'); ?>
     <div id="copyright">
         <div class="container">
             <div class="row">
@@ -56,12 +56,13 @@
                     <hr />
 
                     <footer>
-                        &copy; Windwalker {{ $datetime->format('Y') }}
+                        &copy; Windwalker <?php echo $datetime->format('Y'); ?>
+
                     </footer>
                 </div>
             </div>
         </div>
     </div>
-    @show
+    <?php echo $__env->yieldSection(); ?>
 </body>
 </html>

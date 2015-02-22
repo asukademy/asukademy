@@ -1,0 +1,37 @@
+/**
+ * Part of starter project. 
+ *
+ * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+ * @license    GNU General Public License version 2 or later;
+ */
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+body.admin .jumbotron {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+body.admin .jumbotron h1 {
+  margin: 10px 0;
+}
+body.admin table.table tbody td,
+body.admin table.table thead td,
+body.admin table.table tfoot td,
+body.admin table.table tbody th,
+body.admin table.table thead th,
+body.admin table.table tfoot th {
+  vertical-align: middle;
+}
+.container-fluid {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+.navbar-brand img {
+  height: 35px;
+  margin-top: -8px;
+}
+.word-break {
+  word-break: break-all;
+}

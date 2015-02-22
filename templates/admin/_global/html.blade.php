@@ -3,22 +3,24 @@
 <html lang="zh-tw">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('page_title')</title>
+    <title>@yield('page_title', '控制台') | 飛鳥學院 Asukademy 後台系統</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['base.path'] }}media/images/favicon.ico" />
-    <meta name="generator" content="Formosa | Windwalker Framework" />
+    <meta name="generator" content="The Time Machine" />
+    <meta name="robots" content="nofollow" />
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/acme/main.css" />
+    <link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/admin/main.css" />
     @yield('style')
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="{{ $uri['media.path'] }}js/admin/form.js"></script>
     @yield('script')
 
 </head>
-<body>
+<body class="asukademy admin">
     @section('navbar')
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -28,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ $uri['base.path'] }}">Windwalker</a>
+                <a class="navbar-brand" href="{{ $uri['base.path'] }}">飛鳥學院 Asukademy</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">

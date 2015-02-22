@@ -1,0 +1,10 @@
+'home':
+    pattern: /
+    controller: Admin\Controller\Admin
+'users':
+    pattern: /users
+    controller: Admin\Controller\Users
+
+'user':
+    pattern: /user(/id)
+    controller: Admin\Controller\User

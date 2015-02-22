@@ -8,6 +8,9 @@
 
 namespace Windwalker;
 
+use Admin\AdminPackage;
+use Asukademy\AsukademyPackage;
+use Riki\RikiPackage;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Registry\Registry;
 use Windwalker\SystemPackage\SystemPackage;
@@ -27,7 +30,10 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	public static function loadPackages()
 	{
 		return array(
-			'system' => new SystemPackage
+			'system' => new SystemPackage,
+			'riki' => new RikiPackage,
+			'asukademy' => new AsukademyPackage,
+			'admin' => new AdminPackage
 		);
 	}
 

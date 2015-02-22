@@ -26,6 +26,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('name'))
 			->addColumn(new Column\Varchar('username'))
 			->addColumn(new Column\Varchar('password'))
+			->addColumn(new Column\Integer('group'))
 			->addColumn(new Column\Varchar('email'))
 			->addColumn(new Column\Varchar('nick'))
 			->addColumn(new Column\Char('mobile', 15))

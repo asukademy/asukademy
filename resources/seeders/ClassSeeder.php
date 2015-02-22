@@ -15,7 +15,7 @@ use Windwalker\Table\Table;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class PlanSeeder extends AbstractSeeder
+class ClassSeeder extends AbstractSeeder
 {
 	/**
 	 * doExecute
@@ -28,28 +28,19 @@ class PlanSeeder extends AbstractSeeder
 
 		$stages = (new DataMapper(Table::STAGES))->findAll();
 
-		$plans = ['一般票', '早鳥票', '學生票'];
-
 		foreach ($stages as $stage)
 		{
-			$price = $faker->randomElement([8000, 12000, 24000]);
-
-			foreach (range(0, 2) as $i)
+			foreach (range(1, rand(4, 12)) as $i)
 			{
-				$data = [];
-
-				$data['stage_id']     = $stage->id;
-				$data['title']        = $plans[$i];
-				$data['price']        = floor($price * (1 - ($i * 0.1)));
-				$data['origin_price'] = $price;
-				$data['state']        = 1;
-				$data['start']        = null;
-				$data['end']          = null;
-				$data['quota']        = $faker->optional()->numberBetween(10, 30);
-				$data['max_one_time'] = 5;
+				$data['stage_id'] = $stage->id;
+				$data['title'] = 'Course - ' . $i;
+				$data['hours'] = 3;
+				$data['intro'] = $faker->sentence(2);
+				$data['description'] = $faker->paragraph();
+				$data['ordering'] = $i;
 
 				$this->command->out('.', false);
-				$this->db->getWriter()->insertOne(Table::PLANS, $data);
+				$this->db->getWriter()->insertOne(Table::CLASSES, $data);
 			}
 		}
 

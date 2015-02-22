@@ -60,8 +60,8 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Text('introtext'))
 			->addColumn(new Column\Text('fulltext'))
 			->addColumn(new Column\Varchar('position_id'))
-			->addColumn(new Column\Integer('quota'))
-			->addColumn(new Column\Integer('less'))
+			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
+			->addColumn(new Column\Integer('less', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Text('learned'))
 			->addColumn(new Column\Text('target'))
 			->addColumn(new Column\Text('note'))
@@ -75,6 +75,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Varchar('alias'))
 			->addColumn(new Column\Text('description'))
+			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Tinyint('state', 1))
 			->addColumn(new Column\Timestamp('start'))
 			->addColumn(new Column\Timestamp('end'))
@@ -101,23 +102,24 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Integer('stage_id'))
 			->addColumn(new Column\Varchar('title'))
-			->addColumn('price', DataType::DECIMAL, Column::UNSIGNED, Column::NOT_NULL, 0)
-			->addColumn('origin_price', DataType::DECIMAL, Column::UNSIGNED, Column::NOT_NULL, 0)
+			->addColumn('price', DataType::DECIMAL)
+			->addColumn('origin_price', DataType::DECIMAL, Column::UNSIGNED, Column::ALLOW_NULL, null)
 			->addColumn(new Column\Tinyint('state'))
 			->addColumn(new Column\Timestamp('start'))
 			->addColumn(new Column\Timestamp('end'))
-			->addColumn(new Column\Integer('quota'))
-			->addColumn(new Column\Integer('max_one_time'))
+			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
+			->addColumn(new Column\Integer('max_one_time', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Text('params'))
 			->create(true);
 
 		$this->db->getTable(Table::CLASSES)
 			->addColumn(new Column\Primary('id'))
-			->addColumn(new Column\Integer('course_id'))
+			->addColumn(new Column\Integer('stage_id'))
 			->addColumn(new Column\Varchar('title'))
-			->addColumn('date', DataType::DATE, Column::SIGNED, Column::NOT_NULL, '')
-			->addColumn(new Column\Char('start', 5))
-			->addColumn(new Column\Char('end'), 5)
+			->addColumn('date', DataType::DATE, Column::SIGNED, Column::ALLOW_NULL, '')
+			->addColumn(new Column\Char('start', 5, Column::ALLOW_NULL))
+			->addColumn(new Column\Char('end', 5, Column::ALLOW_NULL))
+			->addColumn(new Column\Integer('hours', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Text('intro'))
 			->addColumn(new Column\Text('description'))
 			->addColumn(new Column\Integer('ordering'))
@@ -143,7 +145,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Integer('course_id'))
 			->addColumn(new Column\Integer('plan_id'))
 			->addColumn(new Column\Varchar('plan_title'))
-			->addColumn('price', DataType::DECIMAL, Column::UNSIGNED, Column::NOT_NULL, 0)
+			->addColumn('price', DataType::DECIMAL)
 			->addColumn(new Column\Varchar('name'))
 			->addColumn(new Column\Varchar('email'))
 			->addColumn(new Column\Varchar('nick'))
@@ -175,6 +177,7 @@ class Init extends AbstractMigration
 		$this->db->getTable(Table::ORDERS)->drop(true);
 		$this->db->getTable(Table::PLANS)->drop(true);
 		$this->db->getTable(Table::POSITIONS)->drop(true);
+		$this->db->getTable(Table::STAGES)->drop(true);
 		$this->db->getTable(Table::TAGS)->drop(true);
 		$this->db->getTable(Table::TUTOR_COURSE_MAPS)->drop(true);
 		$this->db->getTable(Table::TUTORS)->drop(true);

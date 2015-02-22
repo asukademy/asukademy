@@ -47,6 +47,7 @@ class StageSeeder extends AbstractSeeder
 				$data['course_id']   = $course->id;
 				$data['alias']       = $course->id . '-' . $i;
 				$data['description'] = $faker->sentence(2);
+				$data['quota']       = rand(10, 30);
 				$data['state']       = 1;
 				$data['start']       = $date->format('Y-m-d H:i:s');
 

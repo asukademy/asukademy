@@ -29,6 +29,8 @@ class DatabaseSeeder extends AbstractSeeder
 		$this->execute('TutorSeeder');
 		$this->execute('CourseSeeder');
 		$this->execute('StageSeeder');
+		$this->execute('PlanSeeder');
+		$this->execute('ClassSeeder');
 	}
 
 	/**

@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Flower\Controller\{@item.cap@};
+namespace Admin\Controller\User;
 
 use Windwalker\Core\Controller\Controller;
 
@@ -24,8 +24,8 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('{@item.cap@}', 'html');
-		$model = $this->getModel('{@item.cap@}');
+		$view = $this->getView('User', 'html');
+		$model = $this->getModel('User');
 
 		$view->setModel($model);
 

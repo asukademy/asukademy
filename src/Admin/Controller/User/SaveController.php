@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Flower\Controller\{@item.cap@};
+namespace Admin\Controller\User;
 
 use Windwalker\Core\Controller\Controller;
 
 /**
- * The GetController class.
+ * The SaveController class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class GetController extends Controller
+class SaveController extends Controller
 {
 	/**
 	 * doExecute
@@ -24,11 +24,6 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('{@item.cap@}', 'html');
-		$model = $this->getModel('{@item.cap@}');
-
-		$view->setModel($model);
-
-		return $view->setLayout('default')->render();
+		throw new \LogicException('Controller ' . get_called_class() . ' not implemented.');
 	}
 }

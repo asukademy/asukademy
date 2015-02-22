@@ -3,8 +3,8 @@
 @extends('admin._global.layout')
 
 @section('page_title')
-頁面標題@stop
+    會員編輯@stop
 
 @section('content')
-{@item.cap@} Content
+Sakura Content
 @stop

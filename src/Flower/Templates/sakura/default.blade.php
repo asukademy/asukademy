@@ -1,7 +1,10 @@
 {{-- Part of asukademy project. --}}
 
-@extends('_global.admin-html')
+@extends('admin._global.layout')
 
-@section('body')
-Sakura
+@section('page_title')
+頁面標題@stop
+
+@section('content')
+Sakura Content
 @stop

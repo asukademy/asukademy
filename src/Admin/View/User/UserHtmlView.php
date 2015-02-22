@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Flower\View\{@item.cap@};
+namespace Admin\View\User;
 
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
- * The {@item.cap@}HtmlView class.
+ * The UserHtmlView class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class {@item.cap@}HtmlView extends BladeHtmlView
+class UserHtmlView extends BladeHtmlView
 {
 	/**
 	 * prepareData

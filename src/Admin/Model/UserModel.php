@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Flower\Model;
+namespace Admin\Model;
 
 use Windwalker\Core\Model\DatabaseModel;
 
 /**
- * The {@item.cap@}Model class.
+ * The UserModel class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class {@item.cap@}Model extends DatabaseModel
+class UserModel extends DatabaseModel
 {
 
 }

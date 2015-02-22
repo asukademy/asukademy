@@ -70,7 +70,7 @@ class AssetManager
 	 */
 	public function addStyle($url, $version = null, $attribs = array())
 	{
-		if (!$version && $version !== false))
+		if (!$version && $version !== false)
 		{
 			$version = $this->getVersion();
 		}

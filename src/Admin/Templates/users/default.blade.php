@@ -32,11 +32,11 @@
                 {{ $item->id }}
             </td>
             <td>
-                <p>{{{ $item->name }}}</p>
-                <small>{{{ $item->nick }}}</small>
+                <p><a href="{{ $router->buildHtml('user', ['id' => $item->id]) }}">{{{ $item->name }}}</a></p>
+                <p><small>{{{ $item->nick }}}</small></p>
             </td>
             <td class="word-break">
-                <p>{{{ $item->username }}}</p>
+                <p><a href="{{ $router->buildHtml('user', ['id' => $item->id]) }}">{{{ $item->username }}}</a></p>
                 <p>{{{ $item->email }}}</p>
             </td>
             <td>
@@ -67,7 +67,7 @@
             </td>
             <td>
                 <button type="button" class="btn btn-default"
-                    onclick="AsukademyForm.deleteItem('{{{ $router->buildHttp('user', ['id' => $item->id]) }}}');">
+                    onclick="RikiForm.deleteItem('{{{ $router->buildHttp('user', ['id' => $item->id]) }}}');">
                     <span class="glyphicon glyphicon-trash text-danger"></span>
                 </button>
             </td>

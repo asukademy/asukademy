@@ -1,4 +1,10 @@
 {{-- Part of asukademy project. --}}
+<?php
+use Riki\Asset\Asset;
+use Riki\Uri\Uri;
+
+Asset::addScript(Uri::media(true) . 'riki/js/form.js');
+?>
 @extends('admin._global.html')
 
 @section('style')

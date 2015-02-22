@@ -33,11 +33,11 @@
 
             </td>
             <td>
-                <p><?php echo e($item->name); ?></p>
-                <small><?php echo e($item->nick); ?></small>
+                <p><a href="<?php echo $router->buildHtml('user', ['id' => $item->id]); ?>"><?php echo e($item->name); ?></a></p>
+                <p><small><?php echo e($item->nick); ?></small></p>
             </td>
             <td class="word-break">
-                <p><?php echo e($item->username); ?></p>
+                <p><a href="<?php echo $router->buildHtml('user', ['id' => $item->id]); ?>"><?php echo e($item->username); ?></a></p>
                 <p><?php echo e($item->email); ?></p>
             </td>
             <td>
@@ -71,7 +71,7 @@
             </td>
             <td>
                 <button type="button" class="btn btn-default"
-                    onclick="AsukademyForm.deleteItem('<?php echo e($router->buildHttp('user', ['id' => $item->id])); ?>');">
+                    onclick="RikiForm.deleteItem('<?php echo e($router->buildHttp('user', ['id' => $item->id])); ?>');">
                     <span class="glyphicon glyphicon-trash text-danger"></span>
                 </button>
             </td>

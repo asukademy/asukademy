@@ -8,7 +8,6 @@
 
 namespace Riki\Toolbar;
 
-use Riki\Uri\Uri;
 use Windwalker\Core\Router\Router;
 
 /**
@@ -57,6 +56,27 @@ HTML;
 <a class="btn btn-default $class" href="$url">
 	<span class="glyphicon glyphicon-remove"></span> Close
 </a>
+HTML;
+	}
+
+	/**
+	 * edit
+	 *
+	 * @param string $title
+	 * @param string $route
+	 * @param array  $queries
+	 * @param string $class
+	 *
+	 * @return  string
+	 */
+	public static function edit($title, $id, $route, $queries = [], $class = '')
+	{
+		$queries['id'] = $id;
+
+		$url = Router::buildHtml($route, $queries);
+
+		return <<<HTML
+<a class="$class" href="$url">$title</a>
 HTML;
 	}
 

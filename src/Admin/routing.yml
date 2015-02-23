@@ -51,3 +51,20 @@ stage:
         course_id: \d+
         id: \d+
 
+# Plan
+plans:
+    pattern: /course/(course_id)/stage/(stage_id)/plans
+    controller: Admin\Controller\Plans
+    requirements:
+        course_id: \d+
+        stage_id: \d+
+
+# Class
+classes:
+    pattern: /course/(course_id)/stage/(stage_id)/classes
+    controller: Admin\Controller\Classes
+    requirements:
+        course_id: \d+
+        stage_id: \d+
+
+

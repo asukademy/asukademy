@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Stages;
+namespace Admin\Controller\Stage;
 
 use Windwalker\Core\Controller\Controller;
 

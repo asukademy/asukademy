@@ -28,7 +28,7 @@
                 {{{ $stage->id }}}
             </td>
             <td>
-                {{{ $stage->title }}}
+                {{ \Riki\Toolbar\Toolbar::edit($stage->title, $stage->id, 'admin:stage', ['course_id' => $item->id]) }}
             </td>
             <td>
                 {{{ $stage->start }}} ~ {{{ $stage->end }}}

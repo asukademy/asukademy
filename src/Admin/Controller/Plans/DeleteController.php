@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Stages;
+namespace Admin\Controller\Plans;
 
 use Windwalker\Core\Controller\Controller;
 
 /**
- * The SaveController class.
+ * The DeleteController class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class SaveController extends Controller
+class DeleteController extends Controller
 {
 	/**
 	 * doExecute

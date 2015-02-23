@@ -74,7 +74,7 @@ HTML;
 \$form->addField(new Field\TextField('$name', '$label'))
 	->set('class', '')
 	->set('labelClass', '')
-	->readonly();
+	->set('readonly', true);
 HTML;
 	}
 

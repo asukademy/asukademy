@@ -56,6 +56,14 @@ class CourseFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('default', 1);
 
+		$form->addField(new ItemlistField('tutors', 'Tutors'), 'basic')
+			->set('table', Table::TUTORS)
+			->set('title_field', 'name')
+			->set('multiple', 1)
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
 		$form->addField(new Field\TextField('id', 'Id'), 'info')
 			->set('class', '')
 			->set('labelClass', '')

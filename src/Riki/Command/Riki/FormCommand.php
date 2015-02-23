@@ -6,32 +6,31 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Riki\Command;
+namespace Riki\Command\Riki;
 
-use Riki\Command\Asset\MakesumCommand;
-use Riki\Command\Asset\SyncCommand;
+use Riki\Command\Riki\Form\GenFieldCommand;
 use Windwalker\Console\Command\Command;
 
 /**
- * The AssetCommand class.
+ * The FormCommand class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class AssetCommand extends Command
+class FormCommand extends  Command
 {
 	/**
 	 * Property name.
 	 *
 	 * @var  string
 	 */
-	protected $name = 'asset';
+	protected $name = 'form';
 
 	/**
 	 * Property description.
 	 *
 	 * @var  string
 	 */
-	protected $description = 'Asset management';
+	protected $description = 'Form management';
 
 	/**
 	 * initialise
@@ -40,8 +39,7 @@ class AssetCommand extends Command
 	 */
 	protected function initialise()
 	{
-		$this->addCommand(new SyncCommand);
-		$this->addCommand(new MakesumCommand);
+		$this->addCommand(new GenFieldCommand);
 
 		$this->addGlobalOption('d')
 			->alias('dir')

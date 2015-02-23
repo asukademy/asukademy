@@ -6,5 +6,7 @@
     會員編輯@stop
 
 @section('content')
-Sakura Content
+<fieldset class="form-horizontal">
+    {{ \Admin\Form\FormRenderer::render($form->getFields()) }}
+</fieldset>
 @stop

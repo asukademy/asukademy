@@ -26,5 +26,7 @@ class UserHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		$data->item = $this->model->getItem();
+		$data->form = $this->model->getForm();
 	}
 }

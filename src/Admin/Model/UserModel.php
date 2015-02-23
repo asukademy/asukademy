@@ -8,7 +8,11 @@
 
 namespace Admin\Model;
 
+use Admin\Form\UserFieldDefinition;
+use Admin\Mapper\UserMapper;
 use Windwalker\Core\Model\DatabaseModel;
+use Windwalker\Data\Data;
+use Windwalker\Form\Form;
 
 /**
  * The UserModel class.
@@ -17,5 +21,50 @@ use Windwalker\Core\Model\DatabaseModel;
  */
 class UserModel extends DatabaseModel
 {
+	/**
+	 * getItem
+	 *
+	 * @param   mixed  $pk
+	 *
+	 * @return  Data
+	 */
+	public function getItem($pk = null)
+	{
+		return $this->fetch('user.item', function() use ($pk)
+		{
+			$pk = $pk ? : $this['item.id'];
 
+			if (!$pk)
+			{
+				return new Data;
+			}
+
+			return (new UserMapper)->findOne($pk);
+		});
+	}
+
+	/**
+	 * getForm
+	 *
+	 * @param array $data
+	 *
+	 * @return  Form
+	 */
+	public function getForm($data = array())
+	{
+		$form = new Form('user');
+
+		$form->defineFormFields(new UserFieldDefinition);
+
+		$data = $data ? : $this->getItem();
+
+		if ($data)
+		{
+			unset($data['password']);
+
+			$form->bind($data);
+		}
+
+		return $form;
+	}
 }

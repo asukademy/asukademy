@@ -6,13 +6,9 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Riki\Command\Asset;
+namespace Riki\Command\Riki\Asset;
 
-use Riki\Symlink\Symlink;
 use Windwalker\Console\Command\Command;
-use Windwalker\Core\Package\AbstractPackage;
-use Windwalker\Environment\ServerHelper;
-use Windwalker\Filesystem\Filesystem;
 use Windwalker\Filesystem\Folder;
 
 /**

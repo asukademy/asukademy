@@ -35,3 +35,15 @@ body.admin table.table tfoot th {
 .word-break {
   word-break: break-all;
 }
+.jumbotron .toolbar {
+  height: 89px;
+}
+.jumbotron .toolbar:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.jumbotron .toolbar > * {
+  vertical-align: middle;
+}

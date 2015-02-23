@@ -110,6 +110,5 @@ class CourseFieldDefinition implements FieldDefinitionInterface
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
-
 	}
 }

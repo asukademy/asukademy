@@ -73,7 +73,7 @@ HTML;
 \$form->addField(new Field\TextField('$name', '$label'))
 	->set('class', '')
 	->set('labelClass', '')
-	->disabled();
+	->readonly();
 HTML;
 	}
 

@@ -86,7 +86,7 @@ abstract class ListModel extends DatabaseModel
 	 */
 	public function getList(Query $query, $start = null, $limit = null)
 	{
-		$query->limit($start, $limit);
+		$query->limit($limit, $start);
 
 		if (WINDWALKER_DEBUG)
 		{

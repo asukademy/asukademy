@@ -13,6 +13,7 @@ use Admin\Mapper\UserMapper;
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Data\Data;
 use Windwalker\Form\Form;
+use Windwalker\Ioc;
 
 /**
  * The UserModel class.
@@ -56,10 +57,16 @@ class UserModel extends DatabaseModel
 
 		$form->defineFormFields(new UserFieldDefinition);
 
+		$session = Ioc::getSession();
+
+		$data = $data ? : $session->get('user.edit.data');
+
 		$data = $data ? : $this->getItem();
 
 		if ($data)
 		{
+			$data = clone $data;
+
 			unset($data['password']);
 
 			$form->bind($data);

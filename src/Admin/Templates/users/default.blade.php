@@ -5,6 +5,12 @@
 @section('page_title')
 會員管理@stop
 
+@section('toolbar')
+    <a class="btn btn-default btn-lg" href="{{{ $router->buildHtml('user') }}}">
+        <span class="glyphicon glyphicon-plus"></span> New
+    </a>
+@stop
+
 @section('content')
 <table class="table table-bordered table-striped">
     <thead>
@@ -74,5 +80,13 @@
         </tr>
     @endforeach
     </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="15">
+            {{ $pagination->render('admin:users') }}
+        </td>
+    </tr>
+    </tfoot>
 </table>
 @stop

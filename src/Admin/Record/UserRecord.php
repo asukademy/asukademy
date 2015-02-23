@@ -8,6 +8,8 @@
 
 namespace Admin\Record;
 
+use Admin\Mapper\UserMapper;
+use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Database\Driver\DatabaseDriver;
 use Windwalker\Record\Record;
 use Windwalker\Table\Table;
@@ -27,5 +29,40 @@ class UserRecord extends Record
 	public function __construct(DatabaseDriver $db = null)
 	{
 		parent::__construct(Table::USERS, 'id', $db);
+	}
+
+	/**
+	 * check
+	 *
+	 * @return static
+	 * @throws ValidFailException
+	 */
+	public function check()
+	{
+		$this->checkFieldExists('username');
+		$this->checkFieldExists('email');
+
+		return parent::check();
+	}
+
+	/**
+	 * checkFieldExists
+	 *
+	 * @param string $field
+	 *
+	 * @return  void
+	 *
+	 * @throws ValidFailException
+	 */
+	protected function checkFieldExists($field)
+	{
+		$mapper = new UserMapper;
+
+		$data = $mapper->findOne([$field => $this->$field]);
+
+		if ($data->notNull() && $data->id != $this->id)
+		{
+			throw new ValidFailException($field . ' exists');
+		}
 	}
 }

@@ -27,5 +27,6 @@ class UsersHtmlView extends BladeHtmlView
 	protected function prepareData($data)
 	{
 		$data->items = $this->model->getItems();
+		$data->pagination = $this->model->getPagination();
 	}
 }

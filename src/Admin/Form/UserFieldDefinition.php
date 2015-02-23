@@ -33,9 +33,12 @@ class UserFieldDefinition implements FieldDefinitionInterface
 	public function define(Form $form)
 	{
 		$form->addField(new TextField('id', 'ID'))
-			->disabled();
+			->set('readonly', true);
 
 		$form->addField(new TextField('name', 'Name'))
+			->required();
+
+		$form->addField(new TextField('username', 'Userame'))
 			->required();
 
 		$form->addField(new PasswordField('password', 'Password'));

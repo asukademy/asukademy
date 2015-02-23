@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\User;
+namespace Admin\Controller\Course;
 
 use Windwalker\Core\Controller\Controller;
 
 /**
- * The GetController class.
+ * The DeleteController class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class GetController extends Controller
+class DeleteController extends Controller
 {
 	/**
 	 * doExecute
@@ -24,13 +24,6 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('User', 'html');
-		$model = $this->getModel('User');
-
-		$model['item.id'] = $this->input->get('id');
-
-		$view->setModel($model);
-
-		return $view->setLayout('edit')->render();
+		throw new \LogicException('Controller ' . get_called_class() . ' not implemented.');
 	}
 }

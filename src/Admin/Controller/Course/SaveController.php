@@ -6,14 +6,13 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\User;
+namespace Admin\Controller\Course;
 
-use Admin\Model\UserModel;
-use Admin\Record\UserRecord;
+use Admin\Model\CourseModel;
+use Admin\Record\CourseRecord;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
-use Windwalker\Crypt\Password;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
 
@@ -27,7 +26,7 @@ class SaveController extends Controller
 	/**
 	 * doExecute
 	 *
-	 * @return mixed
+	 * @return  mixed
 	 * @throws \Exception
 	 */
 	protected function doExecute()
@@ -40,10 +39,8 @@ class SaveController extends Controller
 
 		// Store Session
 		$temp = clone $data;
-		unset($temp->password);
-		unset($temp->password2);
 
-		$session->set('user.edit.data', $temp);
+		$session->set('course.edit.data' . $temp->id, $temp);
 
 		try
 		{
@@ -53,9 +50,11 @@ class SaveController extends Controller
 			}
 
 			// Prepare default data
-			$data->registered = (new \DateTime('now', new \DateTimeZone('Asia/Taipei')))->format('Y-m-d H:i:s');
+			// -----------------------------------------
 
-			$record = new UserRecord;
+			// -----------------------------------------
+
+			$record = new CourseRecord;
 
 			$record->load($data->id);
 
@@ -65,7 +64,7 @@ class SaveController extends Controller
 		}
 		catch (ValidFailException $e)
 		{
-			$this->setRedirect(Router::buildHttp('admin:user', ['id' => $data->id ? : '']), $e->getMessage(), 'danger');
+			$this->setRedirect(Router::buildHttp('admin:course', ['id' => $data->id ? : '']), $e->getMessage(), 'danger');
 
 			return true;
 		}
@@ -76,17 +75,15 @@ class SaveController extends Controller
 				throw $e;
 			}
 
-			$this->setRedirect(Router::buildHttp('admin:user', ['id' => $data->id]), 'Save fail', 'danger');
+			$this->setRedirect(Router::buildHttp('admin:course', ['id' => $data->id]), 'Save fail', 'danger');
 
 			return true;
 		}
 
 		// Save success, reset user session
-		unset($data->password);
-		unset($data->password2);
-		$session->remove('user.edit.data');
+		$session->remove('course.edit.data' . $temp->id);
 
-		$this->setRedirect(Router::buildHttp('admin:users'), 'Save Success', 'success');
+		$this->setRedirect(Router::buildHttp('admin:course', ['id' => $record->id]), 'Save Success', 'success');
 
 		return true;
 	}
@@ -101,7 +98,7 @@ class SaveController extends Controller
 	 */
 	protected function validate($data)
 	{
-		$model = new UserModel;
+		$model = new CourseModel;
 
 		$form = $model->getForm($data);
 
@@ -109,26 +106,14 @@ class SaveController extends Controller
 		{
 			$errors = $form->getErrors();
 
+			$msgs = array();
+
 			foreach ($errors as $error)
 			{
-				$this->addFlash($error->getMessage(), 'danger');
+				$msgs[] = $error->getMessage();
 			}
 
-			$this->setRedirect(Router::buildHttp('admin:user', ['id' => $data->id]));
-
-			return false;
-		}
-
-		if ($data->password)
-		{
-			if ($data->password2 != $data->password)
-			{
-				throw new ValidFailException('Password not match');
-			}
-
-			$password = new Password;
-
-			$data->password = $password->create($data->password);
+			throw new ValidFailException(implode("<br >", $msgs));
 		}
 
 		return true;

@@ -8,10 +8,13 @@
 
 namespace Admin\Form;
 
+use Asukademy\Form\Field\CategoriesField;
+use Asukademy\Form\Field\ItemlistField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 use Windwalker\Form\Field;
 use Windwalker\Html\Option;
+use Windwalker\Table\Table;
 
 /**
  * The CourseFieldDefinition class.
@@ -29,86 +32,84 @@ class CourseFieldDefinition implements FieldDefinitionInterface
 	 */
 	public function define(Form $form)
 	{
-		$form->addField(new Field\TextField('id', 'Id'))
-			->set('class', '')
-			->set('labelClass', '')
-			->disabled();
-
-		$form->addField(new Field\TextField('catid', 'Catid'))
+		$form->addField(new Field\TextField('title', 'Title'), 'basic')
+			->required()
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('title', 'Title'))
+		$form->addField(new Field\TextField('subtitle', 'Subtitle'), 'basic')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('alias', 'Alias'))
+		$form->addField(new ItemlistField('catid', 'Catid'), 'basic')
+			->set('table', Table::CATEGORIES)
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('subtitle', 'Subtitle'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextField('image', 'Image'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('introtext', 'Introtext'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('fulltext', 'Fulltext'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextField('position_id', 'Position_id'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextField('quota', 'Quota'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextField('less', 'Less'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('learned', 'Learned'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('target', 'Target'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('note', 'Note'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\RadioField('state', 'State'))
+		$form->addField(new Field\RadioField('state', 'State'), 'basic')
 			->addOption(new Option('Yes', 1))
 			->addOption(new Option('No', 0))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', 1);
 
-		$form->addField(new Field\TextareaField('params', 'Params'))
+		$form->addField(new Field\TextField('id', 'Id'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
+			->set('readonly', true);
+
+		$form->addField(new Field\TextField('image', 'Image'), 'info')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new ItemlistField('position_id', 'Position_id'), 'info')
+			->set('table', Table::POSITIONS)
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new Field\TextField('quota', 'Quota'), 'info')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new Field\TextField('less', 'Less'), 'info')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new Field\TextareaField('introtext', 'Introtext'), 'desc')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
+			->set('default', null);
+
+		$form->addField(new Field\TextareaField('fulltext', 'Fulltext'), 'desc')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
+			->set('default', null);
+
+		$form->addField(new Field\TextareaField('learned', 'Learned'), 'desc')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
+			->set('default', null);
+
+		$form->addField(new Field\TextareaField('target', 'Target'), 'desc')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
+			->set('default', null);
+
+		$form->addField(new Field\TextareaField('note', 'Note'), 'desc')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
 			->set('default', null);
 	}
 }

@@ -6,7 +6,7 @@
 會員管理@stop
 
 @section('toolbar')
-    <a class="btn btn-default btn-lg" href="{{{ $router->buildHtml('user') }}}">
+    <a class="btn btn-default btn-lg" href="{{{ $router->buildHtml('new', ['name' => 'user']) }}}">
         <span class="glyphicon glyphicon-plus"></span> New
     </a>
 @stop
@@ -38,11 +38,11 @@
                 {{ $item->id }}
             </td>
             <td>
-                <p><a href="{{ $router->buildHtml('user', ['id' => $item->id]) }}">{{{ $item->name }}}</a></p>
+                <p><a href="{{ $router->buildHtml('edit', ['name' => 'user', 'id' => $item->id]) }}">{{{ $item->name }}}</a></p>
                 <p><small>{{{ $item->nick }}}</small></p>
             </td>
             <td class="word-break">
-                <p><a href="{{ $router->buildHtml('user', ['id' => $item->id]) }}">{{{ $item->username }}}</a></p>
+                <p><a href="{{ $router->buildHtml('edit', ['name' => 'user', 'id' => $item->id]) }}">{{{ $item->username }}}</a></p>
                 <p>{{{ $item->email }}}</p>
             </td>
             <td>

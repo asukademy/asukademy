@@ -63,6 +63,7 @@ HTML;
 \$form->addField(new Field\TextareaField('$name', '$label'))
 	->set('class', '')
 	->set('labelClass', '')
+	->set('rows', 7)
 	->set('default', null);
 HTML;
 	}

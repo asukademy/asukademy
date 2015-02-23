@@ -47,3 +47,6 @@ body.admin table.table tfoot th {
 .jumbotron .toolbar > * {
   vertical-align: middle;
 }
+.admin .tab-content {
+  padding-top: 60px;
+}

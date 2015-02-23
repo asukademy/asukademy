@@ -6,9 +6,7 @@
 課程管理@stop
 
 @section('toolbar')
-    <a class="btn btn-default btn-lg" href="{{{ $router->buildHtml('course') }}}">
-        <span class="glyphicon glyphicon-plus"></span> New
-    </a>
+{{ \Riki\Toolbar\Toolbar::add('course', 'admin:new', [], 'btn-lg') }}
 @stop
 
 @section('content')
@@ -39,7 +37,7 @@
                     {{{ $item->category_title }}}
                 </td>
                 <td>
-                    <p><a href="{{ $router->buildHtml('course', ['id' => $item->id]) }}">{{{ $item->title }}}</a></p>
+                    <p><a href="{{ $router->buildHtml('edit', ['name' => 'course', 'id' => $item->id]) }}">{{{ $item->title }}}</a></p>
                 </td>
                 <td>
                     {{{ $item->position_title }}}

@@ -10,6 +10,7 @@ namespace Asukademy\Listener;
 
 use Windwalker\Core\Renderer\RendererHelper;
 use Windwalker\Event\Event;
+use Windwalker\Utilities\Queue\Priority;
 
 /**
  * The AsukademyListener class.
@@ -20,6 +21,7 @@ class AsukademyListener
 {
 	public function onAfterInitialise(Event $event)
 	{
-
+		RendererHelper::addGlobalPath(WINDWALKER_SOURCE . '/Admin/Templates', Priority::BELOW_NORMAL);
+		RendererHelper::addGlobalPath(WINDWALKER_SOURCE . '/Front/Templates', Priority::BELOW_NORMAL);
 	}
 }

@@ -1,6 +1,21 @@
 'home':
     pattern: /
     controller: Admin\Controller\Admin
+
+new:
+    pattern: /(name)/new
+    controller: Admin\Controller\Crud
+    action:
+        '*': NewController
+
+edit:
+    pattern: /(name)/edit/(id)
+    controller: Admin\Controller\Crud
+    requirements:
+        id: \d+
+    action:
+        '*': EditController
+# User
 'users':
     pattern: /users
     controller: Admin\Controller\Users
@@ -8,7 +23,10 @@
 'user':
     pattern: /user(/id)
     controller: Admin\Controller\User
+    requirements:
+        id: \d+
 
+# Course
 'courses':
     pattern: /courses
     controller: Admin\Controller\Courses
@@ -16,3 +34,20 @@
 'course':
     pattern: /course(/id)
     controller: Admin\Controller\Course
+    requirements:
+        id: \d+
+
+# Stage
+stages:
+    pattern: /course/(course_id)/stages
+    controller: Admin\Controller\Stages
+    requirements:
+        course_id: \d+
+
+stage:
+    pattern: /course/(course_id)/stage(/id)
+    controller: Admin\Controller\Stage
+    requirements:
+        course_id: \d+
+        id: \d+
+

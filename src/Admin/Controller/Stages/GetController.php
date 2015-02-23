@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\User;
+namespace Admin\Controller\Stages;
 
 use Windwalker\Core\Controller\Controller;
 
@@ -24,13 +24,11 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('User', 'html');
-		$model = $this->getModel('User');
-
-		$model['item.id'] = $this->input->get('id');
+		$view = $this->getView('Stages', 'html');
+		$model = $this->getModel('Stages');
 
 		$view->setModel($model);
 
-		return $view->setLayout('edit')->render();
+		return $view->setLayout('default')->render();
 	}
 }

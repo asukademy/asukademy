@@ -56,6 +56,7 @@ Asset::setIndents("    ");
         </form>
 
         @if (WINDWALKER_DEBUG)
+            <hr />
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <h3 class="panel-title">Queries</h3>

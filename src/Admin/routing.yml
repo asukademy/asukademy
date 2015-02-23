@@ -8,3 +8,11 @@
 'user':
     pattern: /user(/id)
     controller: Admin\Controller\User
+
+'courses':
+    pattern: /courses
+    controller: Admin\Controller\Courses
+
+'course':
+    pattern: /course(/id)
+    controller: Admin\Controller\Course

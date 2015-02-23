@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace {@package.cap@}\Controller\{@item.cap@};
+namespace Admin\Controller\Courses;
 
 use Windwalker\Core\Controller\Controller;
 
@@ -24,8 +24,14 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('{@item.cap@}', 'html');
-		$model = $this->getModel('{@item.cap@}');
+		$view = $this->getView('Courses', 'html');
+		$model = $this->getModel('Courses');
+
+		$model['list.page']     = $page = $this->input->getInt('page', 1);
+		$model['list.limit']    = 25;
+		$model['list.start']    = ($model['list.page'] - 1) * $model['list.limit'];
+		$model['list.search']   = $this->input->getString('q');
+		$model['list.ordering'] = 'course.id desc';
 
 		$view->setModel($model);
 

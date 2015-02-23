@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Flower\Controller\{@item.cap@};
+namespace {@package.cap@}\Controller\{@item.cap@};
 
 use Windwalker\Core\Controller\Controller;
 

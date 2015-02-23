@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Flower\Model;
+namespace {@package.cap@}\Model;
 
 use Windwalker\Core\Model\DatabaseModel;
 

@@ -34,7 +34,9 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                      @section('nav')
-                        <li class="active"><a href="{{ $uri['base.path'] }}">Home</a></li>
+                        <li class=""><a href="{{ $uri['base.path'] }}">Home</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('users') }}">Users</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('courses') }}">Courses</a></li>
                      @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace {@package.cap@}\View\{@item.cap@};
+namespace Admin\View\Courses;
 
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
- * The {@item.cap@}HtmlView class.
+ * The CoursesHtmlView class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class {@item.cap@}HtmlView extends BladeHtmlView
+class CoursesHtmlView extends BladeHtmlView
 {
 	/**
 	 * prepareData
@@ -26,5 +26,7 @@ class {@item.cap@}HtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		$data->items = $this->model->getItems();
+		$data->pagination = $this->model->getPagination();
 	}
 }

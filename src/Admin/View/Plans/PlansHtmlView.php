@@ -8,6 +8,7 @@
 
 namespace Admin\View\Plans;
 
+use Riki\Asset\ScriptManager;
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
@@ -26,5 +27,20 @@ class PlansHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		$data->items  = $this->model->getItems();
+		$data->state  = $this->model->getState();
+		$data->stage  = $this->model['stage']->getItem();
+		$data->course = $this->model['course']->getItem();
+
+		$data->course_id = $data->state['course.id'];
+		$data->stage_id  = $data->state['stage.id'];
+
+		foreach ($data->items as $item)
+		{
+			$item->price = number_format((double) $item->price, 0, '', '');
+			$item->origin_price = number_format((double) $item->origin_price, 0, '', '');
+		}
+
+		ScriptManager::load('calendar');
 	}
 }

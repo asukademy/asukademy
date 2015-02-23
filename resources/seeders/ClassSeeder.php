@@ -38,6 +38,7 @@ class ClassSeeder extends AbstractSeeder
 				$data['intro'] = $faker->sentence(2);
 				$data['description'] = $faker->paragraph();
 				$data['ordering'] = $i;
+				$data['state'] = 1;
 
 				$this->command->out('.', false);
 				$this->db->getWriter()->insertOne(Table::CLASSES, $data);

@@ -9,6 +9,10 @@
 namespace Admin\Model;
 
 use Windwalker\Core\Model\DatabaseModel;
+use Windwalker\Data\DataSet;
+use Windwalker\DataMapper\DataMapper;
+use Windwalker\Ioc;
+use Windwalker\Table\Table;
 
 /**
  * The PlansModel class.
@@ -17,5 +21,28 @@ use Windwalker\Core\Model\DatabaseModel;
  */
 class PlansModel extends DatabaseModel
 {
+	/**
+	 * getItems
+	 *
+	 * @return  \Windwalker\Data\DataSet
+	 */
+	public function getItems()
+	{
+		$session = Ioc::getSession();
 
+		$items = $session->get('plans.edit.data');
+
+		if ($items)
+		{
+			$session->remove('plans.edit.data');
+
+			$items = new DataSet($items);
+
+			return $items;
+		}
+
+		$conditions = ['stage_id' => $this['stage.id']];
+
+		return (new DataMapper(Table::PLANS))->find($conditions);
+	}
 }

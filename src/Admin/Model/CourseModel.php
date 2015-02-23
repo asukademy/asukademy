@@ -23,6 +23,13 @@ use Windwalker\Ioc;
 class CourseModel extends DatabaseModel
 {
 	/**
+	 * Property name.
+	 *
+	 * @var  string
+	 */
+	protected $name = 'course';
+
+	/**
 	 * getItem
 	 *
 	 * @param   mixed  $pk

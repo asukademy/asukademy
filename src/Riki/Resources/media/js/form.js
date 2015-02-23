@@ -28,6 +28,12 @@
 			methodInput.val(method);
 			form.attr('action', url).attr('method', 'post');
 
+			// Cancel change confirm
+			if (window.RikiEdit)
+			{
+				window.RikiEdit.changed(false);
+			}
+
 			form.submit();
 
 			return true;

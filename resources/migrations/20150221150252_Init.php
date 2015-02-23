@@ -120,10 +120,11 @@ class Init extends AbstractMigration
 			->addColumn('date', DataType::DATE, Column::SIGNED, Column::ALLOW_NULL, '')
 			->addColumn(new Column\Char('start', 5, Column::ALLOW_NULL))
 			->addColumn(new Column\Char('end', 5, Column::ALLOW_NULL))
-			->addColumn(new Column\Integer('hours', 11, Column::UNSIGNED, Column::ALLOW_NULL))
+			->addColumn(new Column\Char('hours', 6))
 			->addColumn(new Column\Text('intro'))
 			->addColumn(new Column\Text('description'))
 			->addColumn(new Column\Integer('ordering'))
+			->addColumn(new Column\Tinyint('state'))
 			->addColumn(new Column\Text('params'))
 			->create(true);
 

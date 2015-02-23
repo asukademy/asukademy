@@ -28,4 +28,8 @@
             </fieldset>
         </div>
     </div>
+
+    <script>
+        RikiEdit.confirmOnPageExit(jQuery('#adminForm'));
+    </script>
 @stop

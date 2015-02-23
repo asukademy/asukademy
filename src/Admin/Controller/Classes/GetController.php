@@ -24,11 +24,23 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('Classes', 'html');
-		$model = $this->getModel('Classes');
+		$view        = $this->getView('Classes', 'html');
+		$model       = $this->getModel('Classes');
+		$stageModel  = $this->getModel('Stage');
+		$courseModel = $this->getModel('Course');
+
+		$model['stage.id']  = $this->input->get('stage_id');
+		$model['course.id'] = $this->input->get('course_id');
+
+		$stageModel['course.id'] = $this->input->get('course_id');
+		$stageModel['item.id']   = $this->input->get('stage_id');
+
+		$courseModel['item.id'] = $this->input->get('course_id');
 
 		$view->setModel($model);
+		$view->setModel($stageModel);
+		$view->setModel($courseModel);
 
-		return $view->setLayout('default')->render();
+		return $view->setLayout('edit')->render();
 	}
 }

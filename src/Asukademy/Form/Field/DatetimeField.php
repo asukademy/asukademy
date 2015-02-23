@@ -9,6 +9,7 @@
 namespace Asukademy\Form\Field;
 
 use Riki\Asset\Asset;
+use Riki\Asset\ScriptManager;
 use Windwalker\Form\Field\TextField;
 
 /**
@@ -39,13 +40,11 @@ class DatetimeField extends TextField
 	 */
 	public function buildInput($attrs)
 	{
-		Asset::addScript('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js', false);
-		Asset::addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/js/bootstrap-datetimepicker.min.js', false);
-		Asset::addStyle('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/css/bootstrap-datetimepicker.min.css', false);
-
 		$format = $this->get('format', 'YYYY-MM-DD hh:mm:ss');
 		$input =  parent::buildInput($attrs);
 		$id = $this->getId();
+
+		ScriptManager::load('calendar', '#' . $id . '-wrapper', $format);
 
 		$html = <<<HTML
 <div id="$id-wrapper" class="input-group date">
@@ -54,15 +53,6 @@ $input
 	<span class="glyphicon glyphicon-calendar"></span>
 </span>
 </div>
-<script type="text/javascript">
-  $(function() {
-    $('#$id-wrapper').datetimepicker({
-		format: '$format',
-		sideBySide: true,
-		calendarWeeks: true
-    });
-  });
-</script>
 HTML;
 
 		return $html;

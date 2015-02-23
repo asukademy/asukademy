@@ -8,6 +8,7 @@
 
 namespace Admin\View\Classes;
 
+use Riki\Asset\ScriptManager;
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
@@ -26,5 +27,14 @@ class ClassesHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		$data->items  = $this->model->getItems();
+		$data->state  = $this->model->getState();
+		$data->stage  = $this->model['stage']->getItem();
+		$data->course = $this->model['course']->getItem();
+
+		$data->course_id = $data->state['course.id'];
+		$data->stage_id  = $data->state['stage.id'];
+
+		ScriptManager::load('calendar', '.date-picker', 'YYYY-MM-DD');
 	}
 }

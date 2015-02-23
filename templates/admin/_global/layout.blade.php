@@ -4,6 +4,7 @@ use Riki\Asset\Asset;
 use Riki\Uri\Uri;
 
 Asset::addScript(Uri::media(true) . 'riki/js/form.js');
+Asset::addScript(Uri::media(true) . 'riki/js/edit.js');
 
 Asset::setIndents("    ");
 ?>

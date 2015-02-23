@@ -69,7 +69,7 @@ class SaveController extends Controller
 		{
 			$this->setRedirect(Router::buildHttp('admin:stage', ['id' => $data->id, 'course_id' => $courseId]), $e->getMessage(), 'danger');
 
-			return true;
+			return false;
 		}
 		catch (\Exception $e)
 		{
@@ -80,7 +80,7 @@ class SaveController extends Controller
 
 			$this->setRedirect(Router::buildHttp('admin:stage', ['id' => $data->id, 'course_id' => $courseId]), 'Save fail', 'danger');
 
-			return true;
+			return false;
 		}
 
 		// Save success, reset user session

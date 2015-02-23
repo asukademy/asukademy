@@ -174,11 +174,13 @@ JS;
 	 *
 	 * @param string $name Module name.
 	 *
-	 * @return  boolean
+	 * @return bool
 	 */
 	public static function load($name)
 	{
 		$name = strtolower($name);
+
+		$args = func_get_args();
 
 		if (empty(static::$modules[$name]))
 		{
@@ -203,7 +205,12 @@ JS;
 			return true;
 		}
 
-		call_user_func_array(static::$modules[$name], array($name, static::getAssetManager()));
+		$name = array_shift($args);
+
+		array_unshift($args, static::getAssetManager());
+		array_unshift($args, $name);
+
+		call_user_func_array(static::$modules[$name], $args);
 
 		static::$initialised[$name] = true;
 
@@ -229,7 +236,9 @@ JS;
 			return false;
 		}
 
-		return static::load(strtolower($name));
+		array_unshift($args, $name);
+
+		return call_user_func_array([get_called_class(), 'load'], $args);
 	}
 
 	/**

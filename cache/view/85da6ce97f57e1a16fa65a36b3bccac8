@@ -1,0 +1,85 @@
+<?php /* Part of asukademy project. */ ?>
+
+
+
+<?php $__env->startSection('page_title'); ?>
+課程管理<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('toolbar'); ?>
+<?php echo \Riki\Toolbar\Toolbar::add('course', 'admin:new', [], 'btn-lg'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th width="1%">#</th>
+            <th width="1%">ID</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Position</th>
+            <th>Quota</th>
+            <th>Less</th>
+            <th>State</th>
+            <th width="1%">Del</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($items as $k => $item): ?>
+            <tr>
+                <td>
+                    <input type="checkbox" name="cid[]" id="cb<?php echo $k; ?>" value="<?php echo $item->id; ?>" />
+                </td>
+                <td>
+                    <?php echo $item->id; ?>
+
+                </td>
+                <td>
+                    <?php echo e($item->category_title); ?>
+
+                </td>
+                <td>
+                    <p><a href="<?php echo $router->buildHtml('edit', ['name' => 'course', 'id' => $item->id]); ?>"><?php echo e($item->title); ?></a></p>
+                </td>
+                <td>
+                    <?php echo e($item->position_title); ?>
+
+                </td>
+                <td>
+                    <?php echo e($item->quota); ?>
+
+                </td>
+                <td>
+                    <?php echo e($item->less); ?>
+
+                </td>
+                <td>
+                    <?php if($item->state): ?>
+                        <span class="label label-success">啟動</span>
+                    <?php else: ?>
+                        <span class="label label-danger">關閉</span>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default"
+                            onclick="RikiForm.deleteItem('<?php echo e($router->buildHttp('user', ['id' => $item->id])); ?>');">
+                        <span class="glyphicon glyphicon-trash text-danger"></span>
+                    </button>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+
+        <tfoot>
+        <tr>
+            <td colspan="15">
+                <?php echo $pagination->render('admin:courses'); ?>
+
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin._global.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

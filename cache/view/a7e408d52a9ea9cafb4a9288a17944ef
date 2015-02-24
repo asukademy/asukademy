@@ -1,0 +1,68 @@
+<?php /* Part of asukademy project. */ ?>
+
+<div class="sub-toolbar">
+<?php echo \Riki\Toolbar\Toolbar::add('stage', 'admin:new', ['queries' => ['course_id' => $item->id]]); ?>
+
+</div>
+
+<hr />
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>標題</th>
+        <th>日期</th>
+        <th>人數限制</th>
+        <th>狀態</th>
+        <th>刪除</th>
+    </tr>
+    </thead>
+    <?php $__empty_1 = true; foreach($stages as $k => $stage): $__empty_1 = false; ?>
+
+        <tr>
+            <td>
+                <input type="checkbox" name="cid[]" id="cb<?php echo $k; ?>" />
+            </td>
+            <td>
+                <?php echo e($stage->id); ?>
+
+            </td>
+            <td>
+                <?php echo \Riki\Toolbar\Toolbar::edit($stage->title, $stage->id, 'admin:stage', ['course_id' => $item->id]); ?>
+
+            </td>
+            <td>
+                <?php echo e($stage->start); ?> ~ <?php echo e($stage->end); ?>
+
+            </td>
+            <td>
+                <?php echo e($stage->quota); ?>
+
+            </td>
+            <td>
+                <?php if($stage->state): ?>
+                    <span class="label label-success">啟動</span>
+                <?php else: ?>
+                    <span class="label label-danger">關閉</span>
+                <?php endif; ?>
+            </td>
+            <td>
+                <button type="button" class="btn btn-default"
+                        onclick="RikiForm.deleteItem('<?php echo e($router->buildHttp('stage', ['id' => $item->id])); ?>');">
+                    <span class="glyphicon glyphicon-trash text-danger"></span>
+                </button>
+            </td>
+        </tr>
+
+    <?php endforeach; if ($__empty_1): ?>
+
+        <tr>
+            <td colspan="20">
+                沒有開課梯次
+            </td>
+        </tr>
+
+    <?php endif; ?>
+</table>

@@ -1,0 +1,142 @@
+<?php /* Part of asukademy project. */ ?>
+
+
+
+<?php $__env->startSection('page_title'); ?>
+    票價方案<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('toolbar'); ?>
+    <?php echo \Riki\Toolbar\Toolbar::save('admin:classes', ['course_id' => $course_id, 'stage_id' => $stage_id], 'btn-lg'); ?>
+
+
+    <a class="btn btn-default btn-lg" href="<?php echo e($router->buildHtml('course', ['id' => $course_id, 'stage_id' => $stage_id])); ?>">
+        <span class="glyphicon glyphicon-remove"></span> 回到課程編輯
+    </a>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div class="row">
+        <div class="col-md-8">
+            <fieldset class="form-horizontal">
+                <?php foreach(range(1, 20) as $i): ?>
+                    <?php $item = $items[$i - 1]; ?>
+                    <?php $item = $item ? : new \Windwalker\Data\Data; ?>
+                    <?php $classes = 'classes-' . $i; ?>
+                    <?php $name    = 'classes[' . $i . ']'; ?>
+
+                    <div class="well">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="<?php echo $classes; ?>-title" class="col-sm-2 control-label">課程名稱</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="<?php echo $name; ?>[title]" class="form-control" id="<?php echo $classes; ?>-title"
+                                            placeholder="課程名稱" value="<?php echo e($item->title); ?>">
+                                </div>
+
+                                <div class="col-md-3">
+                                    # <?php echo e($stage_id . '-' . $i); ?> @ <?php echo e($item->id); ?>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <label for="<?php echo $classes; ?>-date" class="col-sm-2 control-label">日期</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group date-picker">
+                                        <input type="text" name="<?php echo $name; ?>[date]" class="form-control" id="<?php echo $classes; ?>-date"
+                                                placeholder="日期" value="<?php echo e($item->date); ?>">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+
+                                <?php /* 時段設定 */ ?>
+                                <label for="<?php echo $classes; ?>-end" class="col-sm-2 control-label">時段</label>
+                                <div class="col-sm-4">
+                                    <?php
+                                    $select = function ($name)
+                                    {
+                                        $options = [new \Windwalker\Html\Option('---', '')];
+
+                                        foreach (range(0, 24) as $i)
+                                        {
+                                            $hr = sprintf('%02d', $i);
+
+                                            $options[] = new \Windwalker\Html\Option($hr . ':00', $i);
+                                            $options[] = new \Windwalker\Html\Option($hr . ':30', $i + 0.5);
+                                        }
+
+                                        return new \Windwalker\Html\Select\SelectList($name, $options, ['class' => 'form-control']);
+                                    }
+                                    ?>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <?php echo $select($name . '[start]')->setSelected($item->start)->toString(); ?>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <?php echo $select($name . '[end]')->setSelected($item->end)->toString(); ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="<?php echo $classes; ?>-hours" class="col-sm-2 control-label">時數</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="<?php echo $name; ?>[hours]" class="form-control" id="<?php echo $classes; ?>-hours"
+                                            placeholder="時數" value="<?php echo e($item->hours); ?>">
+                                </div>
+                                <label for="<?php echo $classes; ?>-ordering" class="col-sm-2 control-label">排序</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="<?php echo $name; ?>[ordering]" class="form-control" id="<?php echo $classes; ?>-ordering"
+                                            placeholder="排序" value="<?php echo e($item->ordering); ?>">
+                                </div>
+                                <label for="<?php echo $classes; ?>-enabled" class="col-sm-2 control-label">啟用</label>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" name="<?php echo $name; ?>[enabled]" class="form-control" id="<?php echo $classes; ?>-enabled"
+                                            value="1" <?php echo e($item->state ? 'checked="checked"' : ''); ?>>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="<?php echo $classes; ?>-intro" class="col-sm-2 control-label">簡述</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="<?php echo $name; ?>[intro]" class="form-control" id="<?php echo $classes; ?>-intro"
+                                            placeholder="簡述" value="<?php echo e($item->intro); ?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="<?php echo $classes; ?>-description" class="col-sm-2 control-label">完整說明</label>
+                                <div class="col-sm-10">
+                                    <textarea type="text" name="<?php echo $name; ?>[description]" class="form-control" rows="7" id="<?php echo $classes; ?>-description"
+                                            placeholder="完整說明" ><?php echo e($item->description); ?></textarea>
+                                </div>
+                            </div>
+
+                            <?php /*<input name="<?php echo $name; ?>[id]" type="hidden" value="<?php echo e($item->id); ?>" />/*/ ?>
+
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+            </fieldset>
+        </div>
+
+        <div class="col-md-4">
+            <fieldset>
+                <?php echo $__env->make('stage.submenu', ['active' => 'classes'], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            </fieldset>
+        </div>
+    </div>
+
+    <script>
+        RikiEdit.confirmOnPageExit(jQuery('#adminForm'));
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin._global.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

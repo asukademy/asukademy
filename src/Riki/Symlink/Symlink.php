@@ -38,7 +38,7 @@ class Symlink
 		}
 		else
 		{
-			return exec("sudo ln -s {$dest} {$src}");
+			return exec("ln -s {$src} {$dest}");
 		}
 	}
 }

@@ -10,6 +10,7 @@ namespace Windwalker;
 
 use Admin\AdminPackage;
 use Asukademy\AsukademyPackage;
+use Front\FrontPackage;
 use Riki\RikiPackage;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Registry\Registry;
@@ -33,7 +34,8 @@ class Windwalker extends \Windwalker\Core\Windwalker
 			'system' => new SystemPackage,
 			'riki' => new RikiPackage,
 			'asukademy' => new AsukademyPackage,
-			'admin' => new AdminPackage
+			'admin' => new AdminPackage,
+			'front' => new FrontPackage
 		);
 	}
 

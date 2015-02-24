@@ -23,6 +23,8 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
+		date_default_timezone_set('UTC');
+
 		$this->execute('UserSeeder');
 		$this->execute('CategorySeeder');
 		$this->execute('PositionSeeder');

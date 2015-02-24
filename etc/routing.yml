@@ -1,7 +1,7 @@
-home:
-  pattern: '/'
-  controller: 'Acme\Controller\Page\'
 admin:
   pattern: admin
   package: admin
+front:
+  pattern: '/'
+  package: front
 

@@ -8,7 +8,9 @@
 
 namespace Admin;
 
+use Admin\Listener\AuthoriseListener;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\Event\Dispatcher;
 
 /**
  * The AdminPackage class.
@@ -17,4 +19,10 @@ use Windwalker\Core\Package\AbstractPackage;
  */
 class AdminPackage extends AbstractPackage
 {
+	public function registerListeners(Dispatcher $dispatcher)
+	{
+		parent::registerListeners($dispatcher);
+
+		$dispatcher->addListener(new AuthoriseListener);
+	}
 }

@@ -18,7 +18,10 @@
 		"asika/faker-zhtw": "*@stable",
 
 		"illuminate/view" : "~4.0@stable",
-		"asika/muse": "1.*@stable"
+		"asika/muse": "1.*@stable",
+
+        "joomla/image": "~1.0@stable",
+        "michelf/php-markdown": "*@stable"
 	},
 	"require-dev": {
 		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"

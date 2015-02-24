@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Front;
+namespace Front\Model;
 
-use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\Core\Model\DatabaseModel;
 
 /**
- * The FrontPackage class.
+ * The PageModel class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class FrontPackage extends AbstractPackage
+class PageModel extends DatabaseModel
 {
 
 }

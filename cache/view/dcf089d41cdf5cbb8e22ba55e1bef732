@@ -7,21 +7,21 @@
     <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
     <link rel="icon" href="media/favicon.ico" type="image/x-icon">
 
-    <title>@yield('page_title', 'Asukademy 飛鳥學院')</title>
+    <title><?php echo $__env->yieldContent('page_title', 'Asukademy 飛鳥學院'); ?></title>
 
-@if ($app->get('meta.description'))
-    <meta name="description" content="{{{ $app->get('meta.description') }}}">
-@endif
+<?php if($app->get('meta.description')): ?>
+    <meta name="description" content="<?php echo e($app->get('meta.description')); ?>">
+<?php endif; ?>
     <meta name="generator" content="The Time Machine">
 
-@if ($app->get('og.image'))
+<?php if($app->get('og.image')): ?>
     <meta property="og:image" content="https://cloud.githubusercontent.com/assets/1639206/4780266/64533a2a-5c60-11e4-9908-628396b5f69d.jpg">
-@endif
-    <meta property="og:title" content="@yield('page_title')">
+<?php endif; ?>
+    <meta property="og:title" content="<?php echo $__env->yieldContent('page_title'); ?>">
     <meta property="og:site_name" content="Asukademy 飛鳥學院">
-@if ($app->get('meta.description'))
-    <meta property="og:description" content="{{{ $app->get('meta.description') }}}">
-@endif
+<?php if($app->get('meta.description')): ?>
+    <meta property="og:description" content="<?php echo e($app->get('meta.description')); ?>">
+<?php endif; ?>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -30,14 +30,14 @@
     <![endif]-->
 
     <!-- styles -->
-    <link rel="stylesheet" href="{{{ $uri['media.path'] }}}css/uikit.min.css">
-@yield('style')
-    <link rel="stylesheet" type="text/css" href="{{{ $uri['media.path'] }}}css/front/main.css?{{{ Riki\Asset\Asset::getVersion() }}}">
+    <link rel="stylesheet" href="<?php echo e($uri['media.path']); ?>css/uikit.min.css">
+<?php echo $__env->yieldContent('style'); ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo e($uri['media.path']); ?>css/front/main.css?<?php echo e(Riki\Asset\Asset::getVersion()); ?>">
 
     <!-- scripts -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{{ $uri['media.path'] }}}js/uikit.min.js"></script>
-@yield('script')
+    <script type="text/javascript" src="<?php echo e($uri['media.path']); ?>js/uikit.min.js"></script>
+<?php echo $__env->yieldContent('script'); ?>
 
     <script type="text/javascript">var _jf = _jf || [];_jf.push(['p','29887']);_jf.push(['_setFont','xingothic-tc-w4','css','.xingothic-tc-w4']);_jf.push(['_setFont','xingothic-tc-w4','css','xin4']);_jf.push(['_setFont','xingothic-tc-w4','alias','Xin4']);_jf.push(['_setFont','xingothic-tc-w6','css','.xingothic-tc-w6']);_jf.push(['_setFont','xingothic-tc-w6','css','xin6']);_jf.push(['_setFont','xingothic-tc-w6','alias','Xin6']);(function(f,q,c,h,e,i,r,d){var k=f._jf;if(k.constructor===Object){return}var l,t=q.getElementsByTagName("html")[0],a=function(u){for(var v in k){if(k[v][0]==u){if(false===k[v][1].call(k)){break}}}},j=/\S+/g,o=/[\t\r\n\f]/g,b=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,g="".trim,s=g&&!g.call("\uFEFF\xA0")?function(u){return u==null?"":g.call(u)}:function(u){return u==null?"":(u+"").replace(b,"")},m=function(y){var w,z,v,u,x=typeof y==="string"&&y;if(x){w=(y||"").match(j)||[];z=t[c]?(" "+t[c]+" ").replace(o," "):" ";if(z){u=0;while((v=w[u++])){if(z.indexOf(" "+v+" ")<0){z+=v+" "}}t[c]=s(z)}}},p=function(y){var w,z,v,u,x=arguments.length===0||typeof y==="string"&&y;if(x){w=(y||"").match(j)||[];z=t[c]?(" "+t[c]+" ").replace(o," "):"";if(z){u=0;while((v=w[u++])){while(z.indexOf(" "+v+" ")>=0){z=z.replace(" "+v+" "," ")}}t[c]=y?s(z):""}}},n;k.push(["_eventActived",function(){p(h);m(e)}]);k.push(["_eventInactived",function(){p(h);m(i)}]);k.addScript=n=function(u,A,w,C,E,B){E=E||function(){};B=B||function(){};var x=q.createElement("script"),z=q.getElementsByTagName("script")[0],v,y=false,D=function(){x.src="";x.onerror=x.onload=x.onreadystatechange=null;x.parentNode.removeChild(x);x=null;a("_eventInactived");B()};if(C){v=setTimeout(function(){D()},C)}x.type=A||"text/javascript";x.async=w;x.onload=x.onreadystatechange=function(G,F){if(!y&&(!x.readyState||/loaded|complete/.test(x.readyState))){y=true;if(C){clearTimeout(v)}x.src="";x.onerror=x.onload=x.onreadystatechange=null;x.parentNode.removeChild(x);x=null;if(!F){setTimeout(function(){E()},200)}}};x.onerror=function(H,G,F){if(C){clearTimeout(v)}D();return true};x.src=u;z.parentNode.insertBefore(x,z)};a("_eventPreload");m(h);n(r,"text/javascript",false,3000)})(this,this.document,"className","jf-loading","jf-active","jf-inactive","//d3gc6cgx8oosp4.cloudfront.net/js/stable/v/4.6/id/54380144134");</script>
 </head>
@@ -46,13 +46,13 @@
     <div class="uk-container uk-container-center">
 
         <a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="">
-            <img class="uk-margin uk-margin-remove" src="{{{ $uri['media.path'] }}}img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy">
+            <img class="uk-margin uk-margin-remove" src="<?php echo e($uri['media.path']); ?>img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy">
         </a>
 
         <a href="#" class="uk-navbar-toggle uk-visible-small" data-uk-toggle="{target:'#mainmenu', cls: 'uk-hidden-small'}"></a>
 
         <a id="small-logo" class="uk-navbar-brand uk-navbar-center uk-visible-small" href="">
-            <img class="uk-margin uk-margin-remove" style="max-width: 95%;" src="{{{ $uri['media.path'] }}}img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy">
+            <img class="uk-margin uk-margin-remove" style="max-width: 95%;" src="<?php echo e($uri['media.path']); ?>img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy">
         </a>
 
         <ul id="mainmenu" class="uk-navbar-nav uk-float-right uk-hidden-small">
@@ -95,7 +95,7 @@
     </div>
 </nav>
 
-<section id="banner" style="background-image: url({{{ $uri['media.path'] }}}img/banner/banner-2000-2.jpg);height:650px ;">
+<section id="banner" style="background-image: url(<?php echo e($uri['media.path']); ?>img/banner/banner-2000-2.jpg);height:650px ;">
     <div class="banner-inner">
 
     </div>

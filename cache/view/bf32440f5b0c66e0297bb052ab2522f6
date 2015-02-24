@@ -1,0 +1,77 @@
+<?php /* Part of asukademy project. */ ?>
+<?php
+use Riki\Asset\Asset;
+use Riki\Uri\Uri;
+
+Asset::addScript(Uri::media(true) . 'riki/js/form.js');
+Asset::addScript(Uri::media(true) . 'riki/js/edit.js');
+
+Asset::setIndents("    ");
+?>
+
+
+<?php $__env->startSection('style'); ?>
+<?php echo \Riki\Asset\Asset::renderStyles(true); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<?php echo \Riki\Asset\Asset::renderScripts(true); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+
+    <div class="jumbotron">
+        <div class="container">
+            <?php $__env->startSection('header'); ?>
+                <h1 class="pull-left"><?php echo $__env->yieldContent('page_title'); ?></h1>
+            <?php echo $__env->yieldSection(); ?>
+
+            <div class="toolbar pull-right">
+                <?php $__env->startSection('toolbar'); ?>
+                <?php echo $__env->yieldSection(); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-wrap container">
+        <?php foreach((array) $flashes as $type => $typeBag): ?>
+            <div class="alert alert-<?php echo e($type); ?> alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+
+                <?php foreach((array) $typeBag as $msg): ?>
+                    <p><?php echo $msg; ?></p>
+                <?php endforeach; ?>
+
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="container">
+        <form id="adminForm" name="adminForm" method="post" enctype="multipart/form-data">
+            <?php $__env->startSection('content'); ?>
+                Layout Content
+            <?php echo $__env->yieldSection(); ?>
+        </form>
+
+        <?php if(WINDWALKER_DEBUG): ?>
+            <hr />
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Queries</h3>
+                </div>
+                <div class="panel-body">
+                    <?php $profiler = \Windwalker\Ioc::getProfiler(); ?>
+                    <?php echo $profiler->render(); ?>
+
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin._global.html', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

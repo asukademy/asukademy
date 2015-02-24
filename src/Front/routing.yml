@@ -1,0 +1,5 @@
+page:
+  pattern: (*paths)
+  controller: Front\Controller\Page
+  action:
+    '*': GetController

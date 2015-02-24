@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Model;
+namespace Front\Model;
 
 use Riki\Model\ListModel;
 use Windwalker\Query\Query;
@@ -32,8 +32,7 @@ class CoursesModel extends ListModel
 		$queryHelper = $this->getQueryHelper();
 
 		$queryHelper->addTable('course', Table::COURSES)
-			->addTable('category', Table::CATEGORIES, 'category.id = course.catid')
-			->addTable('position', Table::POSITIONS, 'position.id = course.position_id');
+			->addTable('category', Table::CATEGORIES, 'category.id = course.catid');
 
 		$query->select($queryHelper->getSelectFields());
 
@@ -42,6 +41,7 @@ class CoursesModel extends ListModel
 		if ($this['list.search'])
 		{
 			$search[] = $query->format('%n LIKE %q', 'course.title', '%' . $this['list.search'] . '%');
+			$search[] = $query->format('%n LIKE %q', 'category.title', '%' . $this['list.search'] . '%');
 
 			$query->where(new QueryElement('()', $search, ' OR '));
 		}

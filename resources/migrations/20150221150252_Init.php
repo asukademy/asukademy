@@ -46,6 +46,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Varchar('alias'))
+			->addColumn(new Column\Varchar('eng_title'))
 			->addColumn(new Column\Tinyint('state', 1))
 			->addColumn(new Column\Integer('ordering'))
 			->addColumn(new Column\Text('params'))

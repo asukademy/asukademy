@@ -248,6 +248,44 @@ dl {
 	&.page-contact {
 		background-image: url(../../img/banner/contact.jpg);
 	}
+
+	&.page-courses,
+	&.page-course {
+		background-image: url(../../img/banner/feature-2-dark.jpg);
+		height: auto;
+
+		h1, h2 {
+			color: white;
+		}
+
+		h1 {
+			margin: 20px 20px;
+			padding-bottom: 10px;
+			font-size: 75px;
+			text-shadow: 0 0 15px rgba(0,0,0,.7);
+		}
+	}
+
+	.course-toolbar {
+		text-align: center;
+		padding: 30px 0 40px 0;
+	}
+
+	.categories-bar {
+		margin: 30px 0;
+	}
+
+	.banner-cat-button {
+		display: inline-block;
+		padding: 5px 15px;
+		color: white;
+		border: 1px solid white;
+
+		&:hover {
+			text-decoration: none;
+			background-color: rgba(255,255,255,.2);
+		}
+	}
 }
 
 @media (max-width: 767px) {
@@ -356,8 +394,12 @@ dl {
 
 // Courses page
 .courses-layout {
-	h2.category-title {
-		margin-top: 50px;
+	.category-title {
+		margin-bottom: 50px;
+	}
+
+	.category-container {
+		margin-bottom: 75px;
 	}
 
 	.course-item {

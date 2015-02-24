@@ -29,6 +29,7 @@ class CategorySeeder extends AbstractSeeder
 		{
 			$data['title'] = $title;
 			$data['alias'] = $title;
+			$data['eng_title'] = 'Course English Title';
 			$data['state'] = 1;
 			$data['ordering'] = $k + 1;
 

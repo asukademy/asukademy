@@ -8,16 +8,14 @@
 
 namespace Front\View\Page;
 
-use Windwalker\Core\View\BladeHtmlView;
-use Windwalker\Data\DataSet;
-use Windwalker\Registry\Registry;
+use Front\View\AbstractFrontHtmlView;
 
 /**
  * The PageHtmlView class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class PageHtmlView extends BladeHtmlView
+class PageHtmlView extends AbstractFrontHtmlView
 {
 	/**
 	 * prepareData
@@ -28,11 +26,6 @@ class PageHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
-		// Menus
-		$mainmenu = new Registry;
-
-		$mainmenu->loadFile($this->package->getDir() . '/Resources/menus/mainmenu.yml', 'yaml');
-
-		$data->mainmenu = new DataSet($mainmenu->toArray());
+		parent::prepareData($data);
 	}
 }

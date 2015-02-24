@@ -188,6 +188,41 @@ dl dd {
 #banner.page-contact {
   background-image: url(../../img/banner/contact.jpg);
 }
+#banner.page-courses,
+#banner.page-course {
+  background-image: url(../../img/banner/feature-2-dark.jpg);
+  height: auto;
+}
+#banner.page-courses h1,
+#banner.page-course h1,
+#banner.page-courses h2,
+#banner.page-course h2 {
+  color: white;
+}
+#banner.page-courses h1,
+#banner.page-course h1 {
+  margin: 20px 20px;
+  padding-bottom: 10px;
+  font-size: 75px;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+#banner .course-toolbar {
+  text-align: center;
+  padding: 30px 0 40px 0;
+}
+#banner .categories-bar {
+  margin: 30px 0;
+}
+#banner .banner-cat-button {
+  display: inline-block;
+  padding: 5px 15px;
+  color: white;
+  border: 1px solid white;
+}
+#banner .banner-cat-button:hover {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
 @media (max-width: 767px) {
   .page-index + #banner {
     background-image: url(../../img/banner/banner-mobile.jpg) !important;
@@ -271,8 +306,11 @@ dl dd {
   font-size: 1.3em;
   font-family: 'Oswald', 'Adobe 繁黑體 Std', 'AdobeFanHeitiStd-Bold', 'LiHei Pro', "Xin6", '微軟正黑體', sans-serif;
 }
-.courses-layout h2.category-title {
-  margin-top: 50px;
+.courses-layout .category-title {
+  margin-bottom: 50px;
+}
+.courses-layout .category-container {
+  margin-bottom: 75px;
 }
 .courses-layout .course-item {
   margin-top: 30px;

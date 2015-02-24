@@ -1,3 +1,14 @@
+courses:
+  pattern: /courses(/page)
+  controller: Front\Controller\Courses
+  requirements:
+    category_id: \d+
+course:
+  pattern: /course/(id)
+  controller: Front\Controller\Course
+  requirements:
+    id: \d+
+
 page:
   pattern: (*paths)
   controller: Front\Controller\Page

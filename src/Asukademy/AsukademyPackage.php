@@ -10,7 +10,9 @@ namespace Asukademy;
 
 use Asukademy\Listener\AsukademyListener;
 use Asukademy\Listener\ProfilerListener;
+use Asukademy\Provider\MarkdownProvider;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\DI\Container;
 use Windwalker\Event\Dispatcher;
 
 /**
@@ -20,6 +22,20 @@ use Windwalker\Event\Dispatcher;
  */
 class AsukademyPackage extends AbstractPackage
 {
+	/**
+	 * registerProviders
+	 *
+	 * @param Container $container
+	 *
+	 * @return  void
+	 */
+	public function registerProviders(Container $container)
+	{
+		parent::registerProviders($container);
+
+		$container->registerServiceProvider(new MarkdownProvider);
+	}
+
 	/**
 	 * registerListeners
 	 *

@@ -126,30 +126,6 @@ dl dd {
   display: block;
   line-height: 140%;
 }
-#header.home {
-  background: transparent;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  color: #fff;
-}
-#header.home a {
-  color: #715E49;
-}
-#header.home a:hover {
-  background: transparent;
-  color: #333;
-}
-#header.home a:hover span.menu-item-sub-title {
-  color: #333;
-  opacity: .84;
-  transition: all 0.5s;
-}
-#header.home span.menu-item-sub-title {
-  color: #715E49;
-  opacity: .84;
-  transition: all 0.5s;
-}
 #header .uk-navbar-toggle {
   margin-top: 15px;
 }
@@ -174,11 +150,46 @@ dl dd {
     background: #eee;
   }
 }
+.page-index #header {
+  background: transparent;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  color: #fff;
+}
+.page-index #header a {
+  color: #715E49;
+}
+.page-index #header a:hover {
+  background: transparent;
+  color: #333;
+}
+.page-index #header a:hover span.menu-item-sub-title {
+  color: #333;
+  opacity: .84;
+  transition: all 0.5s;
+}
+.page-index #header span.menu-item-sub-title {
+  color: #715E49;
+  opacity: .84;
+  transition: all 0.5s;
+}
 #banner {
   background: url(../../img/banner/banner-2000.jpg) center center no-repeat;
+  height: 200px;
+}
+#banner.page-index {
+  background-image: url(../../img/banner/banner-2000-2.jpg);
+  height: 650px;
+}
+#banner.page-faq {
+  background-image: url(../../img/banner/feature-1.jpg);
+}
+#banner.page-contact {
+  background-image: url(../../img/banner/contact.jpg);
 }
 @media (max-width: 767px) {
-  .home + #banner {
+  .page-index + #banner {
     background-image: url(../../img/banner/banner-mobile.jpg) !important;
     background-size: auto 100%;
   }

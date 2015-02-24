@@ -171,35 +171,6 @@ dl {
 		line-height: 140%;
 	}
 
-	&.home {
-		background: transparent;
-		position: absolute;
-		top: 0px;
-		width: 100%;
-		color: #fff;
-
-		a {
-			color: #715E49;
-
-			&:hover {
-				background: transparent;
-				color: #333;
-
-				span.menu-item-sub-title {
-					color: #333;
-					opacity: .84;
-					.transition(.5s);
-				}
-			}
-		}
-
-		span.menu-item-sub-title {
-			color: #715E49;
-			opacity: .84;
-			.transition(.5s);
-		}
-	}
-
 	.uk-navbar-toggle {
 		margin-top: 15px;
 	}
@@ -230,13 +201,57 @@ dl {
 	}
 }
 
+.page-index {
+	#header {
+		background: transparent;
+		position: absolute;
+		top: 0px;
+		width: 100%;
+		color: #fff;
+
+		a {
+			color: #715E49;
+
+			&:hover {
+				background: transparent;
+				color: #333;
+
+				span.menu-item-sub-title {
+					color: #333;
+					opacity: .84;
+					.transition(.5s);
+				}
+			}
+		}
+
+		span.menu-item-sub-title {
+			color: #715E49;
+			opacity: .84;
+			.transition(.5s);
+		}
+	}
+}
+
 #banner {
 	background: url(../../img/banner/banner-2000.jpg) center center no-repeat;
-	// min-height: 550px;
+	height: 200px;
+
+	&.page-index {
+		background-image: url(../../img/banner/banner-2000-2.jpg);
+		height:650px;
+	}
+
+	&.page-faq {
+		background-image: url(../../img/banner/feature-1.jpg);
+	}
+
+	&.page-contact {
+		background-image: url(../../img/banner/contact.jpg);
+	}
 }
 
 @media (max-width: 767px) {
-	.home + #banner {
+	.page-index + #banner {
 		background-image: url(../../img/banner/banner-mobile.jpg) !important;
 		background-size: auto 100%;
 	}

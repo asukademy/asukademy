@@ -22,7 +22,7 @@ use Windwalker\Core\Facade\Facade;
  * @method  static  string        renderInternalStyles()    renderInternalStyles()
  * @method  static  string        renderInternalScripts()   renderInternalScripts()
  * @method  static  string        getVersion()              getVersion()
- * @method  static  string        setIndents()              setIndents(string $indents)
+ * @method  static  AssetManager  setIndents()              setIndents(string $indents)
  * @method  static  string        getIndents()              getIndents()
  *
  * @since  {DEPLOY_VERSION}

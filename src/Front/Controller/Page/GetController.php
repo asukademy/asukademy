@@ -34,6 +34,8 @@ class GetController extends Controller
 
 		$view->setModel($model);
 
-		return $view->setLayout(implode('.', $paths))->render();
+		$layout = trim(implode('.', $paths), '.') ? : 'index';
+
+		return $view->setLayout($layout)->render();
 	}
 }

@@ -1,0 +1,35 @@
+about:
+    title: 關於我們
+    sub_title: About
+    route: 'front:page'
+    path: about
+
+courses:
+    title: 課程資訊
+    sub_title: Courses
+    route: 'front:page'
+    path: courses
+    children:
+        programming:
+        title: 程式設計
+        route: 'front:page'
+        path: programming
+
+blog:
+    title: 部落格
+    sub_title: Blog
+    route: 'front:page'
+    path: blog
+    url: http://blog.asukademy.com
+
+faq:
+    title: 常見問題
+    sub_title: FAQ
+    route: 'front:page'
+    path: faq
+
+contact:
+    title: 聯絡與諮詢
+    sub_title: Contact
+    route: 'front:page'
+    path: contact

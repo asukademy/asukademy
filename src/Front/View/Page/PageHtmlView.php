@@ -9,6 +9,8 @@
 namespace Front\View\Page;
 
 use Windwalker\Core\View\BladeHtmlView;
+use Windwalker\Data\DataSet;
+use Windwalker\Registry\Registry;
 
 /**
  * The PageHtmlView class.
@@ -26,5 +28,11 @@ class PageHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		// Menus
+		$mainmenu = new Registry;
+
+		$mainmenu->loadFile($this->package->getDir() . '/Resources/menus/mainmenu.yml', 'yaml');
+
+		$data->mainmenu = new DataSet($mainmenu->toArray());
 	}
 }

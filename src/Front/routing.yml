@@ -9,8 +9,12 @@ category_courses:
   requirements:
     page: \d+
 course:
-  pattern: /courses/(category_alias)/course/(alias)
+  pattern: /courses/(category_alias)/(alias)
   controller: Front\Controller\Course
+
+stage:
+  pattern: /courses/(category_alias)/(course_alias)/(id)
+  controller: Front\Controller\Stage
 
 page:
   pattern: (*paths)

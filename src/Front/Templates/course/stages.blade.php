@@ -24,12 +24,12 @@
                 @endif
             </td>
             <td>
-                <a class="uk-button" href="#">
+                <a class="uk-button" href="{{{ $link = $router->buildHtml('stage', ['id' => $stage->id, 'course_alias' => $item->alias, 'category_alias' => $category->alias]) }}}">
                     詳細資訊
                 </a>
             </td>
             <td>
-                <a class="uk-button" href="#">
+                <a class="uk-button" href="{{{ $link . '#attend' }}}">
                     立即報名
                 </a>
             </td>

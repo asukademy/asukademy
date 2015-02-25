@@ -3,7 +3,7 @@
 @extends('layouts.global.course')
 
 @section('page_title')
-{{--{{{ $pageTitle }}}--}}
+{{{ $item->title }}} | {{{ $category->title }}}
 @stop
 
 @section('banner')
@@ -17,7 +17,7 @@
     <div class="uk-grid basic-layout">
         <div class="uk-width-medium-1-4">
             @include('left')
-            s
+            placeholder
         </div>
 
         <div class="uk-width-medium-3-4 uk-container-center">

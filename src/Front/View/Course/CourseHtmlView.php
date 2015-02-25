@@ -32,6 +32,7 @@ class CourseHtmlView extends AbstractFrontHtmlView
 
 		$data->item   = $this->model->getItem();
 		$data->stages = $this->model->getStages($data->item->id);
+		$data->category = (new DataMapper(Table::CATEGORIES))->findOne(['id' => $data->item->catid]);
 
 		foreach ($data->stages as $stage)
 		{
@@ -39,6 +40,5 @@ class CourseHtmlView extends AbstractFrontHtmlView
 			$stage->people = count($stage->orders);
 			$stage->attendable = $stage->people < $stage->quota;
 		}
-
 	}
 }

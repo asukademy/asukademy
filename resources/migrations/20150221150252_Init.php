@@ -146,6 +146,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Primary('id'))
 			->addColumn(new Column\Integer('user_id'))
 			->addColumn(new Column\Integer('course_id'))
+			->addColumn(new Column\Integer('stage_id'))
 			->addColumn(new Column\Integer('plan_id'))
 			->addColumn(new Column\Varchar('plan_title'))
 			->addColumn('price', DataType::DECIMAL)

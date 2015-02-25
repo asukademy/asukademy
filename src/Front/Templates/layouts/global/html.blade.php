@@ -74,6 +74,16 @@
 
 <div id="main-body">
     @yield('body')
+
+    @if (WINDWALKER_DEBUG)
+        <div class="uk-container uk-container-center">
+            <div class="uk-panel uk-panel-box">
+                <h3 class="uk-panel-title">Debug</h3>
+                <?php $profiler = \Windwalker\Ioc::getProfiler(); ?>
+                {{ $profiler->render() }}
+            </div>
+        </div>
+    @endif
 </div>
 
 <footer id="footer">

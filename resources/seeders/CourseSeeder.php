@@ -52,7 +52,7 @@ class CourseSeeder extends AbstractSeeder
 				$data = [];
 				$data['catid']    = $category->id;
 				$data['title']    = $title = $faker->sentence(4);
-				$data['alias']    = $title;
+				$data['alias']    = \Windwalker\Filter\OutputFilter::stringURLSafe($title);
 				$data['subtitle'] = $faker->sentence(6);
 				$data['image']       = $faker->randomElement($images);
 				$data['introtext']   = file_get_contents(__DIR__ . '/fixtures/intro.md');

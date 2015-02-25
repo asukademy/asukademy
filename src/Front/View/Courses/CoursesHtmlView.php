@@ -42,7 +42,7 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 		// Prepare item data
 		foreach ($data->items as $item)
 		{
-			$item->link = Router::buildHtml('front:course', ['id' => $item->id]);
+			$item->link = Router::buildHtml('front:course', ['alias' => $item->alias, 'category_alias' => $item->category_alias]);
 		}
 
 		// Separate by Categories

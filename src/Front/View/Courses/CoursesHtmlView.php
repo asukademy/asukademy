@@ -33,9 +33,11 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 	{
 		parent::prepareData($data);
 
-		$data->items = $this->model->getItems();
-		$data->pagination = $this->model->getPagination();
-		$data->cats = (new DataMapper(Table::CATEGORIES))->findAll();
+		$data->items           = $this->model->getItems();
+		$data->pagination      = $this->model->getPagination();
+		$data->currentCategory = $this->model->getCategory();
+		$data->cats            = (new DataMapper(Table::CATEGORIES))->findAll();
+		$data->state           = $this->model->getState();
 
 		// Prepare item data
 		foreach ($data->items as $item)
@@ -70,6 +72,17 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 
 		$data->categories = $categories;
 
-		// show($data->items);
+		// Page Title
+		$data->pageTitle = '課程資訊';
+
+		if ($data->currentCategory->notNull())
+		{
+			$data->pageTitle = $data->currentCategory->title . ' ' . $data->pageTitle;
+		}
+
+		if ($this->model->get('list.page') > 1)
+		{
+			$data->pageTitle .= ' - 第 ' . $data->pageTitle . ' 頁';
+		}
 	}
 }

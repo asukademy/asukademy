@@ -2,7 +2,12 @@ courses:
   pattern: /courses(/page)
   controller: Front\Controller\Courses
   requirements:
-    category_id: \d+
+    page: \d+
+category_courses:
+  pattern: /courses(/category_alias,page)
+  controller: Front\Controller\Courses
+  requirements:
+    page: \d+
 course:
   pattern: /course/(id)
   controller: Front\Controller\Course

@@ -3,11 +3,11 @@
 @extends('layouts.global.course')
 
 @section('page_title')
-課程資訊@stop
+{{{ $pageTitle }}}@stop
 
 @section('content')
 
-    @foreach ($categories as $category)
+    @forelse ($categories as $category)
         <div class="category-container">
             <div class="category-title">
                 <h1 class="page-title">{{{ $category['data']->title }}}</h1>
@@ -16,7 +16,11 @@
 
             @include('category', ['items' => $category['items']])
         </div>
-    @endforeach
+    @empty
+        <p class="uk-text-center">
+            沒有結果
+        </p>
+    @endforelse
 
     <div class="uk-margin-large-top">
         {{ $pagination->render('front:courses', 'widget.pagination') }}

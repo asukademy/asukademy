@@ -223,6 +223,10 @@ dl dd {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.2);
 }
+#banner .banner-cat-button.active {
+  background-color: #ffffff;
+  color: black;
+}
 @media (max-width: 767px) {
   .page-index + #banner {
     background-image: url(../../img/banner/banner-mobile.jpg) !important;

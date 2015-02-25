@@ -9,6 +9,8 @@
 namespace Front\Model;
 
 use Riki\Model\ListModel;
+use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\Query\Query;
 use Windwalker\Query\QueryElement;
 use Windwalker\Table\Table;
@@ -38,10 +40,32 @@ class CoursesModel extends ListModel
 
 		$query = $queryHelper->registerQueryTables($query);
 
-		if ($this['list.search'])
+		// Filter
+		// ---------------------------------
+		$category = $this->getCategory();
+
+		if ($category->notNull())
 		{
-			$search[] = $query->format('%n LIKE %q', 'course.title', '%' . $this['list.search'] . '%');
-			$search[] = $query->format('%n LIKE %q', 'category.title', '%' . $this['list.search'] . '%');
+			$query->where('category.id = ' . $query->quote($category->id));
+		}
+
+		// Search
+		if ($searches = $this['list.search'])
+		{
+			$search = [];
+
+			foreach (explode(' ', $searches) as $text)
+			{
+				if (!trim($text))
+				{
+					continue;
+				}
+
+				$search[] = $query->format('%n LIKE %q', 'course.title', '%' . $text . '%');
+				$search[] = $query->format('%n LIKE %q', 'course.introtext', '%' . $text . '%');
+				$search[] = $query->format('%n LIKE %q', 'course.fulltext', '%' . $text . '%');
+				$search[] = $query->format('%n LIKE %q', 'category.title', '%' . $text . '%');
+			}
 
 			$query->where(new QueryElement('()', $search, ' OR '));
 		}
@@ -52,5 +76,25 @@ class CoursesModel extends ListModel
 		}
 
 		return $query;
+	}
+
+	/**
+	 * getCategory
+	 *
+	 * @return  Data
+	 */
+	public function getCategory()
+	{
+		$state = $this->state;
+
+		return $this->fetch('category', function() use ($state)
+		{
+			if (!$state['filter.category_alias'])
+			{
+				return new Data;
+			}
+
+			return (new DataMapper(Table::CATEGORIES))->findOne(['alias' => $this['filter.category_alias']]);
+		});
 	}
 }

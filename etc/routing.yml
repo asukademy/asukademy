@@ -1,7 +1,9 @@
+user:
+  pattern: user
+  package: user
 admin:
   pattern: admin
   package: admin
 front:
   pattern: '/'
   package: front
-

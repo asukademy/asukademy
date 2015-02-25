@@ -104,9 +104,6 @@ class Application extends WebApplication
 		 * set it here. Example: $packages[] = new Flower\FlowerPackage;
 		 */
 
-		// Your packages here...
-		$packages['wwuser'] = new UserPackage;
-
 		return $packages;
 	}
 

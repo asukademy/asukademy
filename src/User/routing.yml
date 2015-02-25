@@ -1,0 +1,21 @@
+profile:
+  pattern: /profile
+  controller: User\Controller\Profile
+
+courses:
+  pattern: /courses(/page)
+  controller: User\Controller\Courses
+
+login:
+  pattern: /login
+  controller: User\Controller\Login
+
+registration:
+  pattern: /registration
+  controller: User\Controller\Registration
+
+activation:
+  pattern: /activation
+  controller: User\Controller\Activation
+  action:
+    '*': GetController

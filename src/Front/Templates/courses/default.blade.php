@@ -6,7 +6,7 @@
 {{{ $pageTitle }}}@stop
 
 @section('banner')
-    <div class="uk-container uk-container-center course-toolbar">
+    <div class="uk-container uk-container-center course-toolbar banner-toolbar">
         <h1 class="page-title">{{{ $currentCategory->isNull() ? '課程資訊' : $currentCategory->title  }}}</h1>
         <h2 class="sub-title">@yield('sub_title')</h2>
 

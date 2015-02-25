@@ -21,7 +21,8 @@
 		"asika/muse": "1.*@stable",
 
         "joomla/image": "~1.0@stable",
-        "michelf/php-markdown": "*@stable"
+        "michelf/php-markdown": "*@stable",
+		"swiftmailer/swiftmailer": "5.*@stable"
 	},
 	"require-dev": {
 		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"

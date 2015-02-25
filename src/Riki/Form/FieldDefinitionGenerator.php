@@ -81,12 +81,12 @@ HTML;
 	public static function genPassword($type, $name, $label, $column)
 	{
 		return <<<HTML
-\$form->addField(new PasswordField('password', 'Password'))
+\$form->addField(new Field\PasswordField('password', 'Password'))
 	->set('class', '')
 	->set('labelClass', '')
 	->set('autocomplete', 'off');
 
-\$form->addField(new PasswordField('password2', 'Password Again'))
+\$form->addField(new Field\PasswordField('password2', 'Password Again'))
 	->set('class', '')
 	->set('labelClass', '')
 	->set('autocomplete', 'off');

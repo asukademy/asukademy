@@ -21,3 +21,32 @@ page:
   controller: Front\Controller\Page
   action:
     '*': GetController
+#about:
+#  pattern: /about
+#  controller: Front\Controller\Page
+#  action:
+#    '*': GetController
+#  variables:
+#    paths: [about]
+#
+#faq:
+#  pattern: /faq
+#  controller: Front\Controller\Page
+#  action:
+#    '*': GetController
+#  variables:
+#    paths: [faq]
+#
+#contact:
+#  pattern: /contact
+#  controller: Front\Controller\Page
+#  action:
+#    '*': GetController
+#  variables:
+#    paths: [contact]
+#
+#index:
+#  pattern: /
+#  controller: Front\Controller\Page
+#  action:
+#    '*': GetController

@@ -7,7 +7,7 @@
 @stop
 
 @section('banner')
-    <div class="uk-container uk-container-center course-toolbar">
+    <div class="uk-container uk-container-center course-toolbar banner-toolbar">
         <h1 class="page-title">{{{ $item->title }}}</h1>
         <h2 class="sub-title">{{{ $item->subtitle }}}</h2>
     </div>

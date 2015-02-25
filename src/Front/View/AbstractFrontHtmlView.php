@@ -32,7 +32,7 @@ abstract class AbstractFrontHtmlView extends BladeHtmlView
 		// Menus
 		$mainmenu = new Registry;
 
-		$mainmenu->loadFile($this->package->getDir() . '/Resources/menus/mainmenu.yml', 'yaml');
+		$mainmenu->loadFile(WINDWALKER_SOURCE . '/Front/Resources/menus/mainmenu.yml', 'yaml');
 
 		$data->mainmenu = new DataSet($mainmenu->toArray());
 

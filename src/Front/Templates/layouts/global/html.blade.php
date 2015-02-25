@@ -73,6 +73,9 @@
 </section>
 
 <div id="main-body">
+
+    @include('layouts.message.message')
+
     @yield('body')
 
     @if (WINDWALKER_DEBUG)

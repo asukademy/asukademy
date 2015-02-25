@@ -13,6 +13,7 @@ use Asukademy\AsukademyPackage;
 use Front\FrontPackage;
 use Riki\RikiPackage;
 use Symfony\Component\Yaml\Yaml;
+use User\UserPackage;
 use Windwalker\Registry\Registry;
 use Windwalker\SystemPackage\SystemPackage;
 
@@ -31,11 +32,12 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	public static function loadPackages()
 	{
 		return array(
-			'system' => new SystemPackage,
-			'riki' => new RikiPackage,
+			'system'    => new SystemPackage,
+			'riki'      => new RikiPackage,
 			'asukademy' => new AsukademyPackage,
-			'admin' => new AdminPackage,
-			'front' => new FrontPackage
+			'user'      => new UserPackage,
+			'admin'     => new AdminPackage,
+			'front'     => new FrontPackage
 		);
 	}
 

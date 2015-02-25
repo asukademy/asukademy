@@ -62,7 +62,7 @@ class UserRecord extends Record
 
 		if ($data->notNull() && $data->id != $this->id)
 		{
-			throw new ValidFailException($field . ' exists');
+			throw new ValidFailException($field . ' 重複');
 		}
 	}
 }

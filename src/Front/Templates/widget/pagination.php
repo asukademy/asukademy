@@ -28,7 +28,7 @@ $route = $data->route;
 		<li>
 			<a href="<?php echo $route(array('page' => $pagination->getFirst())); ?>">
 				<span class="glyphicon glyphicon-fast-backward"></span>
-				<span class="sr-only">First</span>
+				<span class="sr-only"><span class="uk-icon-step-backward"></span></span>
 			</a>
 		</li>
 	<?php endif; ?>
@@ -37,18 +37,18 @@ $route = $data->route;
 		<li>
 			<a href="<?php echo $route(array('page' => $pagination->getPrevious())); ?>">
 				<span class="glyphicon glyphicon-backward"></span>
-				<span class="sr-only">Previous</span>
+				<span class="sr-only"><span class="uk-icon-backward"></span></span>
 			</a>
 		</li>
 	<?php endif; ?>
 
-	<?php if ($pagination->getLess()): ?>
-		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getLess())); ?>">
-				Less
-			</a>
-		</li>
-	<?php endif; ?>
+<!--	--><?php //if ($pagination->getLess()): ?>
+<!--		<li>-->
+<!--			<a href="--><?php //echo $route(array('page' => $pagination->getLess())); ?><!--">-->
+<!--				更少-->
+<!--			</a>-->
+<!--		</li>-->
+<!--	--><?php //endif; ?>
 
 	<?php foreach ($pagination->getPages() as $k => $page): ?>
 		<?php $active = ($page == 'current') ? 'uk-active' : ''; ?>
@@ -65,19 +65,19 @@ $route = $data->route;
 		</li>
 	<?php endforeach; ?>
 
-	<?php if ($pagination->getMore()): ?>
-		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getMore())); ?>">
-				More
-			</a>
-		</li>
-	<?php endif; ?>
+<!--	--><?php //if ($pagination->getMore()): ?>
+<!--		<li>-->
+<!--			<a href="--><?php //echo $route(array('page' => $pagination->getMore())); ?><!--">-->
+<!--				更多-->
+<!--			</a>-->
+<!--		</li>-->
+<!--	--><?php //endif; ?>
 
 	<?php if ($pagination->getNext()): ?>
 		<li>
 			<a href="<?php echo $route(array('page' => $pagination->getNext())); ?>">
 				<span class="glyphicon glyphicon-forward"></span>
-				<span class="sr-only">Next</span>
+				<span class="sr-only"><span class="uk-icon-forward"></span></span>
 			</a>
 		</li>
 	<?php endif; ?>
@@ -86,7 +86,7 @@ $route = $data->route;
 		<li>
 			<a href="<?php echo $route(array('page' => $pagination->getLast())); ?>">
 				<span class="glyphicon glyphicon-fast-forward"></span>
-				<span class="sr-only">Last</span>
+				<span class="sr-only"><span class="uk-icon-step-forward"></span></span>
 			</a>
 		</li>
 	<?php endif; ?>

@@ -22,7 +22,7 @@
                 <th>課程名稱</th>
                 <th>時間</th>
                 <th></th>
-                <th></th>
+                <th>報名資訊</th>
                 <th>狀態</th>
                 <th>取消</th>
             </tr>
@@ -36,8 +36,12 @@
                 </td>
                 <td>{{{ $item->stage_start }}}</td>
                 <td>{{{ '' }}}</td>
-                <td></td>
-                <td>{{{ $item->state }}}</td>
+                <td>
+                    <a href="{{{ $router->buildHtml('order', ['id' => $item->id]) }}}">
+                        報名資訊
+                    </a>
+                </td>
+                <td>{{{ \Admin\Helper\OrderHelper::getStateTitle($item->state) }}}</td>
                 <td>
                     <button type="button" class="uk-button"
                             onclick="RikiForm.deleteItem('{{{ $router->buildHttp('user:courses', ['id' => $item->id]) }}}');">
@@ -45,8 +49,8 @@
                     </button>
                 </td>
             </tr>
-            </tbody>
             @endforeach
+            </tbody>
             <tfoot>
             <tr>
                 <td colspan="20">

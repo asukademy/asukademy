@@ -16,6 +16,14 @@ stage:
   pattern: /courses/(category_alias)/(course_alias)/(id)
   controller: Front\Controller\Stage
 
+order:
+  pattern: /course/plan/order/(plan_id)
+  controller: Front\Controller\Order
+  requirements:
+    plan_id: \d+
+  extra:
+    auth: true
+
 page:
   pattern: (*paths)
   controller: Front\Controller\Page

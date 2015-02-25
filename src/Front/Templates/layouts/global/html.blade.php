@@ -73,7 +73,6 @@
 </section>
 
 <div id="main-body">
-
     @include('layouts.message.message')
 
     @yield('body')
@@ -81,9 +80,17 @@
     @if (WINDWALKER_DEBUG)
         <div class="uk-container uk-container-center">
             <div class="uk-panel uk-panel-box">
-                <h3 class="uk-panel-title">Debug</h3>
+                <h3 class="uk-panel-title">SQL</h3>
                 <?php $profiler = \Windwalker\Ioc::getProfiler(); ?>
                 {{ $profiler->render() }}
+            </div>
+        </div>
+        <div class="uk-container uk-container-center">
+            <div class="uk-panel uk-panel-box">
+                <h3 class="uk-panel-title">Session</h3>
+                {{ show($_SESSION) }}
+                <h3 class="uk-panel-title">Cookie</h3>
+                {{ show($_COOKIE) }}
             </div>
         </div>
     @endif

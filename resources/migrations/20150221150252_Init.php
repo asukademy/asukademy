@@ -78,6 +78,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('alias'))
 			->addColumn(new Column\Text('description'))
 			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
+			->addColumn(new Column\Integer('total', 11, Column::UNSIGNED, Column::NOT_NULL, 0))
 			->addColumn(new Column\Tinyint('state', 1))
 			->addColumn(new Column\Timestamp('start'))
 			->addColumn(new Column\Timestamp('end'))
@@ -110,6 +111,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Timestamp('start'))
 			->addColumn(new Column\Timestamp('end'))
 			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
+			->addColumn(new Column\Integer('total', 11, Column::UNSIGNED, Column::NOT_NULL, 0))
 			->addColumn(new Column\Integer('max_one_time', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Text('params'))
 			->create(true);

@@ -9,6 +9,7 @@
 namespace Asukademy;
 
 use Asukademy\Listener\AsukademyListener;
+use Asukademy\Listener\AuthoriseListener;
 use Asukademy\Listener\ProfilerListener;
 use Asukademy\Provider\MarkdownProvider;
 use Windwalker\Core\Package\AbstractPackage;
@@ -49,5 +50,6 @@ class AsukademyPackage extends AbstractPackage
 
 		$dispatcher->addListener(new AsukademyListener);
 		$dispatcher->addListener(new ProfilerListener);
+		$dispatcher->addListener(new AuthoriseListener);
 	}
 }

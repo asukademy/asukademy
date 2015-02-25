@@ -6,9 +6,19 @@ courses:
   pattern: /courses(/page)
   controller: User\Controller\Courses
 
+order:
+  pattern: /otrder/(id)
+  controller: User\Controller\Order
+
 login:
   pattern: /login
   controller: User\Controller\Login
+
+logout:
+  pattern: /logout
+  controller: User\Controller\Logout
+  action:
+    '*': GetController
 
 registration:
   pattern: /registration

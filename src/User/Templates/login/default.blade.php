@@ -25,7 +25,6 @@ Login
             <div class="uk-form uk-form-horizontal">
                 {{ \Front\Form\UikitFormRenderer::render($form->getFields(), '', 'uk-width-1-1'); }}
 
-
                 <div class="uk-form-row register-button-bar">
                     <button class="uk-button uk-button-large uk-button-primary">
                         註冊

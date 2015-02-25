@@ -8,7 +8,10 @@
 
 namespace User\Helper;
 
+use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Router\Router;
 use Windwalker\Crypt\CryptHelper;
+use Windwalker\Ioc;
 
 /**
  * The UserHelper class.
@@ -29,5 +32,44 @@ class UserHelper
 		$salt = CryptHelper::genRandomBytes(5);
 
 		return md5($salt . $username);
+	}
+
+	/**
+	 * checkLogin
+	 *
+	 * @return  boolean
+	 */
+	public static function checkLogin()
+	{
+		if (User::get()->notNull())
+		{
+			return true;
+		}
+
+		$session = Ioc::getSession();
+		$current = Ioc::getConfig()->get('uri.current');
+		$current = base64_encode($current);
+
+		$session->set('login.redirect.url', $current);
+
+		$app = Ioc::getApplication();
+
+		$app->addFlash('請登入以繼續進行操作', 'warning');
+
+		$app->redirect(Router::buildHttp('user:login'));
+
+		return true;
+	}
+
+	/**
+	 * isLogin
+	 *
+	 * @param integer $user
+	 *
+	 * @return  bool
+	 */
+	public static function isLogin($user = null)
+	{
+		return !User::get($user)->isNull();
 	}
 }

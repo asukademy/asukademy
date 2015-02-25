@@ -9,9 +9,11 @@
 namespace User\Controller\Login;
 
 use User\Model\LoginModel;
+use Windwalker\Authenticate\Authenticate;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
+use Windwalker\Ioc;
 
 /**
  * The SaveController class.
@@ -29,12 +31,37 @@ class SaveController extends Controller
 	protected function doExecute()
 	{
 		$model = new LoginModel;
+		$session = Ioc::getSession();
 
 		$user = $this->input->getVar('user');
 
+		$return = $session->get('login.redirect.url') ? : $this->input->getBase64('return');
+
+		$return = $return ? base64_decode($return) : Router::buildHttp('user:courses');
+
+		$session->remove('login.redirect.url');
+
 		try
 		{
-			$model->login($user['username'], $user['password']);
+			if (!$model->login($user['username'], $user['password']))
+			{
+				$error = $model['errors'];
+
+				if ($error['database'] === Authenticate::EMPTY_CREDENTIAL)
+				{
+					throw new ValidFailException('請輸入帳密');
+				}
+				elseif ($error['database'] === Authenticate::INVALID_CREDENTIAL)
+				{
+					throw new ValidFailException('密碼不正確');
+				}
+				elseif ($error['database'] === Authenticate::USER_NOT_FOUND)
+				{
+					throw new ValidFailException('沒有此帳號');
+				}
+
+				throw new ValidFailException('登入失敗');
+			}
 		}
 		catch (ValidFailException $e)
 		{
@@ -54,7 +81,7 @@ class SaveController extends Controller
 			return false;
 		}
 
-		$this->setRedirect('/', '登入成功', 'success');
+		$this->setRedirect($return, '登入成功', 'success');
 
 		return true;
 	}

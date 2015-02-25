@@ -11,4 +11,20 @@
         </li>
     @endforeach
 
+    @if (!\User\Helper\UserHelper::isLogin())
+        <li class="">
+            <a href="{{{ $menu->url ? : $router->buildHtml('user:login') }}}">
+                <span class="menu-item-title">登入</span>
+                <span class="menu-item-sub-title">Login</span>
+            </a>
+        </li>
+    @else
+        <li class="">
+            <a href="{{{ $menu->url ? : $router->buildHtml('user:logout') }}}">
+                <span class="menu-item-title">登出</span>
+                <span class="menu-item-sub-title">Logout</span>
+            </a>
+        </li>
+    @endif
+
 </ul>

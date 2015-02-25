@@ -13,7 +13,6 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
-use Windwalker\Ioc;
 use Windwalker\Validator\Rule\EmailValidator;
 
 /**
@@ -51,28 +50,19 @@ class SaveController extends Controller
 	/**
 	 * doExecute
 	 *
-	 * @return mixed
-	 * @throws \Exception
+	 * @return  mixed
 	 */
 	protected function doExecute()
 	{
 		$data = new Data($this->data);
 
-		$session = Ioc::getSession();
-
 		try
 		{
-			$this->validate($data);
-
-			$this->model->save($data);
+			$this->validate();
 		}
 		catch (ValidFailException $e)
 		{
-			$session->set('profile.edit.data', $data);
-
-			$this->setRedirect(Router::buildHttp('user:profile'), $e->getMessage(), 'warning');
-
-			return false;
+			$this->setRedirect(Router::buildHttp('user:login'), $e->getMessage(), 'warning');
 		}
 		catch (\Exception $e)
 		{
@@ -81,19 +71,10 @@ class SaveController extends Controller
 				throw $e;
 			}
 
-			$session->set('profile.edit.data', $data);
-
-			$this->setRedirect(Router::buildHttp('user:profile'), '儲存失敗', 'warning');
-
-			return false;
+			$this->setRedirect(Router::buildHttp('user:login'), '因系統問題造成的登入失敗，請聯絡網站管理員', 'warning');
 		}
 
-		$session->remove('profile.edit.data');
-
-		// Reset user
-		$session->set('user', $data);
-
-		$this->setRedirect(Router::buildHttp('user:profile'), '儲存成功', 'success');
+		$this->setRedirect('/', '登入成功', 'success');
 
 		return true;
 	}
@@ -105,11 +86,11 @@ class SaveController extends Controller
 	 *
 	 * @throws ValidFailException
 	 */
-	private function validate($data)
+	private function validate()
 	{
 		$form = $this->model->getForm(false);
 
-		$form->bind($data);
+		$form->bind($this->data);
 
 		if (!$form->validate())
 		{
@@ -123,7 +104,7 @@ class SaveController extends Controller
 			throw new ValidFailException(implode($msgs, '<br>'));
 		}
 
-		$user = $data;
+		$user = new Data($this->data);
 
 		if (!$user->username)
 		{
@@ -147,7 +128,7 @@ class SaveController extends Controller
 			throw new ValidFailException('Email 格式不正確');
 		}
 
-		if ($user->password && strlen($user->password) < 4)
+		if ($user->passwordstrlen($user->password) < 4)
 		{
 			throw new ValidFailException('請至少輸入 4 位數密碼');
 		}

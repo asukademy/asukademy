@@ -26,7 +26,7 @@
                 @endif
             </td>
             <td>
-                <a class="uk-button uk-button-success" href="{{{ '#' }}}">
+                <a class="uk-button uk-button-success" href="{{{ $router->buildHtml('order', ['plan_id' => $plan->id]) }}}">
                     <span class="uk-icon-sign-in"></span> 立即報名
                 </a>
             </td>

@@ -115,6 +115,8 @@ class OrderModel extends DatabaseModel
 
 		$this->addQuantity();
 
+		$this['item.id'] = $record->id;
+
 		return true;
 	}
 

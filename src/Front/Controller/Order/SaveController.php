@@ -105,6 +105,7 @@ class SaveController extends Controller
 			$data->stage_id   = $this->plan->stage->id;
 			$data->price      = $this->plan->price;
 			$data->created    = (new DateTime('now'))->format('Y-m-d H:i:s');
+			$data->state      = 1;
 
 			$this->model->save($data);
 		}
@@ -138,7 +139,7 @@ class SaveController extends Controller
 
 		$session->remove('order.create.data');
 
-		$this->setRedirect(Router::buildHttp('user:courses'), '報名成功', 'success');
+		$this->setRedirect(Router::buildHttp('user:order', ['id' => $this->model['item.id']]), '報名成功', 'success');
 
 		return true;
 	}

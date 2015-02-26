@@ -16,3 +16,5 @@ language:
     default: en-GB
     format: ini
     path: resources/languages
+pay2go:
+    test: true

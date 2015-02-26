@@ -8,14 +8,15 @@
 
 namespace User\View\Order;
 
-use Windwalker\Core\View\BladeHtmlView;
+use Front\View\AbstractFrontHtmlView;
+use Windwalker\Core\Authenticate\User;
 
 /**
  * The OrderHtmlView class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class OrderHtmlView extends BladeHtmlView
+class OrderHtmlView extends AbstractFrontHtmlView
 {
 	/**
 	 * prepareData
@@ -26,5 +27,9 @@ class OrderHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		parent::prepareData($data);
+
+		$data->item = $this->model->getItem();
+		$data->user = User::get();
 	}
 }

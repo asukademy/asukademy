@@ -27,6 +27,8 @@ class GetController extends Controller
 		$view = $this->getView('Order', 'html');
 		$model = $this->getModel('Order');
 
+		$model['item.id'] = $this->input->get('id');
+
 		$view->setModel($model);
 
 		return $view->setLayout('default')->render();

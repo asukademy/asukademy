@@ -54,6 +54,19 @@ a:hover {
 .uk-button-primary:hover {
   box-shadow: 0 4px 0 #009fde;
 }
+.uk-button-warning {
+  background-color: #FFAB37;
+  color: white;
+}
+.uk-button-warning:hover,
+.uk-button-warning:focus {
+  background-color: #ffb33c;
+  color: white;
+}
+.uk-button-warning:active {
+  background-color: #eea033;
+  color: white;
+}
 h1 a,
 h2 a,
 h3 a,

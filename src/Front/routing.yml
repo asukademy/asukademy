@@ -24,6 +24,12 @@ order:
   extra:
     auth: true
 
+order_notify:
+  pattern: /order/notify
+  controller: Front\Controller\Order
+  action:
+    '*': NotifyController
+
 page:
   pattern: (*paths)
   controller: Front\Controller\Page

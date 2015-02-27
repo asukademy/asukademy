@@ -8,8 +8,20 @@
 
 namespace Windwalker\Pay2Go;
 
+use Windwalker\Pay2Go\Payment\AbstractPayment;
+use Windwalker\Pay2Go\Payment;
+
 /**
  * The Pay2Go class.
+ *
+ * @property-read  Payment\Alipay   $alipay  The Alipay payment
+ * @property-read  Payment\ATM      $atm  An alias of VACC
+ * @property-read  Payment\Barcode  $barcode  The Barcode payment
+ * @property-read  Payment\CreditCard  $creditCard  The CreditCard payment
+ * @property-read  Payment\CVS      $cvs  The CVS payment
+ * @property-read  Payment\Tenpay   $tenpay  The CreditCard payment
+ * @property-read  Payment\VACC     $vacc  The VACC payment
+ * @property-read  Payment\WebATM   $webATM  The WebATM payment
  *
  * @method  string  getMerchantID()  getMerchantID()
  * @method  Pay2Go  setMerchantID()  setMerchantID($value)
@@ -40,8 +52,11 @@ namespace Windwalker\Pay2Go;
  *
  * @since  {DEPLOY_VERSION}
  */
-class Pay2Go
+class Pay2Go extends AbstractDataHolder
 {
+	const RESPONSE_TYPE_STRING = 'String';
+	const RESPONSE_TYPE_JSON = 'JSON';
+
 	/**
 	 * Property hashKey.
 	 *
@@ -79,11 +94,25 @@ class Pay2Go
 	);
 
 	/**
+	 * Property payments.
+	 *
+	 * @var  AbstractPayment[]
+	 */
+	protected $payments = array();
+
+	/**
 	 * Property test.
 	 *
 	 * @var  boolean
 	 */
 	protected $test = false;
+
+	/**
+	 * Property prepared.
+	 *
+	 * @var  boolean
+	 */
+	protected $prepared = false;
 
 	/**
 	 * Class init
@@ -100,89 +129,20 @@ class Pay2Go
 	}
 
 	/**
-	 * setData
+	 * peekAllData
 	 *
-	 * @param array|object $data
-	 *
-	 * @return  static
+	 * @return  array
 	 */
-	public function setData($data)
+	public function peekAllData()
 	{
-		if ($data instanceof \Traversable)
+		$data = $this->data;
+
+		foreach ($this->payments as $payment)
 		{
-			$data = iterator_to_array($data);
+			$data = array_merge($data, $payment->getData());
 		}
 
-		if (is_object($data))
-		{
-			$data = get_object_vars($data);
-		}
-
-		$this->data = array_merge($this->data, (array) $data);
-
-		return $this;
-	}
-
-	/**
-	 * get
-	 *
-	 * @param string $name
-	 * @param mixed  $value
-	 *
-	 * @return  static
-	 */
-	public function set($name, $value = null)
-	{
-		$this->data[$name] = $value;
-
-		return $this;
-	}
-
-	/**
-	 * get
-	 *
-	 * @param string $name
-	 * @param mixed  $default
-	 *
-	 * @return  mixed
-	 */
-	public function get($name, $default = null)
-	{
-		if (isset($this->data[$name]))
-		{
-			return $this->data[$name];
-		}
-
-		return $default;
-	}
-
-	/**
-	 * __call
-	 *
-	 * @param string $name
-	 * @param array  $args
-	 *
-	 * @return  mixed
-	 */
-	public function __call($name, $args = array())
-	{
-		if (substr($name, 0, 3) == 'get')
-		{
-			$name = substr($name, 3);
-
-			return $this->get($name);
-		}
-
-		if (substr($name, 0, 3) == 'set')
-		{
-			$name = substr($name, 3);
-
-			array_unshift($args, $name);
-
-			return call_user_func_array(array($this, 'set'), $args);
-		}
-
-		throw new \BadMethodCallException(get_called_class() . '::' . $name . '() not exists.');
+		return $data;
 	}
 
 	/**
@@ -194,6 +154,8 @@ class Pay2Go
 	 */
 	public function render($formId = 'pay2go-form')
 	{
+		$this->prepareRender();
+
 		return sprintf(
 			'<form action="%s" id="%s" method="post">%s</form>',
 			$this->getPostUrl(),
@@ -213,8 +175,13 @@ class Pay2Go
 
 		$inputs = array();
 
-		foreach ($this->data as $key => $value)
+		foreach ($this as $key => $value)
 		{
+			if ($value === null)
+			{
+				continue;
+			}
+
 			$inputs[] = sprintf('<input type="hidden" name="%s" value="%s">', $key, $value);
 		}
 
@@ -228,12 +195,60 @@ class Pay2Go
 	 */
 	public function prepareRender()
 	{
+		if ($this->prepared)
+		{
+			return $this;
+		}
+
 		if (!$this->getTimeStamp())
 		{
 			$this->setTimeStamp(time());
 		}
 
 		$this->set('CheckValue', $this->getCheckValue());
+
+		foreach ($this->payments as $payment)
+		{
+			$this->merge($payment);
+		}
+
+		$this->prepared = true;
+
+		return $this;
+	}
+
+	/**
+	 * post
+	 *
+	 * @return  void
+	 */
+	public function post()
+	{
+		$formId = 'pay2go-form';
+
+		echo $this->render($formId);
+
+		echo <<<SCRTPT
+<script>
+	var form = document.getElementById('{$formId}');
+
+	form.submit();
+</script>
+SCRTPT;
+
+		die;
+	}
+
+	/**
+	 * reset
+	 *
+	 * @return  static
+	 */
+	public function reset()
+	{
+		$this->prepared = false;
+
+		$this->setTimeStamp(null);
 
 		return $this;
 	}
@@ -245,22 +260,26 @@ class Pay2Go
 	 */
 	public function getCheckValue()
 	{
-		$merArray = array(
-			'MerchantID'     => $this->getMerchantID(),
-			'TimeStamp'      => $this->getTimeStamp(),
-			'MerchantOrderNo'=> $this->getMerchantOrderNo(),
-			'Version'        => $this->getVersion(),
-			'Amt'            => $this->getAmt(),
-		);
+		return Pay2GoHelper::createCheckValue($this->data, $this->getHashKey(), $this->getHashIV());
+	}
 
-		$key = $this->getHashKey();
-		$iv  = $this->getHashIV();
+	/**
+	 * merge
+	 *
+	 * @param array|AbstractDataHolder $data
+	 *
+	 * @return  static
+	 */
+	public function merge($data)
+	{
+		if ($data instanceof \Traversable)
+		{
+			$data = iterator_to_array($data);
+		}
 
-		ksort($merArray);
-		$checkMerstr = http_build_query($merArray);
-		$CheckValueSTR = "HashKey=$key&$checkMerstr&HashIV=$iv";
+		$this->data = array_merge($this->data, $data);
 
-		return strtoupper(hash("sha256", $CheckValueSTR));
+		return $this;
 	}
 
 	/**
@@ -348,5 +367,29 @@ class Pay2Go
 		$this->test = $test;
 
 		return $this;
+	}
+
+	/**
+	 * __get
+	 *
+	 * @param   string  $name
+	 *
+	 * @return  AbstractPayment|mixed
+	 */
+	public function __get($name)
+	{
+		if (!empty($this->payments[strtolower($name)]))
+		{
+			return $this->payments[strtolower($name)];
+		}
+
+		$class = __NAMESPACE__ . '\Payment\\' . ucfirst($name);
+
+		if (class_exists($class))
+		{
+			return $this->payments[strtolower($name)] = new $class;
+		}
+
+		throw new \UnexpectedValueException(sprintf('Property $s not exists', $name));
 	}
 }

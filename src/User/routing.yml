@@ -7,7 +7,7 @@ courses:
   controller: User\Controller\Courses
 
 order:
-  pattern: /otrder/(id)
+  pattern: /order/(id)
   controller: User\Controller\Order
 
 login:

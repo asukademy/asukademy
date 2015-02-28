@@ -77,7 +77,6 @@ class UserHandler implements UserHandlerInterface
 		if (!$currentUser->isAdmin())
 		{
 			unset($user->group);
-			unset($user->state);
 		}
 
 		if ($currentUser->isMember() && $currentUser->id != $user->id)
@@ -88,7 +87,6 @@ class UserHandler implements UserHandlerInterface
 		// Check exists
 		$this->checkFieldExists('username', $user, '帳號');
 		$this->checkFieldExists('email', $user, 'Email');
-
 
 		if ($user->id)
 		{

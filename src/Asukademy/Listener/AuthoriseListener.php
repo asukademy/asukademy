@@ -49,6 +49,11 @@ class AuthoriseListener
 
 		$user = User::get(['username' => $credential->username]);
 
+		if ($user->isNull())
+		{
+			return;
+		}
+
 		if ($user->activation)
 		{
 			throw new ValidFailException('使用者尚未通過 Email 驗證');

@@ -79,8 +79,6 @@ class RegistrationModel extends DatabaseModel
 
 		$user->activation = UserHelper::createActivationCode($user->username);
 
-		User::save($user);
-
-		return true;
+		return User::save($user);
 	}
 }

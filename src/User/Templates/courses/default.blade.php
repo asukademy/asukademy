@@ -16,6 +16,8 @@
         }
     </style>
     <form action="{{{ $uri['current'] }}}" method="post" id="adminForm" enctype="multipart/form-data">
+
+        @if ($items->notNull())
         <table class="uk-table uk-table-striped courses-table">
             <thead>
             <tr>
@@ -63,5 +65,16 @@
             </tr>
             </tfoot>
         </table>
+        @else
+        <div class="uk-panel uk-panel-box uk-text-center" style="padding-bottom: 120px; padding-top: 120px;">
+            <h2>您還沒有報名任何課程</h2>
+
+            <p>
+                <a class="uk-button uk-button-primary uk-button-hero" href="{{{ $router->buildHtml('front:courses') }}}">
+                    <span class="uk-icon-book"></span> 按此瀏覽課程
+                </a>
+            </p>
+        </div>
+        @endif
     </form>
 @stop

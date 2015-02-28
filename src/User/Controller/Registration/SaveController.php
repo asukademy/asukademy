@@ -11,6 +11,7 @@ namespace User\Controller\Registration;
 use Asukademy\Mail\Mailer;
 use User\Helper\UserHelper;
 use User\Model\RegistrationModel;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
@@ -55,9 +56,21 @@ class SaveController extends Controller
 		{
 			$this->validate($user);
 
-			$model->register($user);
+			$user = $model->register($user);
 
-			$this->mail($user);
+			$config = Ioc::getConfig();
+
+			if ($config['debug.ignore_mail'])
+			{
+				$user->state = 1;
+				$user->activation = '';
+
+				User::save($user);
+			}
+			else
+			{
+				$this->mail($user);
+			}
 		}
 		catch (ValidFailException $e)
 		{
@@ -111,7 +124,7 @@ class SaveController extends Controller
 			->setFrom('noreply@asukademy.com')
 			->setFromName('Asukademy 飛鳥學院')
 			->setTos(array($user->email => $user->name))
-			->setHtml($emailBody, 'text/html');
+			->setHtml($emailBody);
 
 		try
 		{

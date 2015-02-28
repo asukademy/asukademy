@@ -108,6 +108,19 @@ class SaveController extends Controller
 			$data->state      = 1;
 
 			$this->model->create($data);
+
+			if ($this->input->get('save_to_profile'))
+			{
+				$user = User::get();
+
+				$user->bind($this->data);
+
+				User::save($user);
+
+				$session = Ioc::getSession();
+
+				$session->set('user', User::get($user->id));
+			}
 		}
 		catch (ValidFailException $e)
 		{

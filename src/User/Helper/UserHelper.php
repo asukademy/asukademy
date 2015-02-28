@@ -8,6 +8,7 @@
 
 namespace User\Helper;
 
+use User\Access\Group;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Router\Router;
 use Windwalker\Crypt\CryptHelper;
@@ -71,5 +72,24 @@ class UserHelper
 	public static function isLogin($user = null)
 	{
 		return !User::get($user)->isNull();
+	}
+
+	/**
+	 * isAdmin
+	 *
+	 * @param int $pk
+	 *
+	 * @return  bool
+	 */
+	public static function isAdmin($pk = null)
+	{
+		$user = User::get($pk);
+
+		if (!$user->isGuest())
+		{
+			return false;
+		}
+
+		return $user->group === Group::ADMIN;
 	}
 }

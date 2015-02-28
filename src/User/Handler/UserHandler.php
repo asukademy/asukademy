@@ -9,7 +9,8 @@
 namespace User\Handler;
 
 use Admin\Record\UserRecord;
-use Windwalker\Core\Authenticate\UserData;
+use Windwalker\Core\Authenticate\User;
+use User\Data\UserData;
 use Windwalker\Core\Authenticate\UserDataInterface;
 use Windwalker\Core\Authenticate\UserHandlerInterface;
 use Windwalker\Core\Ioc;
@@ -70,18 +71,34 @@ class UserHandler implements UserHandlerInterface
 	 */
 	public function save(UserDataInterface $user)
 	{
-		$record = new UserRecord;
+		$currentUser = User::get();
+
+		if (!$currentUser->isAdmin())
+		{
+			unset($user->group);
+			unset($user->username);
+			unset($user->state);
+		}
+
+		if ($currentUser->isMember() && $currentUser->id != $user->id)
+		{
+			throw new \InvalidArgumentException('Not self.');
+		}
 
 		if ($user->id)
 		{
-			$record->load($user->id);
+			$data = $this->getDataMapper()->findOne($user->id);
+		}
+		else
+		{
+			$data = new Data;
 		}
 
-		$record->bind($user->dump())
-			->check()
-			->store(Record::UPDATE_NULLS);
+		$data->bind($user);
 
-		$user->id = $record->id;
+		$data = $this->getDataMapper()->saveOne($data, 'id', true);
+
+		$user->id = $data->id;
 
 		return $user;
 	}

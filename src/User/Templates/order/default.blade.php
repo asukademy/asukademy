@@ -7,6 +7,14 @@
 @stop
 
 @section('body')
+<aside class="middle-toolbar uk-container uk-container-center">
+    <div class="middle-toolbar-inner">
+        <a class="uk-button uk-button-default uk-button-large" href="{{{ $router->buildHtml('courses') }}}">
+            <span class="uk-icon-chevron-left"></span> 回到我的課程
+        </a>
+    </div>
+</aside>
+
 <section id="manager-section" class="main-block manager-layout">
     <div class="uk-container uk-container-center">
 

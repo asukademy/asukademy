@@ -367,6 +367,12 @@ dl dd {
 .uk-form input[type=radio]:checked:before {
   display: block;
 }
+.middle-toolbar {
+  position: relative;
+}
+.middle-toolbar .middle-toolbar-inner {
+  position: absolute;
+}
 #footer {
   margin-top: 50px;
   padding-top: 150px;

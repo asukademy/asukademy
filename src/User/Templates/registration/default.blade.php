@@ -27,7 +27,7 @@ Regiatration
 
                 <div class="uk-form-row register-button-bar">
                     <button class="uk-button uk-button-large uk-button-primary">
-                        登入
+                        註冊
                     </button>
                 </div>
             </div>

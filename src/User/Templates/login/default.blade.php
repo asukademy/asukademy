@@ -27,11 +27,18 @@ Login
 
                 <div class="uk-form-row register-button-bar">
                     <button class="uk-button uk-button-large uk-button-primary">
-                        註冊
+                        登入
                     </button>
                 </div>
             </div>
             <input name="return" type="hidden" value="{{{ $return }}}" />
         </form>
+
+        <p class="uk-text-center">
+            <br /><br />
+            <a href="{{{ $router->buildHtml('registration') }}}">
+                按此註冊
+            </a>
+        </p>
     </div>
 @stop

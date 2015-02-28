@@ -8,8 +8,10 @@
 
 namespace User\Controller\Login;
 
+use User\Helper\UserHelper;
 use User\Model\LoginModel;
 use Windwalker\Authenticate\Authenticate;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
@@ -30,6 +32,13 @@ class SaveController extends Controller
 	 */
 	protected function doExecute()
 	{
+		if (UserHelper::isLogin())
+		{
+			$this->setRedirect(Router::buildHttp('user:profile'));
+
+			return true;
+		}
+
 		$model = new LoginModel;
 		$session = Ioc::getSession();
 

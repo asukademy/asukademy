@@ -19,11 +19,41 @@
             </a>
         </li>
     @else
-        <li class="">
-            <a href="{{{ $menu->url ? : $router->buildHtml('user:logout') }}}">
-                <span class="menu-item-title">登出</span>
-                <span class="menu-item-sub-title">Logout</span>
+        <li data-uk-dropdown>
+            <a href="#">
+                <span class="menu-item-title">
+
+                    會員中心
+                    <span class="uk-icon-angle-down"></span>
+                </span>
+
+                <span class="menu-item-sub-title">My Profile</span>
             </a>
+            <div class="uk-dropdown uk-dropdown-navbar">
+                <ul class="uk-nav uk-nav-navbar">
+                    <li class="">
+                        <a href="{{{ $menu->url ? : $router->buildHtml('user:profile') }}}">
+                            <span class="menu-item-title">
+                                <span class="uk-icon-user"></span> 會員資料
+                            </span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{{ $menu->url ? : $router->buildHtml('user:courses') }}}">
+                            <span class="menu-item-title">
+                                <span class="uk-icon-book"></span> 我的課程
+                            </span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{{ $menu->url ? : $router->buildHtml('user:logout') }}}">
+                            <span class="menu-item-title">
+                                <span class="uk-icon-sign-out"></span> 登出
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
     @endif
 

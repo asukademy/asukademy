@@ -26,4 +26,14 @@ abstract class Ioc extends \Windwalker\Core\Ioc
 	{
 		return static::get('system.profiler');
 	}
+
+	/**
+	 * getMailer
+	 *
+	 * @return  \Swift_SmtpTransport
+	 */
+	public static function getMailer()
+	{
+		return static::get('mailer');
+	}
 }

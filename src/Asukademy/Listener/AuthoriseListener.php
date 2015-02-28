@@ -9,6 +9,8 @@
 namespace Asukademy\Listener;
 
 use User\Helper\UserHelper;
+use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Event\Event;
 use Windwalker\Ioc;
 
@@ -30,7 +32,7 @@ class AuthoriseListener
 	{
 		$route = Ioc::getConfig()->extract('route');
 
-		if ($route['package'] == 'user' && $route['matched'] != 'user:login')
+		if ($route['package'] == 'user' && $route['matched'] != 'user:login' && $route['matched'] != 'user:registration')
 		{
 			UserHelper::checkLogin();
 		}
@@ -38,6 +40,23 @@ class AuthoriseListener
 		if ($route['extra.auth'])
 		{
 			UserHelper::checkLogin();
+		}
+	}
+
+	public function onUserBeforeLogin(Event $event)
+	{
+		$credential = $event['credential'];
+
+		$user = User::get(['username' => $credential->username]);
+
+		if ($user->activation)
+		{
+			throw new ValidFailException('使用者尚未通過 Email 驗證');
+		}
+
+		if (!$user->state)
+		{
+			throw new ValidFailException('使用者尚未啟用');
 		}
 	}
 }

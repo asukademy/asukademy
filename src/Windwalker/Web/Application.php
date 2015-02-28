@@ -8,6 +8,7 @@
 
 namespace Windwalker\Web;
 
+use Asukademy\Provider\SwiftMailerProvider;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Provider\AuthenticateProvider;
 use Windwalker\Core\Provider\CacheProvider;
@@ -78,6 +79,7 @@ class Application extends WebApplication
 		 */
 
 		// Custom Providers here...
+		$providers['mailer'] = new SwiftMailerProvider;
 
 		return $providers;
 	}

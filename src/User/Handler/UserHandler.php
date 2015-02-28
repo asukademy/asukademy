@@ -8,15 +8,15 @@
 
 namespace User\Handler;
 
-use Admin\Record\UserRecord;
+use Admin\Mapper\UserMapper;
 use Windwalker\Core\Authenticate\User;
 use User\Data\UserData;
 use Windwalker\Core\Authenticate\UserDataInterface;
 use Windwalker\Core\Authenticate\UserHandlerInterface;
 use Windwalker\Core\Ioc;
+use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
-use Windwalker\Record\Record;
 
 /**
  * The UserHandler class.
@@ -73,10 +73,10 @@ class UserHandler implements UserHandlerInterface
 	{
 		$currentUser = User::get();
 
+		// Check access
 		if (!$currentUser->isAdmin())
 		{
 			unset($user->group);
-			unset($user->username);
 			unset($user->state);
 		}
 
@@ -84,6 +84,11 @@ class UserHandler implements UserHandlerInterface
 		{
 			throw new \InvalidArgumentException('Not self.');
 		}
+
+		// Check exists
+		$this->checkFieldExists('username', $user, '帳號');
+		$this->checkFieldExists('email', $user, 'Email');
+
 
 		if ($user->id)
 		{
@@ -160,6 +165,26 @@ class UserHandler implements UserHandlerInterface
 		}
 
 		return $this->mapper;
+	}
+
+	/**
+	 * checkFieldExists
+	 *
+	 * @param string $field
+	 * @param Data   $user
+	 *
+	 * @throws ValidFailException
+	 */
+	protected function checkFieldExists($field, $user, $name = null)
+	{
+		$mapper = new UserMapper;
+
+		$data = $mapper->findOne([$field => $user->$field]);
+
+		if ($data->notNull() && $data->id != $user->id)
+		{
+			throw new ValidFailException(($name ? : $field) . ' 已存在');
+		}
 	}
 }
  

@@ -8,9 +8,12 @@
 
 namespace User\Controller\Registration;
 
+use Asukademy\Mail\Mailer;
+use User\Helper\UserHelper;
 use User\Model\RegistrationModel;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
+use Windwalker\Core\Router\Router;
 use Windwalker\Core\Widget\BladeWidget;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
@@ -33,20 +36,33 @@ class SaveController extends Controller
 	 */
 	public function doExecute()
 	{
+		if (UserHelper::isLogin())
+		{
+			$this->setRedirect(Router::buildHttp('user:profile'));
+
+			return true;
+		}
+
 		$model   = new RegistrationModel;
 		$session = Ioc::getSession();
 
 		$user = $this->input->getVar('registration');
 		$user = new Data($user);
 
+		$trans = Ioc::getDatabase()->getTransaction()->start();
+
 		try
 		{
 			$this->validate($user);
 
 			$model->register($user);
+
+			$this->mail($user);
 		}
 		catch (ValidFailException $e)
 		{
+			$trans->rollback();
+
 			$session->set('user.registration.data', (array) $user);
 
 			$this->setRedirect($this->package->router->buildHttp('registration'), $e->getMessage(), 'warning');
@@ -55,6 +71,13 @@ class SaveController extends Controller
 		}
 		catch (\Exception $e)
 		{
+			$trans->rollback();
+
+			if (WINDWALKER_DEBUG)
+			{
+				throw $e;
+			}
+
 			$session->set('user.registration.data', (array) $user);
 
 			$this->setRedirect($this->package->router->buildHttp('registration'), '註冊失敗', 'warning');
@@ -62,11 +85,11 @@ class SaveController extends Controller
 			return false;
 		}
 
+		$trans->commit();
+
 		$session->remove('user.registration.data');
 
 		$this->setRedirect('login', '註冊成功，請前往信箱驗證郵件位址', 'success');
-
-		$this->mail($user);
 
 		return true;
 	}
@@ -77,13 +100,31 @@ class SaveController extends Controller
 	 * @param Data $user
 	 *
 	 * @return bool
-	 *
+	 * @throws ValidFailException
 	 */
 	protected function mail($user = null)
 	{
 		$emailBody = (new BladeWidget('mail.activation', 'user'))->render(['user' => $user]);
 
+		$message = Mailer::newMessage()
+			->setSubject('歡迎加入飛鳥學院，請由此驗證 Email')
+			->setFrom(array('noreply@asukademy.com' => 'Asukademy 飛鳥學院'))
+			->setTo(array($user->email => $user->name))
+			->setBody($emailBody, 'text/html');
 
+		try
+		{
+			Mailer::send($message);
+		}
+		catch (\RuntimeException $e)
+		{
+			if (WINDWALKER_DEBUG)
+			{
+				throw $e;
+			}
+
+			throw new ValidFailException('郵件伺服器出現問題，暫時無法註冊');
+		}
 
 		return true;
 	}

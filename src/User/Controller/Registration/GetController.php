@@ -8,7 +8,9 @@
 
 namespace User\Controller\Registration;
 
+use User\Helper\UserHelper;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Router\Router;
 
 /**
  * The GetController class.
@@ -24,6 +26,13 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
+		if (UserHelper::isLogin())
+		{
+			$this->setRedirect(Router::buildHttp('user:profile'));
+
+			return true;
+		}
+
 		$view = $this->getView('Registration', 'html');
 		$model = $this->getModel('Registration');
 

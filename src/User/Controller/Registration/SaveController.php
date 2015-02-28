@@ -123,7 +123,7 @@ class SaveController extends Controller
 			->setSubject('歡迎加入飛鳥學院，請由此驗證 Email')
 			->setFrom('service@asukademy.com')
 			->setFromName('Asukademy 飛鳥學院')
-			->setTos(array($user->email => $user->name))
+			->setTos(array($user->email))
 			->setHtml($emailBody);
 
 		try

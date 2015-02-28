@@ -30,7 +30,7 @@ abstract class Ioc extends \Windwalker\Core\Ioc
 	/**
 	 * getMailer
 	 *
-	 * @return  \Swift_SmtpTransport
+	 * @return  \SendGrid
 	 */
 	public static function getMailer()
 	{

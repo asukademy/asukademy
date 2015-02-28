@@ -22,7 +22,7 @@
 
         "joomla/image": "~1.0@stable",
         "michelf/php-markdown": "*@stable",
-		"swiftmailer/swiftmailer": "5.*@stable",
+		"sendgrid/sendgrid": "2.2.1",
 
 		"windwalker/pay2go": "1.*"
 	},

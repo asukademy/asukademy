@@ -108,9 +108,10 @@ class SaveController extends Controller
 
 		$message = Mailer::newMessage()
 			->setSubject('歡迎加入飛鳥學院，請由此驗證 Email')
-			->setFrom(array('noreply@asukademy.com' => 'Asukademy 飛鳥學院'))
-			->setTo(array($user->email => $user->name))
-			->setBody($emailBody, 'text/html');
+			->setFrom('noreply@asukademy.com')
+			->setFromName('Asukademy 飛鳥學院')
+			->setTos(array($user->email => $user->name))
+			->setHtml($emailBody, 'text/html');
 
 		try
 		{

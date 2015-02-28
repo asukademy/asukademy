@@ -8,6 +8,7 @@
 
 namespace Asukademy\Mail;
 
+use SendGrid\Email;
 use Windwalker\Ioc;
 
 /**
@@ -20,11 +21,11 @@ class Mailer
 	/**
 	 * send
 	 *
-	 * @param \Swift_Message $message
+	 * @param Email $message
 	 *
 	 * @return  boolean
 	 */
-	public static function send(\Swift_Message $message)
+	public static function send(Email $message)
 	{
 		return Ioc::getMailer()->send($message);
 	}
@@ -44,8 +45,8 @@ class Mailer
 		$message = static::newMessage()
 			->setSubject($subject)
 			->setFrom($from)
-			->setTo($to)
-			->setBody($body, 'text/html');
+			->setTos($to)
+			->setHtml($body);
 
 		return static::send($message);
 	}
@@ -53,10 +54,10 @@ class Mailer
 	/**
 	 * newMessage
 	 *
-	 * @return  \Swift_Message
+	 * @return  Email
 	 */
 	public static function newMessage()
 	{
-		return \Swift_Message::newInstance();
+		return new Email;
 	}
 }

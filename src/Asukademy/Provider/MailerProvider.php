@@ -16,7 +16,7 @@ use Windwalker\DI\ServiceProviderInterface;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class SwiftMailerProvider implements ServiceProviderInterface
+class MailerProvider implements ServiceProviderInterface
 {
 	/**
 	 * Registers the service provider with a DI container.
@@ -31,11 +31,9 @@ class SwiftMailerProvider implements ServiceProviderInterface
 		{
 			$config = $container->get('system.config');
 
-			return \Swift_SmtpTransport::newInstance($config['smtp.host'], $config['smtp.port'], $config['smtp.type'])
-				->setUsername($config['smtp.username'])
-				->setPassword($config['smtp.password']);
+			return new \SendGrid($config['smtp.username'], $config['smtp.password']);
 		};
 
-		$container->share('mailer', $closure);
+		$container->set('mailer', $closure);
 	}
 }

@@ -8,9 +8,14 @@
 
 namespace Front\Controller\Order;
 
+use Front\Model\OrderModel;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Data\Data;
 use Windwalker\Ioc;
-use Windwalker\Pay2Go\Pay2GoReceiver;
+use Windwalker\Pay2Go\Feedback\Barcode;
+use Windwalker\Pay2Go\Feedback\CVS;
+use Windwalker\Pay2Go\LaterPaymentFeedback;
+use Windwalker\Pay2Go\PaidReceiver;
 
 /**
  * The NotifyController class.
@@ -23,22 +28,72 @@ class NotifyController extends Controller
 	 * doExecute
 	 *
 	 * @return  mixed
+	 * @throws \Exception
 	 */
 	protected function doExecute()
 	{
 		$config = Ioc::getConfig();
 
-		$pay2go = new Pay2GoReceiver($config['pay2go.id'], $config['pay2go.key'], $config['pay2go.iv']);
+		$pay2go = new PaidReceiver($config['pay2go.id'], $config['pay2go.key'], $config['pay2go.iv']);
 
-//		$pay2go->setData($this->input->post->getArray());
-		$pay2go->setData($this->getATMData());
+//		$post = $this->getCreditData();
+		$post = $this->input->post->getArray();
+		$post = $this->input->getArray();
 
-		var_dump($pay2go->validate());
+		$pay2go->setData($post);
 
-		show($pay2go);
+		if (!$pay2go->validate())
+		{
+			return '驗證失敗';
+		}
+
+		if ($config['pay2go.test'])
+		{
+			$orderNo = $pay2go->getMerchantOrderNo();
+			$orderNo = explode('_', $orderNo);
+
+			$pay2go->setMerchantOrderNo($orderNo[0]);
+		}
+
+		$type = $pay2go->getPaymentType();
+		$orderNo = $pay2go->getMerchantOrderNo();
+
+		$data['id'] = $orderNo;
+		$data['payment'] = $type;
+		$data['params'] = json_encode($pay2go->getData());
+		$data['state'] = 2;
+
+		$model = new OrderModel;
+
+		$order = $model->getItem($orderNo);
+
+		if ($order->state >= 2)
+		{
+			echo '訂單已付款';
+
+			return false;
+		}
+
+		try
+		{
+			$model->update(new Data($data));
+		}
+		catch (\Exception $e)
+		{
+			if (WINDWALKER_DEBUG)
+			{
+				throw $e;
+			}
+
+			echo '訂單更改失敗';
+
+			return false;
+		}
+
+		return true;
 	}
 
-	protected function getATMData()
+	protected function getCreditData()
 	{
 		return array (
 			'Status' => 'SUCCESS',
@@ -61,6 +116,27 @@ class NotifyController extends Controller
 			'Inst' => '0',
 			'ECI' => '',
 			'PayTime' => '2015-02-27 13:31:17',
+		);
+	}
+
+	protected function getATMData()
+	{
+		return array (
+			'Status' => 'SUCCESS',
+			'Message' => '取號成功',
+			'MerchantName' => 'Asukademy',
+			'MerchantID' => '3592087',
+			'Amt' => '7200',
+			'TradeNo' => '15022713312764395',
+			'MerchantOrderNo' => '771_54f00126643b5',
+			'ReturnURL' => '',
+			'CheckCode' => 'FDED801CBFBD2CA3A0D1278FB166BD68D0591D5C49ACB646DB9A08974A9F0588',
+			'PaymentType' => 'VACC',
+			'IP' => '',
+			'EscrowBank' => '',
+			'ExpireDate' => '2015-03-06',
+			'BankCode' => '017',
+			'CodeNo' => 'TestAccount123456',
 		);
 	}
 }

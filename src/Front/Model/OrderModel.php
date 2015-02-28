@@ -39,7 +39,7 @@ class OrderModel extends DatabaseModel
 	 */
 	public function getPlan($pk = null)
 	{
-		return $this->fetch('item', function() use ($pk)
+		return $this->fetch('plan', function() use ($pk)
 		{
 			$pk = $pk ? : $this['item.id'];
 
@@ -55,6 +55,39 @@ class OrderModel extends DatabaseModel
 				return $item;
 			}
 
+			$item->stage = (new DataMapper(Table::STAGES))->findOne($item->stage_id);
+			$item->course = (new DataMapper(Table::COURSES))->findOne($item->stage->course_id);
+
+			return $item;
+		});
+	}
+
+	/**
+	 * getItem
+	 *
+	 * @param int|array $pk
+	 *
+	 * @return  mixed|Data
+	 */
+	public function getItem($pk = null)
+	{
+		return $this->fetch('order', function() use ($pk)
+		{
+			$pk = $pk ? : $this['item.id'];
+
+			if (!$pk)
+			{
+				return new Data;
+			}
+
+			$item = (new DataMapper(Table::ORDERS))->findOne($pk);
+
+			if ($item->isNull())
+			{
+				return $item;
+			}
+
+			$item->plan = (new DataMapper(Table::PLANS))->findOne($item->plan_id);
 			$item->stage = (new DataMapper(Table::STAGES))->findOne($item->stage_id);
 			$item->course = (new DataMapper(Table::COURSES))->findOne($item->stage->course_id);
 
@@ -99,7 +132,7 @@ class OrderModel extends DatabaseModel
 	 *
 	 * @throws ValidFailException
 	 */
-	public function save($data)
+	public function create($data)
 	{
 		if (!$this->checkQuantity())
 		{
@@ -108,12 +141,32 @@ class OrderModel extends DatabaseModel
 
 		$record = new Record(Table::ORDERS);
 
-		$record->load($data->id)
-			->bind($data)
+		$record->bind($data)
 			->check()
 			->store();
 
 		$this->addQuantity();
+
+		$this['item.id'] = $record->id;
+
+		return true;
+	}
+
+	/**
+	 * update
+	 *
+	 * @param Data $data
+	 *
+	 * @return  bool
+	 */
+	public function update($data)
+	{
+		$record = new Record(Table::ORDERS);
+
+		$record->load($data->id)
+			->bind($data)
+			->check()
+			->store(true);
 
 		$this['item.id'] = $record->id;
 
@@ -193,6 +246,37 @@ class OrderModel extends DatabaseModel
 
 		$query->update(Table::STAGES)
 			->set('total = total + ' . $plus)
+			->where('id = ' . $stage->id);
+
+		$this->db->setQuery($query)->execute();
+
+		return true;
+	}
+
+	/**
+	 * reduceQuantity
+	 *
+	 * @param int $reduces
+	 *
+	 * @return  bool
+	 */
+	public function reduceQuantity($reduces = 1)
+	{
+		$plan = static::getTotalForUpdate(Table::PLANS, $this['item.id']);
+		$stage = static::getTotalForUpdate(Table::STAGES, $plan->stage_id);
+
+		$query = $this->db->getQuery(true);
+
+		$query->update(Table::PLANS)
+			->set('total = total - ' . $reduces)
+			->where('id = ' . $plan->id);
+
+		$this->db->setQuery($query)->execute();
+
+		$query = $this->db->getQuery(true);
+
+		$query->update(Table::STAGES)
+			->set('total = total - ' . $reduces)
 			->where('id = ' . $stage->id);
 
 		$this->db->setQuery($query)->execute();

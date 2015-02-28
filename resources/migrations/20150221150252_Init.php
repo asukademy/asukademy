@@ -161,8 +161,10 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('organization'))
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Tinyint('state', 1))
-			->addColumn(new Column\Timestamp('created'))
+			->addColumn(new Column\Datetime('created'))
 			->addColumn(new Column\Varchar('payment'))
+			->addColumn(new Column\Datetime('expire_time'))
+			->addColumn(new Column\Datetime('paid_time'))
 			->addColumn(new Column\Text('params'))
 			->create(true);
 

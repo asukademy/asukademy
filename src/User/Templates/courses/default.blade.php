@@ -19,6 +19,7 @@
         <table class="uk-table uk-table-striped courses-table">
             <thead>
             <tr>
+                <th>編號</th>
                 <th>課程名稱</th>
                 <th>時間</th>
                 <th></th>
@@ -30,6 +31,9 @@
             <tbody>
             @foreach($items as $k => $item)
             <tr>
+                <td>
+                    {{{ $item->id }}}
+                </td>
                 <td>
                     <p>{{{ $item->course_title }}}</p>
                     <small>{{{ $item->stage_title }}}</small>

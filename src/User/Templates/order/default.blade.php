@@ -23,6 +23,10 @@
                         <button type="button" class="disabled uk-button uk-button-danger uk-button-hero uk-width-1-1">
                             審核中
                         </button>
+                    @elseif ($item->state == 1 && $item->payment)
+                        <a href="#payment" class="disabled uk-button uk-button-warning uk-button-hero uk-width-1-1" data-uk-smooth-scroll>
+                            等待繳費中
+                        </a>
                     @elseif ($item->state == 1)
                         <form action="{{{ $pay2go->getPostUrl() }}}" method="post">
                             <button type="submit" class="disabled uk-button uk-button-primary uk-button-hero uk-width-1-1">
@@ -110,11 +114,35 @@
                             <th>上課時間</th>
                             <td>{{{ $item->stage->start }}} ~ {{{ $item->stage->end }}}</td>
                         </tr>
+
+                        @if ($item->payment)
+                        <tr>
+                            <th>付款方式</th>
+                            <td>{{{ \Windwalker\Pay2Go\Pay2GoHelper::getPaymentTitle($item->payment) }}}</td>
+                        </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
 
+            @if ($item->payment && $item->state == 1)
+                <h2 id="payment">付款詳細資訊</h2>
+
+                <?php
+                $params = ['table_class' => 'uk-table', 'title_width' => '200'];
+                $params['print_barcode_url'] = $item->payment == \Windwalker\Pay2Go\AbstractPayment::BARCODE
+                    ? \Windwalker\Core\Router\Router::buildHtml('user:barcode', ['id' => $item->id])
+                    : null;
+                ?>
+                {{ $feedback->render($params) }}
+            @endif
+
+            @if ($item->payment && $item->state >= 2)
+                <h2 id="payment">付款詳細資訊</h2>
+
+                {{ $payment->render(['table_class' => 'uk-table', 'title_width' => '200']) }}
+            @endif
         </article>
 
     </div>

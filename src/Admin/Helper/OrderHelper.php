@@ -15,6 +15,11 @@ namespace Admin\Helper;
  */
 class OrderHelper
 {
+	const STATE_CANCELED = -1;
+	const STATE_PENDING = 0;
+	const STATE_WAIT_PAY = 1;
+	const STATE_PAID_SUCCESS = 2;
+
 	/**
 	 * getStateTitle
 	 *
@@ -25,10 +30,10 @@ class OrderHelper
 	public static function getStateTitle($state)
 	{
 		$states = [
-			-1 => '已取消',
-			0 => '審核中',
-			1 => '待繳費',
-			2 => '報名成功'
+			static::STATE_CANCELED => '已取消',
+			static::STATE_PENDING  => '審核中',
+			static::STATE_WAIT_PAY => '待繳費',
+			static::STATE_PAID_SUCCESS => '報名成功'
 		];
 
 		if (array_key_exists($state, $states))

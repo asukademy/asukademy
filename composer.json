@@ -22,7 +22,9 @@
 
         "joomla/image": "~1.0@stable",
         "michelf/php-markdown": "*@stable",
-		"swiftmailer/swiftmailer": "5.*@stable"
+		"swiftmailer/swiftmailer": "5.*@stable",
+
+		"windwalker/pay2go": "1.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"

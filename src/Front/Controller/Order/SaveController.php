@@ -107,7 +107,7 @@ class SaveController extends Controller
 			$data->created    = (new DateTime('now'))->format('Y-m-d H:i:s');
 			$data->state      = 1;
 
-			$this->model->save($data);
+			$this->model->create($data);
 		}
 		catch (ValidFailException $e)
 		{

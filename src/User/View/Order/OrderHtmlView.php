@@ -12,7 +12,10 @@ use Front\View\AbstractFrontHtmlView;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
+use Windwalker\Pay2Go\LaterPaymentFeedback;
+use Windwalker\Pay2Go\PaidReceiver;
 use Windwalker\Pay2Go\Pay2Go;
+use Windwalker\Registry\Registry;
 
 /**
  * The OrderHtmlView class.
@@ -34,6 +37,13 @@ class OrderHtmlView extends AbstractFrontHtmlView
 
 		$data->item = $this->model->getItem();
 		$data->user = User::get();
+		$data->item->params = new Registry($data->item->params);
+		$data->feedback = new LaterPaymentFeedback;
+		$data->payment = new PaidReceiver;
+
+		$data->payment->setData($data->item->params->toArray());
+		$data->feedback->setData($data->item->params->toArray());
+		$data->paymentType = $data->payment->getPaymentType();
 
 		$this->preparePayment($data);
 	}
@@ -69,8 +79,9 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			->setEmail($item->email)
 			->setLoginType(0)
 			->setNotifyURL('http://dev.asika.tw/pay2go/notify.php')
-			->setReturnURL('http://dev.asika.tw/pay2go/return.php')
-			->setCustomerURL('http://dev.asika.tw/pay2go/customer.php');
+			// ->setReturnURL('http://asukademy.test:8000//user/order/' . $item->id)
+			->setCustomerURL('http://asukademy.test:8000//user/order/' . $item->id)
+		;
 
 		$pay2go->creditCard
 			->enable()
@@ -81,11 +92,6 @@ class OrderHtmlView extends AbstractFrontHtmlView
 		$pay2go->barcode->enable();
 		$pay2go->cvs->enable();
 		$pay2go->webATM->enable();
-
-//		$pay2go->alipay->enable()
-//			->setReceiver('Asika')
-//			->setTel1('123')
-//			->addProduct($orderNo, $item->course->title, $item->stage->title . ' (' . $item->plan->title . ')', (int) $item->price, 1);
 
 		$data->pay2go = $pay2go;
 	}

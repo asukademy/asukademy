@@ -3,11 +3,11 @@
 <table class="uk-table">
     <thead>
     <th>梯次名稱</th>
-    <th>日期</th>
+    <th width="100">日期</th>
     <th>地點</th>
-    <th>人數</th>
-    <th>詳細資訊</th>
-    <th>立即報名</th>
+    <th width="60">人數</th>
+    <th width="95">詳細資訊</th>
+    <th width="95">立即報名</th>
     </thead>
 
     <tbody>
@@ -20,7 +20,9 @@
                 @if ($stage->attendable)
                     {{{ $stage->people }}} / {{{ $stage->quota }}}
                 @else
-                    額滿
+                    <span data-uk-tooltip title="{{{ $stage->people }}} / {{{ $stage->quota }}}">
+                        額滿
+                    </span>
                 @endif
             </td>
             <td>
@@ -28,10 +30,14 @@
                     詳細資訊
                 </a>
             </td>
-            <td>
+            <td class="uk-text-center">
+                @if ($stage->attendable)
                 <a class="uk-button" href="{{{ $link . '#attend' }}}">
                     立即報名
                 </a>
+                @else
+                -
+                @endif
             </td>
         </tr>
     @endforeach

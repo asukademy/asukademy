@@ -27,6 +27,9 @@ class StageSeeder extends AbstractSeeder
 		$faker = \Faker\Factory::create('zh_TW');
 
 		$courses = (new DataMapper(Table::COURSES))->findAll();
+		$positions = (new DataMapper(Table::POSITIONS))->findColumn('id');
+
+		$tutors = (new DataMapper(Table::TUTORS))->findColumn('id');
 
 		$courseTimes = [
 			// 8 hours
@@ -39,6 +42,7 @@ class StageSeeder extends AbstractSeeder
 		{
 			foreach (range(1, rand(1, 3)) as $i)
 			{
+				$data = [];
 				// Time offset
 				$date   = new DateTime('2015-' . $faker->month . '-' . $faker->dayOfMonth . ' 09:30:00');
 				$offset = $faker->randomElement($courseTimes);
@@ -47,7 +51,9 @@ class StageSeeder extends AbstractSeeder
 				$data['course_id']   = $course->id;
 				$data['alias']       = $course->id . '-' . $i;
 				$data['description'] = $faker->sentence(2);
+				$data['position_id'] = $faker->randomElement($positions);
 				$data['quota']       = rand(10, 30);
+				$data['less']        = 5;
 				$data['state']       = 1;
 				$data['start']       = $date->format('Y-m-d H:i:s');
 
@@ -55,7 +61,17 @@ class StageSeeder extends AbstractSeeder
 				$data['end'] = $date->format('Y-m-d H:i:s');
 
 				$this->command->out('.', false);
-				$this->db->getWriter()->insertOne(Table::STAGES, $data);
+				$this->db->getWriter()->insertOne(Table::STAGES, $data, 'id');
+
+				foreach ($faker->randomElements($tutors, rand(1, 3)) as $tutor)
+				{
+					$map = [];
+					$map['tutor_id'] = $tutor;
+					$map['stage_id'] = $data['id'];
+
+					$this->command->out('.', false);
+					$this->db->getWriter()->insertOne(Table::TUTOR_STAGE_MAPS, $map);
+				}
 			}
 		}
 

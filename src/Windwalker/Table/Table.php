@@ -24,6 +24,7 @@ abstract class Table
 	const STAGES     = 'stages';
 	const TAGS       = 'tags';
 	const TUTOR_COURSE_MAPS = 'tutor_course_maps';
+	const TUTOR_STAGE_MAPS = 'tutor_stage_maps';
 	const TUTORS     = 'tutors';
 	const USERS      = 'users';
 }

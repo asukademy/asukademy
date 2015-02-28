@@ -33,7 +33,6 @@ class CourseSeeder extends AbstractSeeder
 		$faker->addProvider(new Faker\Provider\zh_TW\Text($faker));
 
 		$tutors = (new DataMapper(Table::TUTORS))->findColumn('id');
-		$positions = (new DataMapper(Table::POSITIONS))->findColumn('id');
 		$categories = (new DataMapper(Table::CATEGORIES))->findAll();
 
 		$images = [
@@ -57,9 +56,6 @@ class CourseSeeder extends AbstractSeeder
 				$data['image']       = $faker->randomElement($images);
 				$data['introtext']   = file_get_contents(__DIR__ . '/fixtures/intro.md');
 				$data['fulltext']    = file_get_contents(__DIR__ . '/fixtures/full.md');
-				$data['position_id'] = $faker->randomElement($positions);
-				$data['quota']       = $faker->numberBetween(20, 30);
-				$data['less']        = 5;
 				$data['learned']     = $faker->paragraph();
 				$data['target']      = $faker->paragraph();
 				$data['note']        = $faker->paragraph();

@@ -8,6 +8,7 @@
 
 namespace Front\Controller\Course;
 
+use Front\Model\CoursesModel;
 use Windwalker\Core\Controller\Controller;
 
 /**
@@ -26,6 +27,7 @@ class GetController extends Controller
 	{
 		$view = $this->getView('Course', 'html');
 		$model = $this->getModel('Course');
+		$coursesModel = new CoursesModel;
 //		$stagesModel = $this->getModel('Stages');
 
 		// Default model
@@ -35,6 +37,7 @@ class GetController extends Controller
 //		$stagesModel['course.id'] = $model->getItem()->id;
 
 		$view->setModel($model);
+		$view->setModel($coursesModel);
 
 		return $view->setLayout('default')->render();
 	}

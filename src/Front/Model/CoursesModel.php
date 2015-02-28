@@ -70,6 +70,15 @@ class CoursesModel extends ListModel
 			$query->where(new QueryElement('()', $search, ' OR '));
 		}
 
+		if (!$this['filter.state'])
+		{
+			$query->where('course.state >= 1');
+		}
+		else
+		{
+			$query->where('course.state = ' . $this['filter.state']);
+		}
+
 		if ($this['list.ordering'])
 		{
 			$query->order($this['list.ordering']);

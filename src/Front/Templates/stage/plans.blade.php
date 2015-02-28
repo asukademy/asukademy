@@ -11,7 +11,7 @@
     <tbody>
     @foreach ($plans as $plan)
         <tr>
-            <td>{{{ $plan->title }}}</td>
+            <th>{{{ $plan->title }}}</th>
             <td>
                 @if ($plan->origin_price && $plan->origin_price != $plan->price)
                     <s>${{{ number_format($plan->origin_price, 0) }}}</s>
@@ -19,7 +19,9 @@
                 ${{{ number_format($plan->price, 0) }}}
             </td>
             <td>
-                @if ($plan->attendable)
+                @if (!$plan->quota)
+                    不限 ({{{ $plan->people }}})
+                @elseif ($plan->attendable)
                     {{{ $plan->people }}} / {{{ (int) $plan->quota }}}
                 @else
                     額滿 ({{{ $plan->people }}} / {{{ (int) $plan->quota }}})
@@ -32,5 +34,15 @@
             </td>
         </tr>
     @endforeach
+    <tr>
+        <th>總人數</th>
+        <td colspan="5">
+            @if (!$item->quota)
+                不限
+            @else
+            {{{ $item->total }}} / {{{ $item->quota }}}
+            @endif
+        </td>
+    </tr>
     </tbody>
 </table>

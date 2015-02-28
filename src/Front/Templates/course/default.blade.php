@@ -17,7 +17,6 @@
     <div class="uk-grid basic-layout">
         <div class="uk-width-medium-1-4">
             @include('left')
-            placeholder
         </div>
 
         <div class="uk-width-medium-3-4 uk-container-center">

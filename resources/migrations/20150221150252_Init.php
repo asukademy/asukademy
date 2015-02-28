@@ -61,9 +61,6 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('image'))
 			->addColumn(new Column\Text('introtext'))
 			->addColumn(new Column\Text('fulltext'))
-			->addColumn(new Column\Varchar('position_id'))
-			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
-			->addColumn(new Column\Integer('less', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Text('learned'))
 			->addColumn(new Column\Text('target'))
 			->addColumn(new Column\Text('note'))
@@ -77,8 +74,10 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('title'))
 			->addColumn(new Column\Varchar('alias'))
 			->addColumn(new Column\Text('description'))
+			->addColumn(new Column\Varchar('position_id'))
 			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Integer('total', 11, Column::UNSIGNED, Column::NOT_NULL, 0))
+			->addColumn(new Column\Integer('less', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Tinyint('state', 1))
 			->addColumn(new Column\Timestamp('start'))
 			->addColumn(new Column\Timestamp('end'))
@@ -99,6 +98,11 @@ class Init extends AbstractMigration
 		$this->db->getTable(Table::TUTOR_COURSE_MAPS)
 			->addColumn(new Column\Integer('tutor_id'))
 			->addColumn(new Column\Integer('course_id'))
+			->create(true);
+
+		$this->db->getTable(Table::TUTOR_STAGE_MAPS)
+			->addColumn(new Column\Integer('tutor_id'))
+			->addColumn(new Column\Integer('stage_id'))
 			->create(true);
 
 		$this->db->getTable(Table::PLANS)
@@ -188,6 +192,7 @@ class Init extends AbstractMigration
 		$this->db->getTable(Table::STAGES)->drop(true);
 		$this->db->getTable(Table::TAGS)->drop(true);
 		$this->db->getTable(Table::TUTOR_COURSE_MAPS)->drop(true);
+		$this->db->getTable(Table::TUTOR_STAGE_MAPS)->drop(true);
 		$this->db->getTable(Table::TUTORS)->drop(true);
 		$this->db->getTable(Table::USERS)->drop(true);
 	}

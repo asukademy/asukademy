@@ -33,8 +33,8 @@ class StageHtmlView extends AbstractFrontHtmlView
 
 		foreach ($data->plans as $plan)
 		{
-			$plan->people = count($plan->orders);
-			$plan->attendable = $plan->quota > $plan->people;
+			$plan->people = $plan->total;
+			$plan->attendable = $plan->quota ? $plan->quota > $plan->total : true;
 		}
 	}
 }

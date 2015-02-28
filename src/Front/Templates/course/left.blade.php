@@ -1,30 +1,44 @@
 {{-- Part of asukademy project. --}}
 
-<h2>講師</h2>
+<div class="uk-panel" style="padding-left: 15px;">
+    <h2 class="uk-text-left">講師</h2>
 
-@foreach ($tutors as $tutor)
-<article class="uk-panel tutor-box">
-    <div class="uk-clearfix">
-        <img class="uk-align-medium-left uk-border-circle"
-                src="{{{ $tutor->image }}}"
-                width="48" height="48" alt="Avatar">
-        <h4 style="margin-top: 0">{{{ $tutor->name }}}</h4>
-        <p class="article-author-description uk-overflow-container uk-text-small">
-            {{ nl2br($tutor->description) }}
-        </p>
-    </div>
-</article>
-@endforeach
+    @foreach ($tutors as $tutor)
+        <article class="uk-panel tutor-box">
+            <div class="uk-clearfix">
+                <img class="uk-align-medium-left uk-border-circle"
+                        src="{{{ $tutor->image }}}"
+                        width="48" height="48" alt="Avatar">
+                <h4 style="margin-top: 0">{{{ $tutor->name }}}</h4>
+                <p class="article-author-description uk-overflow-container uk-text-small">
+                    {{ nl2br($tutor->description) }}
+                </p>
+            </div>
+        </article>
+    @endforeach
 
-<p class="uk-text-center uk-panel uk-text-large">
-    分類： <a href="{{{ $router->buildHtml('category_courses', ['category_alias' => $category->alias]) }}}">{{{ $category->title }}}</a>
-</p>
+    <hr />
+</div>
 
-<hr />
+<div class="attend-now uk-panel" style="padding-left: 15px;">
+    <a class="uk-button uk-button-success uk-button-hero uk-width-1-1" data-uk-smooth-scroll href="#stages">
+        <span class="uk-icon-long-arrow-down"></span> 觀看開課梯次
+    </a>
+</div>
 
-<h2>相關課程</h2>
+<br /><br />
 
 <ul class="uk-nav uk-nav-side side-menu side-bar" data-uk-nav>
+
+    <li class="uk-nav-header">分類</li>
+    <li>
+        <a href="{{{ $router->buildHtml('category_courses', ['category_alias' => $category->alias]) }}}">{{{ $category->title }}}</a>
+    </li>
+
+    <li class="uk-nav-divider"></li>
+
+    <li class="uk-nav-header">相關課程</li>
+
     @foreach($recommends as $item)
     <li>
         <a href="{{{ $item->link }}}">
@@ -32,11 +46,11 @@
         </a>
     </li>
     @endforeach
-</ul>
 
-<h2>隨機推薦</h2>
+    <li class="uk-nav-divider"></li>
 
-<ul class="uk-nav uk-nav-side side-menu side-bar" data-uk-nav>
+    <li class="uk-nav-header">隨機推薦</li>
+
     @foreach($randoms as $item)
         <li>
             <a href="{{{ $item->link }}}">
@@ -44,20 +58,16 @@
             </a>
         </li>
     @endforeach
-</ul>
 
-<h2>開課梯次</h2>
+    <li class="uk-nav-divider"></li>
 
-<table class="uk-table">
-    <tbody>
+    <li class="uk-nav-header">開課梯次</li>
+
     @foreach ($stages as $stage)
-        <tr>
-            <td>
-                <a href=""  data-uk-tooltip title="{{{ $stage->time }}}">
-                    {{{ $stage->title }}}
-                </a>
-            </td>
-        </tr>
+    <li>
+        <a href=""  data-uk-tooltip title="{{{ $stage->time }}}">
+            {{{ $stage->title }}}
+        </a>
+    </li>
     @endforeach
-    </tbody>
-</table>
+</ul>

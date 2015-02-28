@@ -38,7 +38,7 @@
                     {{ \Asukademy\Markdown\Markdown::defaultTransform($item->note) }}
                 @endif
 
-                <h1>開課梯次</h1>
+                <h1 id="stages">開課梯次</h1>
                 @if (count($stages))
                     @include('stages')
                 @else

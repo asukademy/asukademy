@@ -13,5 +13,53 @@
     </a>
 </div>
 
-<h3>其他梯次</h3>
+<br /><br />
+
+<ul class="uk-nav uk-nav-side side-menu side-bar" data-uk-nav>
+    <li class="uk-nav-divider"></li>
+
+    <li class="uk-nav-header">快速導覽</li>
+    
+    <li>
+        <a href="#intro" data-uk-smooth-scroll >課程簡介</a>
+    </li>
+
+    <li>
+        <a href="#classes" data-uk-smooth-scroll >課程規劃</a>
+    </li>
+
+    <li>
+        <a href="#info" data-uk-smooth-scroll >課程資訊</a>
+    </li>
+
+    <li>
+        <a href="#learned" data-uk-smooth-scroll >在這堂課，您可以學到...</a>
+    </li>
+
+    <li>
+        <a href="#target" data-uk-smooth-scroll >適合對象</a>
+    </li>
+
+    <li>
+        <a href="#note" data-uk-smooth-scroll >注意事項</a>
+    </li>
+
+    <li>
+        <a href="#attend" data-uk-smooth-scroll >立即報名</a>
+    </li>
+
+    <li class="uk-nav-divider"></li>
+    
+    <li class="uk-nav-header">其他梯次</li>
+
+    @foreach ($stages as $stage)
+        <li class="{{{ $stage->id == $item->id ? 'uk-active' : '' }}}">
+            <a href="{{{ $router->buildHtml('stage', ['id' => $stage->id, 'course_alias' => $item->course->alias, 'category_alias' => $item->category->alias]) }}}">
+                {{{ $stage->title }}}
+            </a>
+        </li>
+    @endforeach
+
+    <li class="uk-nav-divider"></li>
+</ul>
 

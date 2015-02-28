@@ -8,6 +8,8 @@
 
 namespace Front\Controller\Stage;
 
+use Admin\Model\StagesModel;
+use Front\Model\CourseModel;
 use Windwalker\Core\Controller\Controller;
 
 /**
@@ -26,10 +28,12 @@ class GetController extends Controller
 	{
 		$view = $this->getView('Stage', 'html');
 		$model = $this->getModel('Stage');
+		$courseModel = new CourseModel;
 
 		$model['item.id'] = $this->input->get('id');
 
 		$view->setModel($model);
+		$view->setModel($courseModel);
 
 		return $view->setLayout('default')->render();
 	}

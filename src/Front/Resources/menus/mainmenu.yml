@@ -3,6 +3,17 @@ about:
     sub_title: About
     route: 'front:page'
     path: about
+    children:
+        about:
+            title: 關於飛鳥學院
+            sub_title: About
+            route: 'front:page'
+            path: about
+        contact:
+            title: 聯絡與諮詢
+            sub_title: Contact
+            route: 'front:page'
+            path: contact
 
 courses:
     title: 課程資訊
@@ -11,9 +22,9 @@ courses:
     path: courses
     children:
         programming:
-        title: 程式設計
-        route: 'front:page'
-        path: programming
+            title: 程式設計
+            route: 'front:page'
+            path: courses/programming
 
 blog:
     title: 部落格
@@ -28,8 +39,3 @@ faq:
     route: 'front:page'
     path: faq
 
-contact:
-    title: 聯絡與諮詢
-    sub_title: Contact
-    route: 'front:page'
-    path: contact

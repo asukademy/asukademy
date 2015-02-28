@@ -7,7 +7,7 @@
 @stop
 
 @section('banner')
-    <div class="uk-container uk-container-center course-toolbar">
+    <div class="uk-container uk-container-center course-toolbar banner-toolbar">
         <h1 class="page-title">{{{ $item->course->title }}}</h1>
         <h2 class="sub-title">開課梯次資訊: {{{ $item->title }}}</h2>
     </div>
@@ -21,23 +21,48 @@
 
         <div class="uk-width-medium-3-4 uk-container-center">
             <article class="article-content">
-                <h1>課程規劃</h1>
+                
+                <p class="uk-text-center">
+                    <img class="uk-border-rounded work-img" src="{{{ $item->course->image }}}" alt="Cover" />
+                </p>
+
+                <h1 id="intro">課程簡介</h1>
+
+                {{ \Asukademy\Markdown\Markdown::defaultTransform(\Front\Helper\IntroHelper::cutParagraphs($item->course->fulltext, 7)) }}
+
+                <p class="uk-text-center">
+                    <a class="uk-button uk-button-hero uk-button-primary"
+                            href="{{{ $router->buildHtml('course', ['category_alias' => $item->category->alias, 'alias' => $item->course->alias]) }}}">
+                        觀看更完整的課程介紹
+                    </a>
+                </p>
+
+                <h1 id="classes">課程規劃</h1>
                 @include('classes')
 
-                {{ \Asukademy\Markdown\Markdown::defaultTransform($item->course->fulltext) }}
+                <h1 id="info">課程資訊</h1>
+                @include('info')
+
+                <iframe
+                    width="100%"
+                    height="350"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC04nF4KXjfR2VQ0jsFm5vEd9LbyiXqbKw&q={{{ $item->position->address }}}">
+                </iframe>
 
                 @if ($item->course->learned)
-                    <h1>在這堂課，您可以學到...</h1>
+                    <h1 id="learned">在這堂課，您可以學到...</h1>
                     {{ \Asukademy\Markdown\Markdown::defaultTransform($item->course->learned) }}
                 @endif
 
                 @if ($item->course->target)
-                    <h1>適合對象</h1>
+                    <h1 id="target">適合對象</h1>
                     {{ \Asukademy\Markdown\Markdown::defaultTransform($item->course->target) }}
                 @endif
 
                 @if ($item->course->note)
-                    <h1>注意事項</h1>
+                    <h1 id="note">注意事項</h1>
                     {{ \Asukademy\Markdown\Markdown::defaultTransform($item->course->note) }}
                 @endif
 

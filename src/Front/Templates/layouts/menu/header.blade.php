@@ -3,11 +3,29 @@
 <ul id="mainmenu" class="uk-navbar-nav uk-float-right uk-hidden-small">
 
     @foreach ($mainmenu as $menu)
-        <li class="{{{ $app->get('uri.route') == $menu->path ? 'uk-active' : '' }}}">
+        <li class="{{{ $app->get('uri.route') == $menu->path ? 'uk-active' : '' }}}" {{{ $menu->children ? 'data-uk-dropdown' : '' }}}>
             <a href="{{{ $menu->url ? : $router->buildHtml('front:page', ['paths' => [$menu->path]]) }}}">
                 <span class="menu-item-title">{{{ $menu->title }}}</span>
                 <span class="menu-item-sub-title">{{{ $menu->sub_title }}}</span>
             </a>
+
+            @if ($menu->children)
+            <div class="uk-dropdown uk-dropdown-navbar">
+                <ul class="uk-nav uk-nav-navbar">
+                    @foreach ($menu->children as $child)
+                        <?php $child = new \Windwalker\Data\Data($child); ?>
+                        <li class="">
+                            <a href="{{{ $child->url ? : $router->buildHtml('front:page', ['paths' => [$child->path]]) }}}">
+                                <span class="menu-item-title">
+                                    {{{ $child->title }}}
+                                </span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
         </li>
     @endforeach
 

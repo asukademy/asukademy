@@ -160,7 +160,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Varchar('address'))
 			->addColumn(new Column\Varchar('organization'))
 			->addColumn(new Column\Varchar('title'))
-			->addColumn(new Column\Tinyint('state', 1))
+			->addColumn(new Column\Tinyint('state', 1, Column::SIGNED))
 			->addColumn(new Column\Datetime('created'))
 			->addColumn(new Column\Varchar('payment'))
 			->addColumn(new Column\Datetime('expire_time'))

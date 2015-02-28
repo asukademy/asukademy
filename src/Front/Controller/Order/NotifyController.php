@@ -12,9 +12,6 @@ use Front\Model\OrderModel;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
-use Windwalker\Pay2Go\Feedback\Barcode;
-use Windwalker\Pay2Go\Feedback\CVS;
-use Windwalker\Pay2Go\LaterPaymentFeedback;
 use Windwalker\Pay2Go\PaidReceiver;
 
 /**
@@ -38,7 +35,7 @@ class NotifyController extends Controller
 
 //		$post = $this->getCreditData();
 		$post = $this->input->post->getArray();
-		$post = $this->input->getArray();
+//		$post = $this->input->getArray();
 
 		$pay2go->setData($post);
 
@@ -58,10 +55,11 @@ class NotifyController extends Controller
 		$type = $pay2go->getPaymentType();
 		$orderNo = $pay2go->getMerchantOrderNo();
 
-		$data['id'] = $orderNo;
-		$data['payment'] = $type;
-		$data['params'] = json_encode($pay2go->getData());
-		$data['state'] = 2;
+		$data['id']        = $orderNo;
+		$data['payment']   = $type;
+		$data['paid_time'] = $pay2go->getPayTime();
+		$data['params']    = json_encode($pay2go->getData());
+		$data['state']     = 2;
 
 		$model = new OrderModel;
 

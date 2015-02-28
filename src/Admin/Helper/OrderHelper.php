@@ -8,6 +8,8 @@
 
 namespace Admin\Helper;
 
+use Windwalker\Data\Data;
+
 /**
  * The OrderHelper class.
  * 
@@ -15,10 +17,12 @@ namespace Admin\Helper;
  */
 class OrderHelper
 {
-	const STATE_CANCELED = -1;
-	const STATE_PENDING = 0;
-	const STATE_WAIT_PAY = 1;
+	const STATE_CANCELED     = -1;
+	const STATE_PENDING      = 0;
+	const STATE_WAIT_PAY     = 1;
 	const STATE_PAID_SUCCESS = 2;
+	const STATE_PROCESSING   = 3;
+	const STATE_END          = 4;
 
 	/**
 	 * getStateTitle
@@ -33,7 +37,9 @@ class OrderHelper
 			static::STATE_CANCELED => '已取消',
 			static::STATE_PENDING  => '審核中',
 			static::STATE_WAIT_PAY => '待繳費',
-			static::STATE_PAID_SUCCESS => '報名成功'
+			static::STATE_PAID_SUCCESS => '報名成功',
+			static::STATE_PROCESSING => '進行中',
+			static::STATE_PENDING => '已結束',
 		];
 
 		if (array_key_exists($state, $states))
@@ -42,5 +48,75 @@ class OrderHelper
 		}
 
 		return '未知狀態';
+	}
+
+	/**
+	 * setExtraState
+	 *
+	 * @param Data $order
+	 *
+	 * @return  Data
+	 */
+	public static function setExtraStateList(Data $order)
+	{
+		if ($order->stage_end)
+		{
+			$date = new \DateTime($order->stage_end);
+		}
+		else
+		{
+			$date = new \DateTime($order->stage_start);
+		}
+
+		$end = new \DateTime($order->stage_end);
+
+		$now = new \DateTime;
+
+		if ($now > $date)
+		{
+			$order->state = OrderHelper::STATE_PROCESSING;
+		}
+
+		if ($now > $end)
+		{
+			$order->processing = OrderHelper::STATE_END;
+		}
+
+		return $order;
+	}
+
+	/**
+	 * setExtraState
+	 *
+	 * @param Data $order
+	 *
+	 * @return  Data
+	 */
+	public static function setExtraState(Data $order)
+	{
+		if ($order->stage->end)
+		{
+			$date = new \DateTime($order->stage->end);
+		}
+		else
+		{
+			$date = new \DateTime($order->stage->start);
+		}
+
+		$end = new \DateTime($order->stage->end);
+
+		$now = new \DateTime;
+
+		if ($now > $date)
+		{
+			$order->state = OrderHelper::STATE_PROCESSING;
+		}
+
+		if ($now > $end)
+		{
+			$order->processing = OrderHelper::STATE_END;
+		}
+
+		return $order;
 	}
 }

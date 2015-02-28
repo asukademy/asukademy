@@ -8,6 +8,7 @@
 
 namespace User\View\Courses;
 
+use Admin\Helper\OrderHelper;
 use Front\View\AbstractFrontHtmlView;
 
 /**
@@ -30,5 +31,11 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 
 		$data->items = $this->model->getItems();
 		$data->pagination = $this->model->getPagination();
+
+		// State
+		foreach ($data->items as $item)
+		{
+			OrderHelper::setExtraStateList($item);
+		}
 	}
 }

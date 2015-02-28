@@ -27,15 +27,19 @@
                 </div>
 
                 <div class="uk-width-medium-1-4">
-                    @if ($item->state == 0)
+                    @if ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED)
                         <button type="button" class="disabled uk-button uk-button-danger uk-button-hero uk-width-1-1">
+                            已取消
+                        </button>
+                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_PENDING)
+                        <button type="button" class="disabled uk-button uk-button-warning uk-button-hero uk-width-1-1">
                             審核中
                         </button>
-                    @elseif ($item->state == 1 && $item->payment)
+                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_WAIT_PAY && $item->payment)
                         <a href="#payment" class="disabled uk-button uk-button-warning uk-button-hero uk-width-1-1" data-uk-smooth-scroll>
                             等待繳費中
                         </a>
-                    @elseif ($item->state == 1)
+                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_WAIT_PAY)
                         <form action="{{{ $pay2go->getPostUrl() }}}" method="post">
                             <button type="submit" class="disabled uk-button uk-button-primary uk-button-hero uk-width-1-1">
                                 立即付款
@@ -43,6 +47,14 @@
 
                             {{ $pay2go->renderInputs() }}
                         </form>
+                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_PROCESSING)
+                        <button type="button" class="disabled uk-button uk-button-success uk-button-hero uk-width-1-1">
+                            進行中
+                        </button>
+                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_END)
+                        <button type="button" disabled class="disabled uk-button uk-button-disabled uk-button-hero uk-width-1-1">
+                            已結束
+                        </button>
                     @else
                         <button type="button" class="disabled uk-button uk-button-success uk-button-hero uk-width-1-1">
                             報名成功

@@ -32,7 +32,8 @@ class AuthoriseListener
 	{
 		$route = Ioc::getConfig()->extract('route');
 
-		if ($route['package'] == 'user' && $route['matched'] != 'user:login' && $route['matched'] != 'user:registration')
+		if ($route['package'] == 'user' && $route['matched'] != 'user:login' && $route['matched'] != 'user:registration'
+			&& $route['metched'] != 'user:activation')
 		{
 			UserHelper::checkLogin();
 		}

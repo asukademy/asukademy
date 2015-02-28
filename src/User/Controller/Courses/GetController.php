@@ -11,6 +11,8 @@ namespace User\Controller\Courses;
 use Front\Model\CoursesModel;
 use Front\Model\OrdersModel;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Router\Router;
+use Windwalker\Ioc;
 
 /**
  * The GetController class.
@@ -26,6 +28,17 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
+		$session = Ioc::getSession();
+		$page = $this->input->getInt('page');
+
+		// Remember page
+		if (!$page && $session->get('courses.current.page'))
+		{
+			$this->setRedirect(Router::buildHttp('user:courses', ['page' => $session->get('courses.current.page')]));
+
+			return true;
+		}
+
 		$view = $this->getView('Courses', 'html');
 		$model = new OrdersModel;
 
@@ -36,6 +49,8 @@ class GetController extends Controller
 		$model['list.ordering'] = 'stage.start desc';
 //		$model['list.search']   = $this->input->getString('q');
 //		$model['filter.category_alias'] = urldecode($this->input->getString('category_alias'));
+
+		$session->set('courses.current.page', $page);
 
 		$view->setModel($model);
 

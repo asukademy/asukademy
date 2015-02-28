@@ -9,6 +9,8 @@
 namespace Admin\Controller\Courses;
 
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Router\Router;
+use Windwalker\Ioc;
 
 /**
  * The GetController class.

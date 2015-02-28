@@ -265,21 +265,32 @@ class OrderModel extends DatabaseModel
 		$plan = static::getTotalForUpdate(Table::PLANS, $this['item.id']);
 		$stage = static::getTotalForUpdate(Table::STAGES, $plan->stage_id);
 
-		$query = $this->db->getQuery(true);
+		if (!$stage->quota && !$plan->quota)
+		{
+			return false;
+		}
 
-		$query->update(Table::PLANS)
-			->set('total = total - ' . $reduces)
-			->where('id = ' . $plan->id);
+		if ($stage->quota && ($stage->total >= $reduces))
+		{
+			$query = $this->db->getQuery(true);
 
-		$this->db->setQuery($query)->execute();
+			$query->update(Table::STAGES)
+				->set('total = total - ' . $reduces)
+				->where('id = ' . $stage->id);
 
-		$query = $this->db->getQuery(true);
+			$this->db->setQuery($query)->execute();
+		}
 
-		$query->update(Table::STAGES)
-			->set('total = total - ' . $reduces)
-			->where('id = ' . $stage->id);
+		if ($plan->quota && ($plan->total >= $reduces))
+		{
+			$query = $this->db->getQuery(true);
 
-		$this->db->setQuery($query)->execute();
+			$query->update(Table::PLANS)
+				->set('total = total - ' . $reduces)
+				->where('id = ' . $plan->id);
+
+			$this->db->setQuery($query)->execute();
+		}
 
 		return true;
 	}

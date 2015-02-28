@@ -41,7 +41,7 @@
 
 		deleteItem: function(url, msg)
 		{
-			msg = msg || 'Are you sure?';
+			msg = msg || '你確定嗎？ 這個動作無法還原。';
 
 			if (!confirm(msg))
 			{

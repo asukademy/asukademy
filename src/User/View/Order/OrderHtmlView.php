@@ -8,6 +8,7 @@
 
 namespace User\View\Order;
 
+use Admin\Helper\OrderHelper;
 use Front\View\AbstractFrontHtmlView;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Data\Data;
@@ -46,6 +47,8 @@ class OrderHtmlView extends AbstractFrontHtmlView
 		$data->paymentType = $data->payment->getPaymentType();
 
 		$this->preparePayment($data);
+
+		OrderHelper::setExtraState($data->item);
 	}
 
 	/**

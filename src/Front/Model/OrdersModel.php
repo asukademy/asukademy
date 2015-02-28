@@ -35,7 +35,8 @@ class OrdersModel extends ListModel
 		$queryHelper->addTable('order', Table::ORDERS)
 			->addTable('plan', Table::PLANS, 'plan.id = order.plan_id')
 			->addTable('stage', Table::STAGES, 'stage.id = plan.stage_id')
-			->addTable('course', Table::COURSES, 'course.id = stage.course_id');
+			->addTable('course', Table::COURSES, 'course.id = stage.course_id')
+			->addTable('category', Table::CATEGORIES, 'category.id = course.catid');
 
 		$query->select($queryHelper->getSelectFields());
 

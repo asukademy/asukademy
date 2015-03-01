@@ -13,6 +13,7 @@ use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 use Windwalker\Data\DataSet;
 use Windwalker\DataMapper\DataMapper;
+use Windwalker\Ioc;
 use Windwalker\Table\Table;
 
 /**
@@ -84,5 +85,24 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 		{
 			$data->pageTitle .= ' - 第 ' . $data->pageTitle . ' 頁';
 		}
+
+		$this->prepareMeta();
+	}
+
+	/**
+	 * prepareMeta
+	 *
+	 * @return  void
+	 */
+	protected function prepareMeta()
+	{
+		$config = Ioc::getConfig();
+
+		if ($this->data->items[0])
+		{
+			$config['meta.description'] = $this->data->items[0]->introtext;
+		}
+
+		$config['og.image'] = 'https://windspeaker.s3.amazonaws.com/post/asika/2015/03/01/54f315720d36a.jpg';
 	}
 }

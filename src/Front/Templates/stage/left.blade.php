@@ -33,7 +33,7 @@
     </li>
 
     <li>
-        <a href="#learned" data-uk-smooth-scroll >在這堂課，您可以學到...</a>
+        <a href="#learned" data-uk-smooth-scroll >學習內容</a>
     </li>
 
     <li>

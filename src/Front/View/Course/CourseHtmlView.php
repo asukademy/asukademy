@@ -12,6 +12,7 @@ use Front\View\AbstractFrontHtmlView;
 use Windwalker\Core\Router\Router;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\DataMapper\RelationDataMapper;
+use Windwalker\Ioc;
 use Windwalker\Table\Table;
 
 /**
@@ -77,5 +78,21 @@ class CourseHtmlView extends AbstractFrontHtmlView
 			->addTable('course', Table::COURSES, 'course.id = map.course_id');
 
 		$data->tutors = $tutorMapper->find(['course.id' => $data->item->id]);
+
+		$this->prepareMeta();
+	}
+
+	/**
+	 * prepareMeta
+	 *
+	 * @return  void
+	 */
+	protected function prepareMeta()
+	{
+		$config = Ioc::getConfig();
+
+		$config['meta.description'] = $this->data->item->introtext;
+
+		$config['og.image'] = $this->data->item->image;
 	}
 }

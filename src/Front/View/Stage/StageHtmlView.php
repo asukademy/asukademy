@@ -11,6 +11,7 @@ namespace Front\View\Stage;
 use Front\View\AbstractFrontHtmlView;
 use Riki\Asset\Asset;
 use Windwalker\DataMapper\RelationDataMapper;
+use Windwalker\Ioc;
 use Windwalker\Table\Table;
 
 /**
@@ -72,5 +73,21 @@ class StageHtmlView extends AbstractFrontHtmlView
 			->addTable('stage', Table::STAGES, 'stage.id = map.stage_id');
 
 		$data->tutors = $tutorMapper->find(['stage.id' => $data->item->id]);
+
+		$this->prepareMeta();
+	}
+
+	/**
+	 * prepareMeta
+	 *
+	 * @return  void
+	 */
+	protected function prepareMeta()
+	{
+		$config = Ioc::getConfig();
+
+		$config['meta.description'] = $this->data->item->course->introtext;
+
+		$config['og.image'] = $this->data->item->course->image;
 	}
 }

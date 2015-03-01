@@ -19,9 +19,9 @@
     <meta name="generator" content="The Time Machine">
 
 @if ($app->get('og.image'))
-    <meta property="og:image" content="https://cloud.githubusercontent.com/assets/1639206/4780266/64533a2a-5c60-11e4-9908-628396b5f69d.jpg">
+    <meta property="og:image" content="{{{ $app->get('og.image') }}}">
 @endif
-    <meta property="og:title" content="@yield('page_title')">
+    <meta property="og:title" content="@yield('page_title', 'Asukademy 飛鳥學院')">
     <meta property="og:site_name" content="Asukademy 飛鳥學院">
 @if ($app->get('meta.description'))
     <meta property="og:description" content="{{{ $app->get('meta.description') }}}">

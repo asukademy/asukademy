@@ -90,7 +90,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 
 		$pay2go->creditCard
 			->enable()
-			->setUNIONPAY(1)
+			//->setUNIONPAY(1)
 			->installment(0);
 
 		$pay2go->atm->enable();

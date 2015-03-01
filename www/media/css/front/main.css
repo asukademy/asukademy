@@ -216,6 +216,10 @@ dl dd {
   background-image: url(../../img/banner/feature-2-dark.jpg);
   height: auto;
 }
+#banner.page-error {
+  background-image: url(https://windspeaker.s3.amazonaws.com/post/asika/2015/03/01/54f30faf0048b.jpg);
+  height: auto;
+}
 #banner .course-toolbar {
   text-align: center;
 }

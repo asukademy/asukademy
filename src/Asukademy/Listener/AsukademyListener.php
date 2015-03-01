@@ -10,8 +10,10 @@ namespace Asukademy\Listener;
 
 use Riki\Asset\Asset;
 use Riki\Asset\ScriptManager;
+use Asukademy\Error\ErrorHandler;
 use Windwalker\Core\Renderer\RendererHelper;
 use Windwalker\Event\Event;
+use Windwalker\Ioc;
 use Windwalker\Utilities\Queue\Priority;
 
 /**
@@ -21,11 +23,25 @@ use Windwalker\Utilities\Queue\Priority;
  */
 class AsukademyListener
 {
+	/**
+	 * onAfterInitialise
+	 *
+	 * @param Event $event
+	 *
+	 * @return  void
+	 */
 	public function onAfterInitialise(Event $event)
 	{
 		RendererHelper::addGlobalPath(WINDWALKER_SOURCE . '/Admin/Templates', Priority::BELOW_NORMAL);
 		RendererHelper::addGlobalPath(WINDWALKER_SOURCE . '/Front/Templates', Priority::BELOW_NORMAL);
 
+		// Error
+		if (!Ioc::getConfig()->get('system.debug'))
+		{
+			ErrorHandler::register(true);
+		}
+
+		// Script
 		ScriptManager::setModule('calendar', function($name, $asset, $selector = '.calendar', $format = 'YYYY-MM-DD hh:mm:ss')
 		{
 			static $inited = false;

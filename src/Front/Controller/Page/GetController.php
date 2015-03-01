@@ -36,6 +36,13 @@ class GetController extends Controller
 
 		$layout = trim(implode('.', $paths), '.') ? : 'index';
 
-		return $view->setLayout($layout)->render();
+		try
+		{
+			return $view->setLayout($layout)->render();
+		}
+		catch (\InvalidArgumentException $e)
+		{
+			throw new \Exception($e->getMessage(), 404, $e);
+		}
 	}
 }

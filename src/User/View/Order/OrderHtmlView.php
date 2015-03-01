@@ -84,7 +84,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			->setItemDesc($item->course->title . ' - ' . $item->stage->title . ' (' . $item->plan->title . ')')
 			->setEmail($item->email)
 			->setLoginType(0)
-			->setNotifyURL(Router::buildHttp('order_notify', [], RestfulRouter::TYPE_FULL))
+			->setNotifyURL(Router::buildHttp('front:order_notify', [], RestfulRouter::TYPE_FULL))
 			// ->setReturnURL('http://asukademy.test:8000//user/order/' . $item->id)
 			->setCustomerURL(Uri::current());
 

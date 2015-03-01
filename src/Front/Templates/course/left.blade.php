@@ -65,7 +65,7 @@
 
     @foreach ($stages as $stage)
     <li>
-        <a href=""  data-uk-tooltip title="{{{ $stage->time }}}">
+        <a href="{{{ $router->buildHtml('stage', ['id' => $stage->id, 'course_alias' => $item->alias, 'category_alias' => $category->alias]) }}}"  data-uk-tooltip title="{{{ $stage->time }}}">
             {{{ $stage->title }}}
         </a>
     </li>

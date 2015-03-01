@@ -3,7 +3,7 @@ system:
     timezone: 'UTC'
 session:
     handler: native
-    expire_time: 15
+    expire_time: 144000
 cache:
     enabled: 0
     storage: file

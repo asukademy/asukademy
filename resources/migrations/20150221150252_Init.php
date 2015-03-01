@@ -177,6 +177,16 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Integer('course_id'))
 			->addColumn(new Column\Varchar('title'))
 			->create(true);
+
+		// Default User
+		$user['username'] = 'admin';
+		$user['password'] = (new \Windwalker\Crypt\Password)->create('1234');
+		$user['email']    = 'admin@asukademy.com';
+		$user['name']     = 'Admin';
+		$user['state']     = 1;
+		$user['group']     = 1;
+
+		$this->db->getWriter()->insertOne(Table::USERS, $user, 'id');
 	}
 
 	/**

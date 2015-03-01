@@ -34,6 +34,7 @@ class StageHtmlView extends AbstractFrontHtmlView
 		$data->item  = $this->model->getItem();
 		$data->plans = $this->model->getPlans();
 
+		// Count price
 		$data->item->price_min = PHP_INT_MAX;
 
 		foreach ($data->plans as $plan)
@@ -41,15 +42,21 @@ class StageHtmlView extends AbstractFrontHtmlView
 			$plan->people = $plan->total;
 			$plan->attendable = $plan->quota ? $plan->quota > $plan->total : true;
 
-			if ($data->item->price_max < $plan->origin_price)
+			if ($data->item->price_max < $plan->price)
 			{
-				$data->item->price_max = $plan->origin_price;
+				$data->item->price_max = $plan->price;
 			}
 
 			if ($data->item->price_min > $plan->price)
 			{
 				$data->item->price_min = $plan->price;
 			}
+		}
+
+		// Count hours
+		if (count($data->item->classes))
+		{
+			$data->item->hours = array_sum($data->item->classes->hours);
 		}
 
 		// Other stages

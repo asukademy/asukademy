@@ -60,6 +60,11 @@ class UserFieldDefinition implements FieldDefinitionInterface
 
 		$form->addField(new TextField('title', 'Title'));
 
+		$form->addField(new RadioField('group', '權限'))
+			->addOption(new Option('一般會員', 0))
+			->addOption(new Option('管理員', 1))
+			->set('default', 0);
+
 		$form->addField(new RadioField('state', 'State'))
 			->addOption(new Option('Published', 1))
 			->addOption(new Option('Closed', 0))

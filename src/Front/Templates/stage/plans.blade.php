@@ -13,7 +13,7 @@
         <tr>
             <th>{{{ $plan->title }}}</th>
             <td>
-                @if ($plan->origin_price && $plan->origin_price != $plan->price)
+                @if ((int) $plan->origin_price && $plan->origin_price != $plan->price)
                     <s>${{{ number_format($plan->origin_price, 0) }}}</s>
                 @endif
                 ${{{ number_format($plan->price, 0) }}}

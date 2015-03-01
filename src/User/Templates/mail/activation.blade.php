@@ -33,7 +33,7 @@
     <p>請點擊以下連結，完成信箱認證手續</p>
 
     <p>
-        <a href="http://asukademy.com/user/activation?token={{{ $user->activation }}}"
+        <a href="{{{ \Riki\Uri\Uri::root() }}}user/activation?token={{{ $user->activation }}}"
                 style="color: rgb(255, 255, 255); text-decoration: none; cursor: pointer; -webkit-transition: all 0.5s;
                 transition: all 0.5s; box-sizing: border-box; width: 256.25px; -webkit-appearance: none;
                 margin: 0px; border: none; overflow: visible; font-family: inherit; font-style: inherit;
@@ -46,6 +46,6 @@
     </p>
 
     <br /><br /><br />
-    <p><a href="http://asukademy.com">Asukademy 飛鳥學院</a> 敬上</p>
+    <p><a href="{{{ \Riki\Uri\Uri::root() }}}">Asukademy 飛鳥學院</a> 敬上</p>
 </body>
 </html>

@@ -23,6 +23,8 @@ class UserSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
+		$this->db->getTable(Table::USERS)->truncate();
+
 		$faker = \Faker\Factory::create('zh_TW');
 
 		$faker->addProvider(new Faker\Provider\zh_TW\Address($faker));
@@ -47,7 +49,7 @@ class UserSeeder extends AbstractSeeder
 			$data['address'] = $faker->address;
 			$data['organization'] = $faker->company;
 			$data['title'] = $faker->title;
-			$data['state'] = $faker->randomElement([1,1,1,0]);
+			$data['state'] = ($i == 1) ? 1 : $faker->randomElement([1,1,1,0]);
 			$data['registered'] = $faker->dateTime->format('Y-m-d H:s:i');
 			$data['last_login'] = $faker->dateTime->format('Y-m-d H:s:i');
 

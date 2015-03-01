@@ -43,6 +43,11 @@ class SaveController extends Controller
 		unset($temp->password);
 		unset($temp->password2);
 
+		if (!$data->password)
+		{
+			$data->password = null;
+		}
+
 		$session->set('user.edit.data', $temp);
 
 		try
@@ -60,8 +65,9 @@ class SaveController extends Controller
 			$record->load($data->id);
 
 			$record->bind($data)
-				->check()
-				->store(true);
+				->check();
+
+			$record->store(true);
 		}
 		catch (ValidFailException $e)
 		{

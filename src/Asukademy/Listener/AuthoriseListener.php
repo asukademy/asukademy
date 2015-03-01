@@ -43,7 +43,7 @@ class AuthoriseListener
 		}
 
 		if ($route['package'] == 'user' && $route['matched'] != 'user:login' && $route['matched'] != 'user:registration'
-			&& $route['metched'] != 'user:activation')
+			&& $route['matched'] != 'user:activation')
 		{
 			UserHelper::checkLogin();
 		}

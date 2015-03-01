@@ -12,6 +12,7 @@ use Riki\Asset\Asset;
 use Riki\Asset\ScriptManager;
 use Riki\Uri\Uri;
 use Windwalker\Core\View\BladeHtmlView;
+use Windwalker\Data\DataSet;
 
 /**
  * The CourseHtmlView class.
@@ -31,7 +32,7 @@ class CourseHtmlView extends BladeHtmlView
 	{
 		$data->item   = $this->model->getItem();
 		$data->form   = $this->model->getForm();
-		$data->stages = $this->model['stages']->getItems();
+		$data->stages = $data->item->id ? $this->model['stages']->getItems() : new DataSet;
 
 		ScriptManager::chosen('select');
 		Asset::addScript(Uri::media(true) . 'riki/js/tabs-state.js');

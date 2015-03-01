@@ -200,11 +200,6 @@ JS;
 			return false;
 		}
 
-		if (!empty(static::$initialised[$name]))
-		{
-			return true;
-		}
-
 		$name = array_shift($args);
 
 		array_unshift($args, static::getAssetManager());

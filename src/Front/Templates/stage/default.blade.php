@@ -21,10 +21,6 @@
 
         <div class="uk-width-medium-3-4 uk-container-center">
             <article class="article-content">
-                
-                <p class="uk-text-center">
-                    <img class="uk-border-rounded work-img" src="{{{ $item->course->image }}}" alt="Cover" />
-                </p>
 
                 <h1 id="intro">課程簡介</h1>
 
@@ -37,19 +33,15 @@
                     </a>
                 </p>
 
-                <h1 id="classes">課程規劃</h1>
-                @include('classes')
+                <hr />
+
+                @if (count($item->classes))
+                    <h1 id="classes">課程規劃</h1>
+                    @include('classes')
+                @endif
 
                 <h1 id="info">課程資訊</h1>
                 @include('info')
-
-                <iframe
-                    width="100%"
-                    height="350"
-                    frameborder="0"
-                    style="border:0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC04nF4KXjfR2VQ0jsFm5vEd9LbyiXqbKw&q={{{ $item->position->address }}}">
-                </iframe>
 
                 @if ($item->course->learned)
                     <h1 id="learned">在這堂課，您可以學到...</h1>

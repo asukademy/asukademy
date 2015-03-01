@@ -21,6 +21,11 @@
 
         <div class="uk-width-medium-3-4 uk-container-center">
             <article class="article-content">
+
+                <p class="uk-text-center">
+                    <img class="uk-border-rounded work-img" src="{{{ $item->image }}}" alt="Cover" />
+                </p>
+
                 {{ \Asukademy\Markdown\Markdown::defaultTransform($item->fulltext) }}
 
                 @if ($item->learned)

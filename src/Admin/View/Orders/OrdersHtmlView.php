@@ -8,6 +8,7 @@
 
 namespace Admin\View\Orders;
 
+use Admin\Helper\OrderHelper;
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
@@ -29,5 +30,10 @@ class OrdersHtmlView extends BladeHtmlView
 		$data->items = $this->model->getItems();
 		$data->pagination = $this->model->getPagination();
 
+		// State
+		foreach ($data->items as $item)
+		{
+			OrderHelper::setExtraStateList($item);
+		}
 	}
 }

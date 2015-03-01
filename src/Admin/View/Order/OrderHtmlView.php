@@ -8,6 +8,7 @@
 
 namespace Admin\View\Order;
 
+use Admin\Helper\OrderHelper;
 use Windwalker\Core\View\BladeHtmlView;
 use Windwalker\Pay2Go\LaterPaymentFeedback;
 use Windwalker\Pay2Go\PaidReceiver;
@@ -36,5 +37,8 @@ class OrderHtmlView extends BladeHtmlView
 
 		$data->feedback = new LaterPaymentFeedback;
 		$data->feedback->setData($data->item->params);
+
+		// State
+		OrderHelper::setExtraState($data->item);
 	}
 }

@@ -38,8 +38,8 @@ class OrderHelper
 			static::STATE_PENDING  => '審核中',
 			static::STATE_WAIT_PAY => '待繳費',
 			static::STATE_PAID_SUCCESS => '報名成功',
-			static::STATE_PROCESSING => '進行中',
-			static::STATE_END => '已結束',
+			static::STATE_PROCESSING => '課程進行中',
+			static::STATE_END => '課程結束',
 		];
 
 		if (array_key_exists($state, $states))
@@ -61,14 +61,14 @@ class OrderHelper
 	{
 		if ($order->stage_end)
 		{
-			$date = new \DateTime($order->stage_end);
+			$end = new \DateTime($order->stage_end);
 		}
 		else
 		{
-			$date = new \DateTime($order->stage_start);
+			$end = new \DateTime($order->stage_start);
 		}
 
-		$end = new \DateTime($order->stage_end);
+		$date = new \DateTime($order->stage_start);
 
 		$now = new \DateTime;
 
@@ -79,7 +79,7 @@ class OrderHelper
 
 		if ($now > $end)
 		{
-			$order->processing = OrderHelper::STATE_END;
+			$order->state = OrderHelper::STATE_END;
 		}
 
 		return $order;
@@ -96,14 +96,14 @@ class OrderHelper
 	{
 		if ($order->stage->end)
 		{
-			$date = new \DateTime($order->stage->end);
+			$end = new \DateTime($order->stage->end);
 		}
 		else
 		{
-			$date = new \DateTime($order->stage->start);
+			$end = new \DateTime($order->stage->start);
 		}
 
-		$end = new \DateTime($order->stage->end);
+		$date = new \DateTime($order->stage->start);
 
 		$now = new \DateTime;
 

@@ -35,9 +35,12 @@
                 <ul class="nav navbar-nav">
                      @section('nav')
                         <li class=""><a href="{{ $uri['base.path'] }}">Home</a></li>
-                        <li class=""><a href="{{ $router->buildHtml('users') }}">Users</a></li>
-                        <li class=""><a href="{{ $router->buildHtml('courses') }}">Courses</a></li>
-                        <li class=""><a href="{{ $router->buildHtml('orders') }}">Orders</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('users') }}">會員</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('courses') }}">課程</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('orders') }}">報名</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('tutors') }}">講師</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('positions') }}">場地</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('categories') }}">分類</a></li>
                      @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

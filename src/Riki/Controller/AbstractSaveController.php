@@ -8,10 +8,12 @@
 
 namespace Riki\Controller;
 
+use Admin\Model\AbstractFormModel;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Data\Data;
+use Windwalker\Form\Form;
 
 /**
  * The AbstractSaveController class.
@@ -84,7 +86,7 @@ abstract class AbstractSaveController extends Controller
 		{
 			$this->useTransition ? $trans->rollback() : null;
 
-			$session->set($this->getName() . '.edit.data', $this->data);
+			$session->set($this->getName() . '.edit.data' . $data->id, $this->data);
 
 			$this->setRedirect($this->getFailRedirect($data), $e->getMessage(), 'warning');
 
@@ -94,7 +96,7 @@ abstract class AbstractSaveController extends Controller
 		{
 			$this->useTransition ? $trans->rollback() : null;
 
-			$session->set($this->getName() . '.edit.data', $this->data);
+			$session->set($this->getName() . '.edit.data' . $data->id, $this->data);
 
 			if (WINDWALKER_DEBUG)
 			{
@@ -108,9 +110,9 @@ abstract class AbstractSaveController extends Controller
 
 		$this->useTransition ? $trans->commit() : null;
 
-		$session->remove($this->getName() . '.edit.data');
+		$session->remove($this->getName() . '.edit.data' . $data->id);
 
-		$this->setRedirect($this->getSuccessRedirect($data), '儲存成功', 'warning');
+		$this->setRedirect($this->getSuccessRedirect($data), '儲存成功', 'success');
 
 		return true;
 	}
@@ -169,6 +171,26 @@ abstract class AbstractSaveController extends Controller
 	 */
 	protected function validate(Data $data)
 	{
+		if ($this->model instanceof AbstractFormModel)
+		{
+			$form = $this->model->getForm();
+
+			$form->bind($data);
+
+			if (!$form->validate())
+			{
+				$errors = $form->getErrors();
+
+				$msg = [];
+
+				foreach ($errors as $error)
+				{
+					$msg[] = $error->getMessage();
+				}
+
+				throw new ValidFailException(implode('<br>', $msg));
+			}
+		}
 	}
 
 	/**

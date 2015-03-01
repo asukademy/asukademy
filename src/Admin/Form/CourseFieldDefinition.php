@@ -69,6 +69,10 @@ class CourseFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('default', null);
 
+		$form->addField(new Field\TextField('ordering', 'Ordering'), 'basic')
+			->set('class', '')
+			->set('labelClass', '');
+
 		$form->addField(new Field\TextField('id', 'Id'), 'info')
 			->set('class', '')
 			->set('labelClass', '')

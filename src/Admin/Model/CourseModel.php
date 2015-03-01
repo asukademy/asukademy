@@ -13,6 +13,7 @@ use Admin\Mapper\CourseMapper;
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
+use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 use Windwalker\Ioc;
 use Windwalker\Table\Table;
@@ -22,7 +23,7 @@ use Windwalker\Table\Table;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class CourseModel extends DatabaseModel
+class CourseModel extends AbstractFormModel
 {
 	/**
 	 * Property name.
@@ -86,5 +87,25 @@ class CourseModel extends DatabaseModel
 		}
 
 		return $form;
+	}
+
+	/**
+	 * getDefaultTable
+	 *
+	 * @return  string
+	 */
+	public function getDefaultTable()
+	{
+		return Table::COURSES;
+	}
+
+	/**
+	 * getFieldDefinition
+	 *
+	 * @return  FieldDefinitionInterface
+	 */
+	protected function getFieldDefinition()
+	{
+		return new CourseFieldDefinition;
 	}
 }

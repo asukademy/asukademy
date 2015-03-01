@@ -13,6 +13,8 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
+use Windwalker\Ioc;
+use Windwalker\Record\Record;
 use Windwalker\Validator\Rule\EmailValidator;
 
 /**
@@ -51,30 +53,46 @@ class SaveController extends Controller
 	 * doExecute
 	 *
 	 * @return  mixed
+	 * @throws \Exception
 	 */
 	protected function doExecute()
 	{
+		$session = Ioc::getSession();
+
 		$data = new Data($this->data);
 
 		try
 		{
 			$this->validate();
+
+			$this->model->save($data);
 		}
 		catch (ValidFailException $e)
 		{
-			$this->setRedirect(Router::buildHttp('user:login'), $e->getMessage(), 'warning');
+			$session->set('profile.edit.data', $this->data);
+
+			$this->setRedirect(Router::buildHttp('user:profile'), $e->getMessage(), 'warning');
+
+			return false;
 		}
 		catch (\Exception $e)
 		{
+			$session->set('profile.edit.data', $this->data);
+
 			if (WINDWALKER_DEBUG)
 			{
 				throw $e;
 			}
 
-			$this->setRedirect(Router::buildHttp('user:login'), '因系統問題造成的登入失敗，請聯絡網站管理員', 'warning');
+			$this->setRedirect(Router::buildHttp('user:profile'), '儲存失敗', 'warning');
+
+			return false;
 		}
 
-		$this->setRedirect('/', '登入成功', 'success');
+		$session->set('user', $data);
+		$session->remove('profile.edit.data');
+
+		$this->setRedirect(Router::buildHttp('user:profile'), '儲存成功', 'success');
 
 		return true;
 	}
@@ -128,7 +146,7 @@ class SaveController extends Controller
 			throw new ValidFailException('Email 格式不正確');
 		}
 
-		if ($user->passwordstrlen($user->password) < 4)
+		if ($user->password && strlen($user->password) < 4)
 		{
 			throw new ValidFailException('請至少輸入 4 位數密碼');
 		}

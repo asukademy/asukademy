@@ -17,7 +17,7 @@ edit:
         '*': EditController
 # User
 'users':
-    pattern: /users
+    pattern: /users(/page)
     controller: Admin\Controller\Users
 
 'user':
@@ -28,7 +28,7 @@ edit:
 
 # Course
 'courses':
-    pattern: /courses
+    pattern: /courses(/page)
     controller: Admin\Controller\Courses
 
 'course':
@@ -81,3 +81,27 @@ order_state:
     controller: Admin\Controller\Order
     action:
         '*': StateController
+
+# Tutor
+tutors:
+    pattern: /tutors(/page)
+    controller: Admin\Controller\Tutors
+tutor:
+    pattern: /tutor(/id)
+    controller: Admin\Controller\Tutor
+
+# Position
+positions:
+    pattern: /positions(/page)
+    controller: Admin\Controller\Positions
+position:
+    pattern: /position(/id)
+    controller: Admin\Controller\Position
+
+# Category
+categories:
+    pattern: /categories(/page)
+    controller: Admin\Controller\Categories
+category:
+    pattern: /category(/id)
+    controller: Admin\Controller\Category

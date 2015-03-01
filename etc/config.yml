@@ -1,5 +1,5 @@
 system:
-    debug: 0
+    debug: 1
     timezone: 'UTC'
 session:
     handler: native

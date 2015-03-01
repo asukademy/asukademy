@@ -7,6 +7,7 @@
 
 @section('toolbar')
 {{ \Riki\Toolbar\Toolbar::add('course', 'admin:new', [], 'btn-lg') }}
+{{ \Riki\Toolbar\Toolbar::reorder('admin:courses', [], 'btn-lg') }}
 @stop
 
 @section('content')
@@ -17,6 +18,7 @@
             <th width="1%">ID</th>
             <th>Category</th>
             <th>Title</th>
+            <th width="10%">Ordering</th>
             <th>State</th>
             <th width="1%">Del</th>
         </tr>
@@ -35,6 +37,9 @@
                 </td>
                 <td>
                     <p><a href="{{ $router->buildHtml('edit', ['name' => 'course', 'id' => $item->id]) }}">{{{ $item->title }}}</a></p>
+                </td>
+                <td>
+                    <input name="ordering[{{{ $item->catid }}}][{{{ $item->id }}}]" class="form-control" type="text" value="{{{ $item->ordering }}}" />
                 </td>
                 <td>
                     @if ($item->state)

@@ -58,6 +58,11 @@ class SaveController extends Controller
 			$data->alias = $data->alias ? : $data->title;
 
 			$data->alias = OutputFilter::stringURLUnicodeSlug($data->alias);
+
+			if (!$data->id)
+			{
+				$data->ordering = (new CourseModel)->getMaxOrdering(['catid' => $data->catid]) + 1;
+			}
 			// -----------------------------------------
 
 			$record = new CourseRecord;

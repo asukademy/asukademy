@@ -7,7 +7,7 @@
         <article class="uk-panel tutor-box">
             <div class="uk-clearfix">
                 <img class="uk-align-medium-left uk-border-circle"
-                        src="{{{ $tutor->image }}}"
+                        src="{{{ $router->buildHtml('image', ['url' => $tutor->image, 'w' => 48, 'h' => 48]) }}}"
                         width="48" height="48" alt="Avatar">
                 <h4 style="margin-top: 0">{{{ $tutor->name }}}</h4>
                 <p class="article-author-description uk-overflow-container uk-text-small">

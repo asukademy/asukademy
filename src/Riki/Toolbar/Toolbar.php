@@ -113,4 +113,15 @@ HTML;
 </a>
 HTML;
 	}
+
+	public static function reorder($route, $queries = [], $class = '')
+	{
+		$url = Router::buildHtml($route, $queries);
+
+		return <<<HTML
+<a class="btn btn-default $class" href="#" onclick="RikiForm.post('$url')">
+	<span class="glyphicon glyphicon-refresh"></span> Reorder
+</a>
+HTML;
+	}
 }

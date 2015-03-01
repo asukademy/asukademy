@@ -150,7 +150,7 @@ dl dd {
     left: 0;
     background-color: #fff;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ccc;
   }
   #header #mainmenu.uk-hidden-small {
     transition: all 0.5s;
@@ -161,6 +161,11 @@ dl dd {
   }
   #header #mainmenu li a:hover {
     background: #eee;
+  }
+  #header #mainmenu .uk-dropdown {
+    width: 100%;
+    position: static;
+    display: block;
   }
 }
 .page-index #header {
@@ -196,11 +201,17 @@ dl dd {
 }
 #banner {
   background: url(../../img/banner/banner-2000.jpg) center center no-repeat;
-  height: 200px;
+  min-height: 210px;
 }
 #banner h1,
 #banner h2 {
   color: white;
+}
+@media (max-width: 767px) {
+  #banner h1,
+  #banner h2 {
+    word-break: break-all;
+  }
 }
 #banner h1 {
   margin: 20px 20px;
@@ -241,6 +252,7 @@ dl dd {
   padding: 5px 15px;
   color: white;
   border: 1px solid white;
+  margin-bottom: 10px;
 }
 #banner .banner-cat-button:hover {
   text-decoration: none;

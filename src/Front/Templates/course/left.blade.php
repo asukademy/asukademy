@@ -4,20 +4,27 @@
     <h2 class="uk-text-left">講師</h2>
 
     @foreach ($tutors as $tutor)
-        <article class="uk-panel tutor-box">
-            <div class="uk-clearfix">
+        <article class="uk-panel tutor-box uk-margin-top">
+            <div class="uk-clearfix" >
                 <img class="uk-align-medium-left uk-border-circle"
                         src="{{{ $router->buildHtml('image', ['url' => $tutor->image, 'w' => 48, 'h' => 48]) }}}"
                         width="48" height="48" alt="Avatar">
                 <h4 style="margin-top: 0">{{{ $tutor->name }}}</h4>
                 <p class="article-author-description uk-overflow-container uk-text-small">
                     {{ nl2br($tutor->description) }}
+
+                    @if ($tutor->experience)
+                    <br /><br />
+                    {{ nl2br($tutor->experience) }}
+                     @endif
                 </p>
+
+
             </div>
+            <hr />
         </article>
     @endforeach
 
-    <hr />
 </div>
 
 <div class="attend-now uk-panel" style="padding-left: 15px;">

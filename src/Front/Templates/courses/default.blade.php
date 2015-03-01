@@ -14,7 +14,7 @@
             <form class="uk-form" action="{{{ $uri['current'] }}}" method="get">
 
                 <input type="text" name="q" class="uk-form-large uk-form-width-large uk-text-center"
-                        value="{{{ $state['list.search'] }}}" placeholder="搜尋課程名稱" />
+                        value="{{{ $state['list.search'] }}}" placeholder="搜尋課程" />
 
             </form>
         </div>

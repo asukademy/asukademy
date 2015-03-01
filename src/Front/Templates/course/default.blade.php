@@ -49,6 +49,12 @@
                 @else
                 沒有開課梯次
                 @endif
+
+                <p class="uk-text-center uk-margin-large-top">
+                    <a href="{{{ $router->buildHtml('page', ['paths' => 'contact']) }}}">
+                        訂閱我們
+                    </a> 以隨時接收最新的開課資訊
+                </p>
             </article>
         </div>
     </div>

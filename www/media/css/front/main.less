@@ -199,7 +199,7 @@ dl {
 			left: 0;
 			background-color: #fff;
 			border-top: 1px solid #eee;
-			border-bottom: 1px solid #eee;
+			border-bottom: 1px solid #ccc;
 
 			&.uk-hidden-small {
 				.transition(.5s);
@@ -212,6 +212,12 @@ dl {
 				a:hover {
 					background: #eee;
 				}
+			}
+
+			.uk-dropdown {
+				width: 100%;
+				position: static;
+				display: block;
 			}
 		}
 	}
@@ -258,10 +264,14 @@ dl {
 
 #banner {
 	background: url(../../img/banner/banner-2000.jpg) center center no-repeat;
-	height: 200px;
+	min-height: 210px;
 
 	h1, h2 {
 		color: white;
+
+		@media (max-width: 767px) {
+			word-break: break-all;
+		}
 	}
 
 	h1 {
@@ -312,6 +322,7 @@ dl {
 		padding: 5px 15px;
 		color: white;
 		border: 1px solid white;
+		margin-bottom: 10px;
 
 		&:hover {
 			text-decoration: none;

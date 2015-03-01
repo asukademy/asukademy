@@ -2,10 +2,10 @@
 
 <table class="uk-table">
     <thead>
-    <th>方案名稱</th>
+    <th style="min-width: 55px;">方案<span class="uk-hidden-small">名稱</span></th>
     <th>價格</th>
     <th>人數</th>
-    <th>立即報名</th>
+    <th><span class="uk-hidden-small">立即</span>報名</th>
     </thead>
 
     <tbody>
@@ -29,7 +29,8 @@
             </td>
             <td>
                 <a class="uk-button uk-button-success" href="{{{ $router->buildHtml('order', ['plan_id' => $plan->id]) }}}">
-                    <span class="uk-icon-sign-in"></span> 立即報名
+                    <span class="uk-icon-sign-in"></span>
+                    <span class="uk-hidden-small">立即報名</span>
                 </a>
             </td>
         </tr>

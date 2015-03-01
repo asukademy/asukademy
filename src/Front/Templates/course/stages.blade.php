@@ -5,9 +5,9 @@
     <th>梯次名稱</th>
     <th width="100">日期</th>
     <th>地點</th>
-    <th width="60">人數</th>
+    <th width="60" class="uk-hidden-small">人數</th>
     <th width="95">詳細資訊</th>
-    <th width="95">立即報名</th>
+    <th width="95" class="uk-hidden-small">立即報名</th>
     </thead>
 
     <tbody>
@@ -16,7 +16,7 @@
             <td>{{{ $stage->title }}}</td>
             <td>{{{ $stage->time }}}</td>
             <td>{{{ $stage->position->title }}}</td>
-            <td>
+            <td class="uk-hidden-small">
                 @if ($stage->attendable && !$stage->quota)
                     不限 ({{{ $stage->total }}})
                 @elseif ($stage->attendable)
@@ -32,7 +32,7 @@
                     詳細資訊
                 </a>
             </td>
-            <td class="uk-text-center">
+            <td class="uk-text-center uk-hidden-small">
                 @if ($stage->attendable)
                 <a class="uk-button" href="{{{ $link . '#attend' }}}">
                     立即報名

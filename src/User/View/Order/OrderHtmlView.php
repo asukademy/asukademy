@@ -10,7 +10,10 @@ namespace User\View\Order;
 
 use Admin\Helper\OrderHelper;
 use Front\View\AbstractFrontHtmlView;
+use Riki\Uri\Uri;
 use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Router\RestfulRouter;
+use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
 use Windwalker\Pay2Go\LaterPaymentFeedback;
@@ -81,10 +84,9 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			->setItemDesc($item->course->title . ' - ' . $item->stage->title . ' (' . $item->plan->title . ')')
 			->setEmail($item->email)
 			->setLoginType(0)
-			->setNotifyURL('http://dev.asika.tw/pay2go/notify.php')
+			->setNotifyURL(Router::buildHttp('order_notify', [], RestfulRouter::TYPE_FULL))
 			// ->setReturnURL('http://asukademy.test:8000//user/order/' . $item->id)
-			->setCustomerURL('http://asukademy.test:8000//user/order/' . $item->id)
-		;
+			->setCustomerURL(Uri::current());
 
 		$pay2go->creditCard
 			->enable()

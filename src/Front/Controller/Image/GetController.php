@@ -44,6 +44,8 @@ class GetController extends Controller
 			return true;
 		}
 
+		Folder::create($temp->getPath());
+
 		if (substr($src, 0, 4) == 'http')
 		{
 			$fp = fopen($temp->getPathname(), 'w+');

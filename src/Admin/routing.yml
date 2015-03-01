@@ -1,6 +1,6 @@
 'home':
     pattern: /
-    controller: Admin\Controller\Admin
+    controller: Admin\Controller\Users
 
 new:
     pattern: /(name)/new

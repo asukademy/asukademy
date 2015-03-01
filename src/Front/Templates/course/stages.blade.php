@@ -17,7 +17,9 @@
             <td>{{{ $stage->time }}}</td>
             <td>{{{ $stage->position->title }}}</td>
             <td>
-                @if ($stage->attendable)
+                @if ($stage->attendable && !$stage->quota)
+                    不限 ({{{ $stage->total }}})
+                @elseif ($stage->attendable)
                     {{{ $stage->people }}} / {{{ $stage->quota }}}
                 @else
                     <span data-uk-tooltip title="{{{ $stage->people }}} / {{{ $stage->quota }}}">

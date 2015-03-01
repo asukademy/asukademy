@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
 
     <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="{{{ $uri['media.path'] }}}media/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{{ $uri['media.path'] }}}favicon.ico" type="image/x-icon">
 
 @if ($view->layout == 'index')
     <title>@yield('page_title', 'Asukademy 飛鳥學院')</title>
@@ -101,7 +101,7 @@
 
         <div class="footer-logo">
             <a href="#" data-uk-smooth-scroll>
-                <img src="media/img/asukademy-logo-hex.png" width="150" alt="Footer LOGO">
+                <img src="{{{ $uri['media.path'] }}}img/asukademy-logo-hex.png" width="150" alt="Footer LOGO">
             </a>
         </div>
 
@@ -110,7 +110,7 @@
 
             <a target="_blank" class="uk-icon-button uk-icon-github" href="https://github.com/asukademy"></a>
 
-            <a class="uk-icon-button uk-icon-envelope-o" href="mailto:simon@asukademy.com"></a>
+            <a class="uk-icon-button uk-icon-envelope-o" href="mailto:service@asukademy.com"></a>
         </p>
 
         <p>

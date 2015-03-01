@@ -12,8 +12,10 @@ use Admin\Form\StageFieldDefinition;
 use Admin\Mapper\StageMapper;
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\Form\Form;
 use Windwalker\Ioc;
+use Windwalker\Table\Table;
 
 /**
  * The StageModel class.
@@ -40,7 +42,16 @@ class StageModel extends DatabaseModel
 				return new Data;
 			}
 
-			return (new StageMapper)->findOne($pk);
+			$item = (new StageMapper)->findOne($pk);
+
+			if (!$item)
+			{
+				return $item;
+			}
+
+			$item->tutors = (new DataMapper(Table::TUTOR_STAGE_MAPS))->findColumn('tutor_id', ['stage_id' => $item->id]);
+
+			return $item;
 		});
 	}
 

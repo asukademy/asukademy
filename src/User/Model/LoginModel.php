@@ -44,14 +44,15 @@ class LoginModel extends DatabaseModel
 	 *
 	 * @param string $username
 	 * @param string $password
+	 * @param bool   $remember
 	 *
-	 * @return  bool
+	 * @return bool
 	 */
-	public function login($username, $password)
+	public function login($username, $password, $remember = false)
 	{
 		$credential = new Credential(array('username' => $username, 'password' => $password));
 
-		if (!User::login($credential, true))
+		if (!User::login($credential, $remember))
 		{
 			$this['errors'] = User::getResults();
 

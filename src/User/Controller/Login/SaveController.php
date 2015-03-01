@@ -15,6 +15,7 @@ use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
+use Windwalker\Data\Data;
 use Windwalker\Ioc;
 
 /**
@@ -43,6 +44,7 @@ class SaveController extends Controller
 		$session = Ioc::getSession();
 
 		$user = $this->input->getVar('user');
+		$user = new Data($user);
 
 		$return = $session->get('login.redirect.url') ? : $this->input->getBase64('return');
 
@@ -52,7 +54,7 @@ class SaveController extends Controller
 
 		try
 		{
-			if (!$model->login($user['username'], $user['password']))
+			if (!$model->login($user['username'], $user['password'], $user['remember']))
 			{
 				$error = $model['errors'];
 

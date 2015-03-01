@@ -38,9 +38,11 @@ class UserHelper
 	/**
 	 * checkLogin
 	 *
-	 * @return  boolean
+	 * @param string $route
+	 *
+	 * @return bool
 	 */
-	public static function checkLogin()
+	public static function checkLogin($route = 'user:login')
 	{
 		if (User::get()->notNull())
 		{
@@ -57,7 +59,7 @@ class UserHelper
 
 		$app->addFlash('請登入以繼續進行操作', 'warning');
 
-		$app->redirect(Router::buildHttp('user:login'));
+		$app->redirect(Router::buildHttp($route));
 
 		return true;
 	}

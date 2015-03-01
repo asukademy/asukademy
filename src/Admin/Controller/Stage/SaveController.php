@@ -10,10 +10,12 @@ namespace Admin\Controller\Stage;
 
 use Admin\Model\StageModel;
 use Admin\Record\StageRecord;
+use Asukademy\Helper\DateTimeHelper;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
+use Windwalker\Data\DataSet;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Ioc;
 use Windwalker\Table\Table;
@@ -45,6 +47,8 @@ class SaveController extends Controller
 
 		$session->set('stage.edit.data' . $temp->id, $temp);
 
+		$trans = Ioc::getDatabase()->getTransaction()->start();
+
 		try
 		{
 			if (!$this->validate($data))
@@ -55,6 +59,11 @@ class SaveController extends Controller
 			// Prepare default data
 			// -----------------------------------------
 			$data->course_id = $courseId;
+
+			if (!$data->end)
+			{
+				$data->end = DateTimeHelper::format($data->start, 'Y-m-d') . ' 23:59';
+			}
 			// -----------------------------------------
 
 			$record = new StageRecord;
@@ -64,15 +73,21 @@ class SaveController extends Controller
 			$record->bind($data)
 				->check()
 				->store(true);
+
+			$this->postSave($record);
 		}
 		catch (ValidFailException $e)
 		{
+			$trans->rollback();
+
 			$this->setRedirect(Router::buildHttp('admin:stage', ['id' => $data->id, 'course_id' => $courseId]), $e->getMessage(), 'danger');
 
 			return false;
 		}
 		catch (\Exception $e)
 		{
+			$trans->rollback();
+
 			if (WINDWALKER_DEBUG)
 			{
 				throw $e;
@@ -83,12 +98,35 @@ class SaveController extends Controller
 			return false;
 		}
 
+		$trans->commit();
+
 		// Save success, reset user session
 		$session->remove('stage.edit.data' . $temp->id);
 
 		$this->setRedirect(Router::buildHttp('admin:stage', ['id' => $record->id, 'course_id' => $courseId]), 'Save Success', 'success');
 
 		return true;
+	}
+
+	/**
+	 * postSave
+	 *
+	 * @return  void
+	 */
+	public function postSave($record)
+	{
+		$tutors = $this->input->post->getByPath('stage.tutors', [], 'array');
+
+		$mapper = new DataMapper(Table::TUTOR_STAGE_MAPS);
+
+		$dataset = new DataSet;
+
+		foreach ($tutors as $tutor)
+		{
+			$dataset[] = ['tutor_id' => $tutor, 'stage_id' => $record->id];
+		}
+
+		$mapper->flush($dataset, ['stage_id' => $record->id]);
 	}
 
 	/**

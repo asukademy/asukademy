@@ -17,9 +17,6 @@
             <th width="1%">ID</th>
             <th>Category</th>
             <th>Title</th>
-            <th>Position</th>
-            <th>Quota</th>
-            <th>Less</th>
             <th>State</th>
             <th width="1%">Del</th>
         </tr>
@@ -38,15 +35,6 @@
                 </td>
                 <td>
                     <p><a href="{{ $router->buildHtml('edit', ['name' => 'course', 'id' => $item->id]) }}">{{{ $item->title }}}</a></p>
-                </td>
-                <td>
-                    {{{ $item->position_title }}}
-                </td>
-                <td>
-                    {{{ $item->quota }}}
-                </td>
-                <td>
-                    {{{ $item->less }}}
                 </td>
                 <td>
                     @if ($item->state)

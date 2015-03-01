@@ -28,9 +28,19 @@ class AuthoriseListener
 	 *
 	 * @return  void
 	 */
-	public function onBeforeRender(Event $event)
+	public function onAfterRouting(Event $event)
 	{
 		$route = Ioc::getConfig()->extract('route');
+
+		if ($route['package'] == 'admin')
+		{
+			UserHelper::checkLogin();
+
+			if (!User::get()->isAdmin())
+			{
+				throw new \Exception('找不到頁面', 404);
+			}
+		}
 
 		if ($route['package'] == 'user' && $route['matched'] != 'user:login' && $route['matched'] != 'user:registration'
 			&& $route['metched'] != 'user:activation')

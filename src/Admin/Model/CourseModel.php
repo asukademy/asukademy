@@ -12,8 +12,10 @@ use Admin\Form\CourseFieldDefinition;
 use Admin\Mapper\CourseMapper;
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\Form\Form;
 use Windwalker\Ioc;
+use Windwalker\Table\Table;
 
 /**
  * The CourseModel class.
@@ -47,7 +49,11 @@ class CourseModel extends DatabaseModel
 				return new Data;
 			}
 
-			return (new CourseMapper)->findOne($pk);
+			$item = (new CourseMapper)->findOne($pk);
+
+			$item->tutors = (new DataMapper(Table::TUTOR_COURSE_MAPS))->findColumn('tutor_id', ['course_id' => $item->id]);
+
+			return $item;
 		});
 	}
 
@@ -60,7 +66,7 @@ class CourseModel extends DatabaseModel
 	 */
 	public function getForm($data = array())
 	{
-		$form = new Form('user');
+		$form = new Form('course');
 
 		$form->defineFormFields(new CourseFieldDefinition);
 

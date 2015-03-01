@@ -67,4 +67,17 @@ classes:
         course_id: \d+
         stage_id: \d+
 
+# Order
+orders:
+    pattern: /orders(/page)
+    controller: Admin\Controller\Orders
 
+order:
+    pattern: /order/(id)
+    controller: Admin\Controller\Order
+
+order_state:
+    pattern: /order/state/update/(id)
+    controller: Admin\Controller\Order
+    action:
+        '*': StateController

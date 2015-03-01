@@ -79,10 +79,16 @@
                                         placeholder="人數" value="{{{ $item->quota }}}">
                             </div>
 
-                            <label for="{{ $plan }}-enabled" class="col-sm-2 control-label">啟用</label>
-                            <div class="col-sm-4">
+                            <label for="{{ $plan }}-enabled" class="col-sm-1 control-label">啟用</label>
+                            <div class="col-sm-2">
                                 <input type="checkbox" name="{{ $name }}[enabled]" class="form-control" id="{{ $plan }}-enabled"
                                         value="1" {{{ $item->state ? 'checked="checked"' : '' }}}>
+                            </div>
+
+                            <label for="{{ $plan }}-require-validate" class="col-sm-1 control-label">需要審核</label>
+                            <div class="col-sm-2">
+                                <input type="checkbox" name="{{ $name }}[require_validate]" class="form-control" id="{{ $plan }}-require-validate"
+                                        value="1" {{{ $item->require_validate ? 'checked="checked"' : '' }}}>
                             </div>
                         </div>
 

@@ -14,7 +14,11 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
+use Windwalker\Data\DataSet;
+use Windwalker\DataMapper\DataMapper;
+use Windwalker\Filter\OutputFilter;
 use Windwalker\Ioc;
+use Windwalker\Table\Table;
 
 /**
  * The SaveController class.
@@ -33,7 +37,7 @@ class SaveController extends Controller
 	{
 		$session = Ioc::getSession();
 
-		$data = $this->input->post->getVar('user');
+		$data = $this->input->post->getVar('course');
 
 		$data = new Data($data);
 
@@ -51,7 +55,9 @@ class SaveController extends Controller
 
 			// Prepare default data
 			// -----------------------------------------
+			$data->alias = $data->alias ? : $data->title;
 
+			$data->alias = OutputFilter::stringURLUnicodeSlug($data->alias);
 			// -----------------------------------------
 
 			$record = new CourseRecord;
@@ -61,6 +67,8 @@ class SaveController extends Controller
 			$record->bind($data)
 				->check()
 				->store(true);
+
+			$this->postSave($record);
 		}
 		catch (ValidFailException $e)
 		{
@@ -86,6 +94,27 @@ class SaveController extends Controller
 		$this->setRedirect(Router::buildHttp('admin:course', ['id' => $record->id]), 'Save Success', 'success');
 
 		return true;
+	}
+
+	/**
+	 * postSave
+	 *
+	 * @return  void
+	 */
+	public function postSave($record)
+	{
+		$tutors = $this->input->post->getByPath('course.tutors', [], 'array');
+
+		$mapper = new DataMapper(Table::TUTOR_COURSE_MAPS);
+
+		$dataset = new DataSet;
+
+		foreach ($tutors as $tutor)
+		{
+			$dataset[] = ['tutor_id' => $tutor, 'course_id' => $record->id];
+		}
+
+		$mapper->flush($dataset, ['course_id' => $record->id]);
 	}
 
 	/**

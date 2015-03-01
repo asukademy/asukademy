@@ -79,14 +79,14 @@ class StageModel extends DatabaseModel
 			return $stage;
 		}
 
-		$plans = (new DataMapper(Table::PLANS))->find(['stage_id' => $stage->id]);
+		$plans = (new DataMapper(Table::PLANS))->find(['stage_id' => $stage->id, 'state >= 1']);
 
 		if ($plans->isNull())
 		{
 			return $plans;
 		}
 
-		$orderMapper    = new DataMapper(Table::ORDERS);
+		$orderMapper = new DataMapper(Table::ORDERS);
 
 		foreach ($plans as $plan)
 		{

@@ -59,7 +59,26 @@ class StageFieldDefinition implements FieldDefinitionInterface
 			->set('rows', 7)
 			->set('default', null);
 
-		$form->addField(new Field\TextField('quota', 'Quota'))
+		$form->addField(new ItemlistField('tutors', 'Tutors'), 'basic')
+			->set('table', Table::TUTORS)
+			->set('title_field', 'name')
+			->set('multiple', 1)
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new ItemlistField('position_id', 'Position_id'), 'info')
+			->set('table', Table::POSITIONS)
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new Field\TextField('quota', 'Quota'), 'info')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
+		$form->addField(new Field\TextField('less', 'Less'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);

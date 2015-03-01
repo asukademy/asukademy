@@ -37,6 +37,7 @@
                         <li class=""><a href="{{ $uri['base.path'] }}">Home</a></li>
                         <li class=""><a href="{{ $router->buildHtml('users') }}">Users</a></li>
                         <li class=""><a href="{{ $router->buildHtml('courses') }}">Courses</a></li>
+                        <li class=""><a href="{{ $router->buildHtml('orders') }}">Orders</a></li>
                      @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

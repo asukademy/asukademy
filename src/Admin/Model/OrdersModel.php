@@ -14,11 +14,11 @@ use Windwalker\Query\QueryElement;
 use Windwalker\Table\Table;
 
 /**
- * The CoursesModel class.
+ * The OrdersModel class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class CoursesModel extends ListModel
+class OrdersModel extends ListModel
 {
 	/**
 	 * getListQuery
@@ -31,8 +31,12 @@ class CoursesModel extends ListModel
 	{
 		$queryHelper = $this->getQueryHelper();
 
-		$queryHelper->addTable('course', Table::COURSES)
-			->addTable('category', Table::CATEGORIES, 'category.id = course.catid');
+		$queryHelper->addTable('order', Table::ORDERS)
+			->addTable('plan', Table::PLANS, 'plan.id = order.plan_id')
+			->addTable('stage', Table::STAGES, 'stage.id = plan.stage_id')
+			->addTable('course', Table::COURSES, 'course.id = stage.course_id')
+			->addTable('category', Table::CATEGORIES, 'category.id = course.catid')
+			->addTable('user', Table::USERS, 'user.id = order.user_id');
 
 		$query->select($queryHelper->getSelectFields());
 

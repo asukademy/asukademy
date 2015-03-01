@@ -46,7 +46,7 @@ class CourseHtmlView extends AbstractFrontHtmlView
 		{
 			$stage->time = (new \DateTime($stage->start))->format('Y-m-d');
 			$stage->people = $stage->total;
-			$stage->attendable = $stage->total < $stage->quota;
+			$stage->attendable = $stage->quota ? $stage->total < $stage->quota : true;
 		}
 
 		// Recommends

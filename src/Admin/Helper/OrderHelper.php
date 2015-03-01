@@ -39,7 +39,7 @@ class OrderHelper
 			static::STATE_WAIT_PAY => '待繳費',
 			static::STATE_PAID_SUCCESS => '報名成功',
 			static::STATE_PROCESSING => '進行中',
-			static::STATE_PENDING => '已結束',
+			static::STATE_END => '已結束',
 		];
 
 		if (array_key_exists($state, $states))

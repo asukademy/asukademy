@@ -43,6 +43,11 @@ class CourseFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('default', null);
 
+		$form->addField(new Field\TextField('alias', 'Alias'), 'basic')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
 		$form->addField(new ItemlistField('catid', 'Catid'), 'basic')
 			->set('table', Table::CATEGORIES)
 			->set('class', '')
@@ -70,22 +75,6 @@ class CourseFieldDefinition implements FieldDefinitionInterface
 			->set('readonly', true);
 
 		$form->addField(new Field\TextField('image', 'Image'), 'info')
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new ItemlistField('position_id', 'Position_id'), 'info')
-			->set('table', Table::POSITIONS)
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextField('quota', 'Quota'), 'info')
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextField('less', 'Less'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);

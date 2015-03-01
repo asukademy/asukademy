@@ -46,7 +46,7 @@ class UserData extends Data implements UserDataInterface
 	 */
 	public function isAdmin()
 	{
-		return $this->group === Group::ADMIN;
+		return $this->group == Group::ADMIN;
 	}
 
 	/**

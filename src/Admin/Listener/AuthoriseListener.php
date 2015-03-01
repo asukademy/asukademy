@@ -8,8 +8,10 @@
 
 namespace Admin\Listener;
 
+use User\Helper\UserHelper;
 use Windwalker\Event\Event;
 use Windwalker\Ioc;
+use Windwalker\Session\Session;
 
 /**
  * The AuthoriseListener class.
@@ -18,6 +20,10 @@ use Windwalker\Ioc;
  */
 class AuthoriseListener
 {
+	public function onAfterRouting(Event $event)
+	{
+	}
+
 	/**
 	 * onBeforeRender
 	 *
@@ -25,13 +31,5 @@ class AuthoriseListener
 	 */
 	public function onBeforeRender(Event $event)
 	{
-		$config = Ioc::getConfig();
-
-		if ($config->get('route.package') != 'admin')
-		{
-			return;
-		}
-
-		// Check user here.
 	}
 }

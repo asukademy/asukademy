@@ -20,11 +20,11 @@ courses:
     sub_title: Courses
     route: 'front:page'
     path: courses
-    children:
-        programming:
-            title: 程式設計
-            route: 'front:page'
-            path: courses/programming
+#    children:
+#        programming:
+#            title: 程式設計
+#            route: 'front:page'
+#            path: courses/programming
 
 blog:
     title: 部落格

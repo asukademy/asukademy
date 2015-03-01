@@ -9,8 +9,10 @@
 namespace User;
 
 use User\Handler\UserHandler;
+use User\Listener\UserListener;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\Event\Dispatcher;
 
 /**
  * The UserPackage class.
@@ -29,5 +31,19 @@ class UserPackage extends AbstractPackage
 		parent::initialise();
 
 		User::setHandler(new UserHandler);
+	}
+
+	/**
+	 * registerListeners
+	 *
+	 * @param Dispatcher $dispatcher
+	 *
+	 * @return  void
+	 */
+	public function registerListeners(Dispatcher $dispatcher)
+	{
+		parent::registerListeners($dispatcher);
+
+		$dispatcher->addListener(new UserListener);
 	}
 }

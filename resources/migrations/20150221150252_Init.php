@@ -114,6 +114,7 @@ class Init extends AbstractMigration
 			->addColumn(new Column\Tinyint('state'))
 			->addColumn(new Column\Timestamp('start'))
 			->addColumn(new Column\Timestamp('end'))
+			->addColumn(new Column\Tinyint('require_validate'))
 			->addColumn(new Column\Integer('quota', 11, Column::UNSIGNED, Column::ALLOW_NULL))
 			->addColumn(new Column\Integer('total', 11, Column::UNSIGNED, Column::NOT_NULL, 0))
 			->addColumn(new Column\Integer('max_one_time', 11, Column::UNSIGNED, Column::ALLOW_NULL))

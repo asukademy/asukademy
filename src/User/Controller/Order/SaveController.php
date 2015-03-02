@@ -13,6 +13,7 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
+use Windwalker\Pay2Go\AbstractPayment;
 use Windwalker\Pay2Go\PaidReceiver;
 
 /**
@@ -48,6 +49,15 @@ class SaveController extends Controller
 		if (!$pay2go->validate())
 		{
 			$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), '訂單驗證失敗', 'warning');
+
+			return false;
+		}
+
+		if ($pay2go->getStatus() != AbstractPayment::STATUS_SUCCESS)
+		{
+			$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), $pay2go->getMessage(), 'warning');
+
+			return false;
 		}
 
 		$pay2go->setMerchantOrderNo($orderNo);
@@ -55,27 +65,23 @@ class SaveController extends Controller
 		$type = $pay2go->getPaymentType();
 		$orderNo = $pay2go->getMerchantOrderNo();
 
-		$data['id']      = $orderNo;
-		$data['payment'] = $type;
+		$data['id'] = $orderNo;
 		$data['expire_time'] = $pay2go->getExpireDate();
-		$data['params']  = json_encode($pay2go->getData());
+		$data['payment'] = $type;
 
 		// Is Later payment?
 		if ($pay2go->payment->isInstantPayment())
 		{
 			$data['state'] = 2;
 		}
+		else
+		{
+			$data['params'] = json_encode($pay2go->getData());
+		}
 
 		$model = new OrderModel;
 
-		$order = $model->getItem($orderNo);
-
-		if ($order->state >= 2)
-		{
-			$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), '已付款完成', 'success');
-
-			return true;
-		}
+		// $order = $model->getItem($orderNo);
 
 		try
 		{
@@ -93,7 +99,7 @@ class SaveController extends Controller
 			return false;
 		}
 
-		$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), '已付款完成', 'success');
+		$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), '收到付款資料', 'success');
 
 		return true;
 	}

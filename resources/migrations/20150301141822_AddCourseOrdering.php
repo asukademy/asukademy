@@ -19,7 +19,7 @@ class AddCourseOrdering extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->db->getTable(\Windwalker\Table\Table::COURSES)
+		$this->db->getTable(\Windwalker\Table\Table::COURSES, true)
 			->addColumn(new Column\Integer('ordering', 11, Column::UNSIGNED, Column::NOT_NULL, 0, '', ['after' => 'state']))
 			->update();
 	}
@@ -29,7 +29,7 @@ class AddCourseOrdering extends AbstractMigration
 	 */
 	public function down()
 	{
-		$this->db->getTable(\Windwalker\Table\Table::COURSES)
+		$this->db->getTable(\Windwalker\Table\Table::COURSES, true)
 			->dropColumn('ordering');
 	}
 }

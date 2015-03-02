@@ -10,6 +10,7 @@ namespace Front\View\Stage;
 
 use Front\View\AbstractFrontHtmlView;
 use Riki\Asset\Asset;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\DataMapper\RelationDataMapper;
 use Windwalker\Ioc;
 use Windwalker\Table\Table;
@@ -34,6 +35,11 @@ class StageHtmlView extends AbstractFrontHtmlView
 
 		$data->item  = $this->model->getItem();
 		$data->plans = $this->model->getPlans();
+
+		if ($data->state < 1 && !User::get()->isAdmin())
+		{
+			throw new \Exception('找不到頁面', 404);
+		}
 
 		// Count price
 		$data->item->price_min = PHP_INT_MAX;

@@ -34,8 +34,8 @@ class NotifyController extends Controller
 		$pay2go = new PaidReceiver($config['pay2go.id'], $config['pay2go.key'], $config['pay2go.iv']);
 
 //		$post = $this->getCreditData();
-		$post = $this->input->post->getArray();
-//		$post = $this->input->getArray();
+//		$post = $this->input->post->getArray();
+		$post = $this->input->getArray();
 
 		$pay2go->setData($post);
 
@@ -58,19 +58,13 @@ class NotifyController extends Controller
 		$data['id']        = $orderNo;
 		$data['payment']   = $type;
 		$data['paid_time'] = $pay2go->getPayTime();
+		$data['expire_time'] = '';
 		$data['params']    = json_encode($pay2go->getData());
 		$data['state']     = 2;
 
 		$model = new OrderModel;
 
 		$order = $model->getItem($orderNo);
-
-		if ($order->state >= 2)
-		{
-			echo '訂單已付款';
-
-			return false;
-		}
 
 		try
 		{

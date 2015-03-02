@@ -46,7 +46,12 @@ class OrderHtmlView extends AbstractFrontHtmlView
 		$data->payment = new PaidReceiver;
 
 		$data->payment->setData($data->item->params->toArray());
-		$data->feedback->setData($data->item->params->toArray());
+
+		if ($data->feedback->isSupport($data->item->payment))
+		{
+			$data->feedback->setData($data->item->params->toArray());
+		}
+
 		$data->paymentType = $data->payment->getPaymentType();
 
 		$this->preparePayment($data);
@@ -76,6 +81,9 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			$orderNo .= '_' . uniqid();
 		}
 
+		$notifyUrl = Router::buildHttp('front:order_notify', [], RestfulRouter::TYPE_FULL);
+		$notifyUrl = 'http://dev.asika.tw/pay2go/notify.php';
+
 		$pay2go->setTest($config['pay2go.test'])
 			->setMerchantOrderNo($orderNo)
 			->setVersion('1.1')
@@ -84,8 +92,8 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			->setItemDesc($item->course->title . ' - ' . $item->stage->title . ' (' . $item->plan->title . ')')
 			->setEmail($item->email)
 			->setLoginType(0)
-			->setNotifyURL(Router::buildHttp('front:order_notify', [], RestfulRouter::TYPE_FULL))
-			// ->setReturnURL('http://asukademy.test:8000//user/order/' . $item->id)
+			->setNotifyURL($notifyUrl)
+			 ->setReturnURL(Uri::current())
 			->setCustomerURL(Uri::current());
 
 		$pay2go->creditCard

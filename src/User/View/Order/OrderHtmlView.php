@@ -81,8 +81,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			$orderNo .= '_' . uniqid();
 		}
 
-		$notifyUrl = Router::buildHttp('front:order_notify', [], RestfulRouter::TYPE_FULL);
-		$notifyUrl = 'http://dev.asika.tw/pay2go/notify.php';
+		$notifyUrl = $config['pay2go.notify'] ? : Router::buildHttp('front:order_notify', [], RestfulRouter::TYPE_FULL);
 
 		$pay2go->setTest($config['pay2go.test'])
 			->setMerchantOrderNo($orderNo)

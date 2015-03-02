@@ -76,15 +76,13 @@ class SaveController extends Controller
 		$data['expire_time'] = $pay2go->getExpireDate();
 		$data['payment'] = $type;
 
-		// Is Later payment?
+		// Is instant payment?
 		if ($pay2go->payment->isInstantPayment())
 		{
 			$data['state'] = 2;
 		}
-		else
-		{
-			$data['params'] = json_encode($pay2go->getData());
-		}
+
+		$data['params'] = json_encode($pay2go->getData());
 
 		$model = new OrderModel;
 

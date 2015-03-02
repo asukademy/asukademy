@@ -13,7 +13,7 @@ use Riki\Uri\Uri;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Pay2Go\AbstractPayment;
-use Windwalker\Pay2Go\LaterPaymentFeedback;
+use Windwalker\Pay2Go\FeedbackReceiver;
 use Windwalker\Table\Table;
 
 /**
@@ -37,7 +37,7 @@ class BarcodeController extends Controller
 			throw new \UnexpectedValueException('沒有條碼', 404);
 		}
 
-		$pay2go = new LaterPaymentFeedback;
+		$pay2go = new FeedbackReceiver;
 		$pay2go->setData(json_decode($order->params, true));
 
 		$data = array(

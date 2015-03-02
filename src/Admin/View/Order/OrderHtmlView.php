@@ -10,7 +10,7 @@ namespace Admin\View\Order;
 
 use Admin\Helper\OrderHelper;
 use Windwalker\Core\View\BladeHtmlView;
-use Windwalker\Pay2Go\LaterPaymentFeedback;
+use Windwalker\Pay2Go\FeedbackReceiver;
 use Windwalker\Pay2Go\PaidReceiver;
 
 /**
@@ -35,7 +35,7 @@ class OrderHtmlView extends BladeHtmlView
 		$data->receiver = new PaidReceiver;
 		$data->receiver->setData($data->item->params);
 
-		$data->feedback = new LaterPaymentFeedback;
+		$data->feedback = new FeedbackReceiver;
 		$data->feedback->setData($data->item->params);
 
 		// State

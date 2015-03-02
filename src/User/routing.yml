@@ -10,6 +10,18 @@ order:
   pattern: /order/(id)
   controller: User\Controller\Order
 
+#order_return:
+#  pattern: /order/return/(id)
+#  controller: User\Controller\Order
+#  action:
+#    '*': ReturnController
+#
+#order_feedback:
+#  pattern: /order/feedback/(id)
+#  controller: User\Controller\Order
+#  action:
+#    '*': FeedbackController
+
 barcode:
   pattern: /order/(id)/barcode
   controller: User\Controller\Order

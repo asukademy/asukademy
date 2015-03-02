@@ -40,9 +40,9 @@ class SaveController extends Controller
 
 			$i = 1;
 
-			foreach ($ordering as $k => &$v)
+			foreach ($ordering as $k => $v)
 			{
-				$v = $i;
+				$ordering[$k] = $i;
 
 				$i++;
 			}

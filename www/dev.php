@@ -10,7 +10,8 @@
 $allowRemotes = array(
 	'127.0.0.1',
 	'fe80::1',
-	'::1'
+	'::1',
+	'219.68.97.4'
 );
 
 if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])

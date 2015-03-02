@@ -78,7 +78,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 
 		// if ($config['pay2go.test'])
 		{
-			$orderNo .= '_' . uniqid('AsukademyOrder');
+			$orderNo .= '_' . strtoupper(substr(md5(uniqid(rand(0, 9))), 0, 4));
 		}
 
 		$notifyUrl = $config['pay2go.notify'] ? : Router::buildHttp('front:order_notify', [], RestfulRouter::TYPE_FULL);

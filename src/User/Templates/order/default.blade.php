@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <th>職稱</th>
-                            <td>{{{ $item->payment }}}</td>
+                            <td>{{{ $item->title }}}</td>
                         </tr>
                         </tbody>
                     </table>

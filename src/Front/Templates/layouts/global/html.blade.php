@@ -6,12 +6,11 @@
 
     <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
     <link rel="icon" href="{{{ $uri['media.path'] }}}favicon.ico" type="image/x-icon">
+<?php
+$titleSuffix = ($view->layout != 'index') ? ' | Asukademy 飛鳥學院' : '';
+?>
 
-@if ($view->layout == 'index')
-    <title>@yield('page_title', 'Asukademy 飛鳥學院')</title>
-@else
-    <title>@yield('page_title') | Asukademy 飛鳥學院</title>
-@endif
+    <title>@yield('page_title', 'Asukademy 飛鳥學院'){{{ $titleSuffix }}}</title>
 
 @if ($app->get('meta.description'))
     <meta name="description" content="{{{ $app->get('meta.description') }}}">
@@ -21,7 +20,7 @@
 @if ($app->get('og.image'))
     <meta property="og:image" content="{{{ $app->get('og.image') }}}">
 @endif
-    <meta property="og:title" content="@yield('page_title', 'Asukademy 飛鳥學院')">
+    <meta property="og:title" content="@yield('page_title', 'Asukademy 飛鳥學院'){{{ $titleSuffix }}}">
     <meta property="og:site_name" content="Asukademy 飛鳥學院">
 @if ($app->get('meta.description'))
     <meta property="og:description" content="{{{ $app->get('meta.description') }}}">

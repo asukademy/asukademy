@@ -43,9 +43,6 @@
 
         <h3>價格</h3>
         <p>
-            @if ($plan->origin_price)
-                <s>{{{ number_format($plan->origin_price, 0) }}}</s> /
-            @endif
             {{{ number_format($plan->price, 0) }}}
         </p>
 

@@ -76,7 +76,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 
 		$orderNo = $item->id;
 
-		if ($config['pay2go.test'])
+		// if ($config['pay2go.test'])
 		{
 			$orderNo .= '_' . uniqid();
 		}
@@ -92,7 +92,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			->setEmail($item->email)
 			->setLoginType(0)
 			->setNotifyURL($notifyUrl)
-			 ->setReturnURL(Uri::current())
+			->setReturnURL(Uri::current())
 			->setCustomerURL(Uri::current());
 
 		$pay2go->creditCard

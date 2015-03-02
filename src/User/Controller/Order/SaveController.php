@@ -39,7 +39,7 @@ class SaveController extends Controller
 
 		$orderNo = $pay2go->getMerchantOrderNo();
 
-		if ($config['pay2go.test'])
+		// if ($config['pay2go.test'])
 		{
 			$orderNo = explode('_', $orderNo);
 
@@ -48,14 +48,14 @@ class SaveController extends Controller
 
 		if ($pay2go->getStatus() != AbstractPayment::STATUS_SUCCESS)
 		{
-			$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), $pay2go->getMessage(), 'warning');
+			$this->setRedirect(Router::buildHttp('user:order', ['id' => $this->input->get('id')]), $pay2go->getMessage(), 'warning');
 
 			return false;
 		}
 
 		if (!$pay2go->validate())
 		{
-			$this->setRedirect(Router::buildHttp('user:order', ['id' => $orderNo]), '訂單驗證失敗', 'warning');
+			$this->setRedirect(Router::buildHttp('user:order', ['id' => $this->input->get('id')]), '訂單驗證失敗', 'warning');
 
 			return false;
 		}

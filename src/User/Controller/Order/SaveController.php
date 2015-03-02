@@ -9,6 +9,8 @@
 namespace User\Controller\Order;
 
 use Front\Model\OrderModel;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
@@ -38,6 +40,11 @@ class SaveController extends Controller
 		$pay2go->setData($this->input->post->getArray());
 
 		$orderNo = $pay2go->getMerchantOrderNo();
+
+		// Logger
+		$log = new Logger('name');
+		$log->pushHandler(new StreamHandler(WINDWALKER_LOGS . '/pay2go-return.log', Logger::INFO));
+		$log->addInfo('Get Return Value: ' . print_r($this->input->post->getArray(), 1));
 
 		// if ($config['pay2go.test'])
 		{

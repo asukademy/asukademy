@@ -15,19 +15,71 @@ namespace Asukademy\Helper;
  */
 class DateTimeHelper
 {
+	const FORMAT_YMD     = 'Y-m-d';
+	const FORMAT_YMD_HI  = 'Y-m-d H:i';
+	const FORMAT_YMD_HIS = 'Y-m-d H:i:s';
+
+	const TIMEZONE_UTC    = 'UTC';
+	const TIMEZONE_TAIPEI = 'Asia/Taipei';
+
 	/**
 	 * format
 	 *
 	 * @param string $date
 	 * @param string $format
-	 * @param bool   $locale
 	 *
 	 * @return  string
 	 */
-	public static function format($date, $format = 'Y-m-d H:i:s', $locale = false)
+	public static function format($date, $format = self::FORMAT_YMD_HIS)
 	{
-		$tz = $locale ? new \DateTimeZone('Asia/Taipei') : null;
+		return (new \DateTime($date))->format($format);
+	}
 
-		return (new \DateTime($date, $tz))->format($format);
+	/**
+	 * convert
+	 *
+	 * @param string $date
+	 * @param string $from
+	 * @param string $to
+	 * @param string $format
+	 *
+	 * @return  string
+	 */
+	public static function convert($date, $from = self::TIMEZONE_UTC, $to = self::TIMEZONE_TAIPEI, $format = self::FORMAT_YMD_HIS)
+	{
+		$from = new \DateTimeZone($from);
+		$to   = new \DateTimeZone($to);
+
+		$date = new \DateTime($date, $from);
+
+		$date->setTimezone($to);
+
+		return $date->format($format);
+	}
+
+	/**
+	 * toUTC
+	 *
+	 * @param string $date
+	 * @param string $format
+	 *
+	 * @return  string
+	 */
+	public static function toUTC($date, $format = self::FORMAT_YMD_HIS)
+	{
+		return static::convert($date, static::TIMEZONE_TAIPEI, static::TIMEZONE_UTC, $format);
+	}
+
+	/**
+	 * toTaipei
+	 *
+	 * @param string $date
+	 * @param string $format
+	 *
+	 * @return  string
+	 */
+	public static function toTaipei($date, $format = self::FORMAT_YMD_HIS)
+	{
+		return static::convert($date, static::TIMEZONE_UTC, static::TIMEZONE_TAIPEI, $format);
 	}
 }

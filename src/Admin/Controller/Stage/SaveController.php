@@ -62,7 +62,7 @@ class SaveController extends Controller
 
 			if (!$data->end)
 			{
-				$data->end = DateTimeHelper::format($data->start, 'Y-m-d') . ' 23:59';
+				$data->end = DateTimeHelper::format($data->start, DateTimeHelper::FORMAT_YMD) . ' 23:59';
 			}
 			// -----------------------------------------
 

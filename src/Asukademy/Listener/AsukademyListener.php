@@ -12,6 +12,7 @@ use Riki\Asset\Asset;
 use Riki\Asset\ScriptManager;
 use Asukademy\Error\ErrorHandler;
 use Windwalker\Core\Renderer\RendererHelper;
+use Windwalker\Core\Utilities\DateTimeHelper;
 use Windwalker\Event\Event;
 use Windwalker\Ioc;
 use Windwalker\Utilities\Queue\Priority;
@@ -35,6 +36,9 @@ class AsukademyListener
 		RendererHelper::addGlobalPath(WINDWALKER_SOURCE . '/Admin/Templates', Priority::BELOW_NORMAL);
 		RendererHelper::addGlobalPath(WINDWALKER_SOURCE . '/Front/Templates', Priority::BELOW_NORMAL);
 
+		// Timezone
+		DateTimeHelper::setDefaultTimezone('Asia/Taipei');
+
 		// Error
 		if (!Ioc::getConfig()->get('system.debug'))
 		{
@@ -42,7 +46,7 @@ class AsukademyListener
 		}
 
 		// Script
-		ScriptManager::setModule('calendar', function($name, $asset, $selector = '.calendar', $format = 'YYYY-MM-DD hh:mm:ss')
+		ScriptManager::setModule('calendar', function($name, $asset, $selector = '.calendar', $format = 'YYYY-MM-DD HH:mm:ss')
 		{
 			static $inited = false;
 			static $profile = [];

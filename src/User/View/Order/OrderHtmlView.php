@@ -92,7 +92,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 			->setEmail($item->email)
 			->setLoginType(0)
 			->setNotifyURL($notifyUrl)
-			->setReturnURL(Uri::current())
+			//->setReturnURL(Uri::current())
 			->setCustomerURL(Uri::current());
 
 		$pay2go->creditCard
@@ -104,6 +104,23 @@ class OrderHtmlView extends AbstractFrontHtmlView
 		$pay2go->barcode->enable();
 		$pay2go->cvs->enable();
 		$pay2go->webATM->enable();
+
+//		$pay2go->alipay
+//			->enable()
+//			->setReceiver('ASukademy')
+//			->setTel1('123-12312-123')
+//			->setTel2('123-123-123')
+//			->setCount(1)
+//			->addProduct(
+//				$item->id,
+//				$item->course->title,
+//				$item->stage->title . ' (' . $item->plan->title . ')',
+//				(int) $item->price,
+//				1
+//			);
+
+
+		// $pay2go->tenpay->enable();
 
 		$data->pay2go = $pay2go;
 	}

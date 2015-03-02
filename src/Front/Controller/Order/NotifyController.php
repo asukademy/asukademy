@@ -37,7 +37,7 @@ class NotifyController extends Controller
 
 		// create a log channel
 		$log = new Logger('name');
-		$log->pushHandler(new StreamHandler(WINDWALKER_LOGS . '/pay2go.log', Logger::INFO));
+		$log->pushHandler(new StreamHandler(WINDWALKER_LOGS . '/pay2go-notify.log', Logger::INFO));
 
 //		$post = $this->getCreditData();
 //		$post = $this->input->post->getArray();

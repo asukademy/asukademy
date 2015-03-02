@@ -132,7 +132,11 @@
                         </tr>
                         <tr>
                             <th>上課時間</th>
-                            <td>{{{ $item->stage->start }}} ~ {{{ $item->stage->end }}}</td>
+                            <td>
+                                {{{ \Asukademy\Helper\DateTimeHelper::format($item->stage->start, \Asukademy\Helper\DateTimeHelper::FORMAT_YMD_HI) }}}
+                                ~
+                                {{{ \Asukademy\Helper\DateTimeHelper::format($item->stage->end, \Asukademy\Helper\DateTimeHelper::FORMAT_YMD_HI) }}}
+                            </td>
                         </tr>
 
                         @if ($item->payment)

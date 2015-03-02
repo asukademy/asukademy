@@ -14,7 +14,9 @@ use Monolog\Logger;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
+use Windwalker\Pay2Go\AbstractPayment;
 use Windwalker\Pay2Go\PaidReceiver;
+use Windwalker\Pay2Go\Pay2GoHelper;
 
 /**
  * The NotifyController class.
@@ -50,6 +52,11 @@ class NotifyController extends Controller
 		if (!$pay2go->validate())
 		{
 			return '驗證失敗';
+		}
+
+		if ($pay2go->getStatus() != AbstractPayment::STATUS_SUCCESS)
+		{
+			return Pay2GoHelper::getErrorTitle($pay2go->getStatus());
 		}
 
 		if ($config['pay2go.test'])
@@ -93,52 +100,5 @@ class NotifyController extends Controller
 		$log->addInfo('Change Stage: ' . print_r($data, 1));
 
 		return true;
-	}
-
-	protected function getCreditData()
-	{
-		return array (
-			'Status' => 'SUCCESS',
-			'Message' => '授權成功',
-			'MerchantID' => '3592087',
-			'Amt' => '7200',
-			'TradeNo' => '15022713311757163',
-			'MerchantOrderNo' => '771_54f00115118b6',
-			'RespondType' => 'String',
-			'CheckCode' => 'AE68DC706B5CCC7310069AC9DD575ADEC63451FD72333F3EE78203ED9C7313FD',
-			'IP' => '219.68.97.4',
-			'EscrowBank' => 'Cosmos',
-			'PaymentType' => 'CREDIT',
-			'RespondCode' => '00',
-			'Auth' => '930637',
-			'Card6No' => '400022',
-			'Card4No' => '2222',
-			'InstFirst' => '7200',
-			'InstEach' => '0',
-			'Inst' => '0',
-			'ECI' => '',
-			'PayTime' => '2015-02-27 13:31:17',
-		);
-	}
-
-	protected function getATMData()
-	{
-		return array (
-			'Status' => 'SUCCESS',
-			'Message' => '取號成功',
-			'MerchantName' => 'Asukademy',
-			'MerchantID' => '3592087',
-			'Amt' => '7200',
-			'TradeNo' => '15022713312764395',
-			'MerchantOrderNo' => '771_54f00126643b5',
-			'ReturnURL' => '',
-			'CheckCode' => 'FDED801CBFBD2CA3A0D1278FB166BD68D0591D5C49ACB646DB9A08974A9F0588',
-			'PaymentType' => 'VACC',
-			'IP' => '',
-			'EscrowBank' => '',
-			'ExpireDate' => '2015-03-06',
-			'BankCode' => '017',
-			'CodeNo' => 'TestAccount123456',
-		);
 	}
 }

@@ -9,6 +9,8 @@
 namespace Front\Controller\Order;
 
 use Front\Model\OrderModel;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
 use Windwalker\Ioc;
@@ -33,9 +35,15 @@ class NotifyController extends Controller
 
 		$pay2go = new PaidReceiver($config['pay2go.id'], $config['pay2go.key'], $config['pay2go.iv']);
 
+		// create a log channel
+		$log = new Logger('name');
+		$log->pushHandler(new StreamHandler(WINDWALKER_LOGS . '/pay2go.log', Logger::INFO));
+
 //		$post = $this->getCreditData();
 //		$post = $this->input->post->getArray();
 		$post = $this->input->getArray();
+
+		$log->addInfo('Receive Notify: ' . print_r($post, 1));
 
 		$pay2go->setData($post);
 
@@ -81,6 +89,8 @@ class NotifyController extends Controller
 
 			return false;
 		}
+
+		$log->addInfo('Change Stage: ' . print_r($data, 1));
 
 		return true;
 	}

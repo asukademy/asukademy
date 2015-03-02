@@ -25,7 +25,9 @@
 		"sendgrid/sendgrid": "2.2.1",
 
 		"windwalker/pay2go": "1.*",
-		"joomla/image": "~1.0@stable"
+		"joomla/image": "~1.0@stable",
+
+        "monolog/monolog": "1.*@stable"
 	},
 	"require-dev": {
 		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"

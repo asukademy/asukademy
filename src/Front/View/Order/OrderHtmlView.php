@@ -10,8 +10,6 @@ namespace Front\View\Order;
 
 use Front\View\AbstractFrontHtmlView;
 use Windwalker\Core\Authenticate\User;
-use Windwalker\Ioc;
-use Windwalker\Table\Table;
 use Windwalker\Database\Schema\Column;
 
 /**

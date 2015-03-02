@@ -28,7 +28,7 @@
             <td>{{{ $item->id }}}</td>
             <td>
                 @if ($item->image)
-                    <img src="{{{ $item->image }}}" alt="Avatar" width="75" height="75" />
+                    <img src="{{{ \Asukademy\Helper\ThumbHelper::resize($item->image, 75, 75) }}}" alt="Avatar" width="75" height="75" />
                 @endif
             </td>
             <td>

@@ -29,12 +29,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ $uri['base.path'] }}">飛鳥學院 Asukademy</a>
+                <a class="navbar-brand" href="{{ $router->buildHtml('home') }}">飛鳥學院 Asukademy</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                      @section('nav')
-                        <li class=""><a href="{{ $uri['base.path'] }}">Home</a></li>
                         <li class=""><a href="{{ $router->buildHtml('users') }}">會員</a></li>
                         <li class=""><a href="{{ $router->buildHtml('courses') }}">課程</a></li>
                         <li class=""><a href="{{ $router->buildHtml('orders') }}">報名</a></li>
@@ -44,7 +43,8 @@
                      @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{-- <li class="pull-right"><a href="{{ $uri['base.path'] }}admin">Admin</a></li> --}}
+                     <li><a target="_blank" href="{{ $uri['base.path'] }}"><span class="glyphicon glyphicon-globe"></span> 觀看前台</a></li>
+                    <li><a href="{{ $router->buildHtml('user:logout') }}"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->

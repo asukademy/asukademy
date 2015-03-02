@@ -29,7 +29,7 @@
                 <td>{{{ $item->id }}}</td>
                 <td>
                     @if ($item->image)
-                        <img src="{{{ \Riki\Uri\Uri::root() . 'image?url=' . urlencode($item->image) . '&w=75&h=75' }}}" alt="Avatar" width="75" height="75" />
+                        <img src="{{{ \Asukademy\Helper\ThumbHelper::resize($item->image, 75, 75) }}}" alt="Avatar" width="75" height="75" />
                     @endif
                 </td>
                 <td>

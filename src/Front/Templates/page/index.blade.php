@@ -13,19 +13,19 @@
                         我們希望飛鳥學院能夠帶領學生們意氣風發的面對人生，在競爭激烈的現代社會中立足，更希望成為員工們的安居之地，專心面對人生的一切挑戰。
                     </p>
                     <p class="uk-text-right">
-                        <a class="uk-button" href="about">了解更多</a>
+                        <a class="uk-button" href="{{{ $router->buildHtml('page', ['paths' => 'about']) }}}">了解更多</a>
                     </p>
                 </div>
 
                 <div class="uk-width-medium-1-4 feature-img">
-                    <a href="courses">
-                        <img src="media/img/home/course-info.jpg" alt="Image" />
+                    <a href="{{{ $router->buildHtml('courses') }}}">
+                        <img src="{{{ $uri['media.path'] }}}img/home/course-info.jpg" alt="Image" />
                     </a>
                 </div>
 
                 <div class="uk-width-medium-1-4 feature-img">
-                    <a href="faq">
-                        <img src="media/img/home/faq.jpg" alt="Image" />
+                    <a href="{{{ $router->buildHtml('page', ['paths' => 'faq']) }}}">
+                        <img src="{{{ $uri['media.path'] }}}img/home/faq.jpg" alt="Image" />
                     </a>
                 </div>
             </div>
@@ -81,7 +81,7 @@
             </style>
 
             <p>
-                <a style="margin-top: 50px;" class="see-course-button uk-button uk-button-hero uk-button-primary" href="courses">
+                <a style="margin-top: 50px;" class="see-course-button uk-button uk-button-hero uk-button-primary" href="{{{ $router->buildHtml('page', ['paths' => 'courses']) }}}">
                     立即了解我們的課程內容
                 </a>
             </p>

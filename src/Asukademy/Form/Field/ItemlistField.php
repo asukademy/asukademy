@@ -27,7 +27,11 @@ class ItemlistField extends ListField
 	 */
 	protected function prepareOptions()
 	{
-		$categories = (new DataMapper($this->get('table')))->findAll();
+		$ordering = $this->get('ordering', null);
+		$start    = $this->get('start', null);
+		$limit    = $this->get('limit', null);
+
+		$categories = (new DataMapper($this->get('table')))->findAll($ordering, $start, $limit);
 
 		$titleField = $this->get('title_field', 'title');
 		$valueField = $this->get('value_field', 'id');

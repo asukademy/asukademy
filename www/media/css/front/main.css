@@ -116,10 +116,11 @@ dl dd {
 }
 #header .uk-navbar-brand {
   height: 70px;
+  padding-left: 0;
 }
 #header .uk-navbar-brand img {
   max-height: 100%;
-  padding: 10px;
+  padding: 10px 0;
 }
 #header .uk-navbar-nav > li > a {
   font-family: 'Roboto', 'LiHei Pro', 'Heiti TC', 'Xin6', '微軟正黑體', sans-serif;
@@ -161,6 +162,7 @@ dl dd {
   }
   #header #mainmenu li a:hover {
     background: #eee;
+    color: #333;
   }
   #header #mainmenu .uk-dropdown {
     width: 100%;
@@ -175,17 +177,20 @@ dl dd {
   width: 100%;
   color: #fff;
 }
-.page-index #header a {
+.page-index #header #mainmenu > li > a {
   color: #715E49;
 }
-.page-index #header a:hover {
+.page-index #header #mainmenu > li > a:hover {
   background: transparent;
   color: #333;
 }
-.page-index #header a:hover span.menu-item-sub-title {
+.page-index #header #mainmenu > li > a:hover span.menu-item-sub-title {
   color: #333;
   opacity: .84;
   transition: all 0.5s;
+}
+.page-index #header #mainmenu > li.uk-open > a {
+  background: transparent;
 }
 .page-index #header span.menu-item-sub-title {
   color: #715E49;
@@ -214,7 +219,7 @@ dl dd {
   }
 }
 #banner h1 {
-  margin: 20px 20px;
+  margin: 20px 0;
   padding-bottom: 10px;
   font-size: 75px;
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
@@ -242,7 +247,8 @@ dl dd {
   text-align: center;
 }
 #banner .banner-toolbar {
-  padding: 30px 0 40px 0;
+  padding-top: 30px;
+  padding-bottom: 40px;
 }
 #banner .categories-bar {
   margin: 30px 0 20px 0;
@@ -366,6 +372,9 @@ dl dd {
 }
 .mini-img {
   width: 300px;
+}
+.article-author-description {
+  line-height: 150%;
 }
 .uk-form input[type=checkbox],
 .uk-form input[type=radio] {

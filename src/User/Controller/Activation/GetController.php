@@ -25,9 +25,7 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$view = $this->getView('Activation', 'html');
 		$model = $this->getModel('Activation');
-
 		$token = $this->input->get('token');
 
 		try
@@ -36,12 +34,12 @@ class GetController extends Controller
 		}
 		catch (\Exception $e)
 		{
-			$this->setRedirect(Router::buildHttp('front:page', ['paths' => '']), $e->getMessage(), 'warning');
+			$this->setRedirect(Router::buildHttp('user:login'), $e->getMessage(), 'warning');
 
 			return false;
 		}
 
-		$this->setRedirect(Router::buildHttp('front:page', ['paths' => '']), '驗證成功，請由此登入', 'success');
+		$this->setRedirect(Router::buildHttp('user:login'), '驗證成功，請由此登入', 'success');
 
 		return true;
 

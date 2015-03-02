@@ -41,6 +41,7 @@ $titleSuffix = ($view->layout != 'index') ? ' | Asukademy 飛鳥學院' : '';
     <!-- scripts -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{{ $uri['media.path'] }}}js/uikit.min.js"></script>
+    <script type="text/javascript" src="{{ $uri['media.path'] }}js/main.js?{{{ \Riki\Asset\Asset::getVersion() }}}"></script>
     {{ \Riki\Asset\Asset::renderScripts() }}
 @yield('script')
 
@@ -50,13 +51,13 @@ $titleSuffix = ($view->layout != 'index') ? ' | Asukademy 飛鳥學院' : '';
 <nav id="header" class="uk-navbar uk-navbar-attached">
     <div class="uk-container uk-container-center">
 
-        <a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="{{{ $uri['base.path'] }}}">
+        <a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="{{{ $router->buildHtml('front:page', ['paths' => '']) }}}">
             <img class="uk-margin uk-margin-remove" src="{{{ $uri['media.path'] }}}img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy">
         </a>
 
         <a href="#" class="uk-navbar-toggle uk-visible-small" data-uk-toggle="{target:'#mainmenu', cls: 'uk-hidden-small'}"></a>
 
-        <a id="small-logo" class="uk-navbar-brand uk-navbar-center uk-visible-small" href="{{{ $uri['base.path'] }}}">
+        <a id="small-logo" class="uk-navbar-brand uk-navbar-center uk-visible-small" href="{{{ $router->buildHtml('front:page', ['paths' => '']) }}}">
             <img class="uk-margin uk-margin-remove" style="max-width: 95%;" src="{{{ $uri['media.path'] }}}img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy">
         </a>
 

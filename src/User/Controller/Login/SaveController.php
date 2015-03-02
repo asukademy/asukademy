@@ -16,7 +16,9 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\Ioc;
+use Windwalker\Table\Table;
 
 /**
  * The SaveController class.
@@ -73,6 +75,12 @@ class SaveController extends Controller
 
 				throw new ValidFailException('登入失敗');
 			}
+
+			$user = User::get();
+
+			$user->last_login = (new \DateTime('now'))->format('Y-m-d H:i:s');
+
+			User::save($user);
 		}
 		catch (ValidFailException $e)
 		{

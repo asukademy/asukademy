@@ -18,5 +18,7 @@
             </fieldset>
         </div>
     </div>
+
+    {{ \Asukademy\Session\CSRFToken::input()}}
 @stop
 

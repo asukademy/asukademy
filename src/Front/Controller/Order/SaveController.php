@@ -11,6 +11,7 @@ namespace Front\Controller\Order;
 use Admin\Helper\OrderHelper;
 use Admin\S3\S3Helper;
 use Asukademy\Mail\Mailer;
+use Asukademy\Session\CSRFToken;
 use DateTime;
 use Front\Model\OrderModel;
 use Windwalker\Core\Authenticate\User;
@@ -75,6 +76,8 @@ class SaveController extends Controller
 	 */
 	protected function prepareExecute()
 	{
+		CSRFToken::validate();
+
 		$this->data  = $this->input->getVar('user');
 		$this->model = new OrderModel;
 		$this->user  = User::get();

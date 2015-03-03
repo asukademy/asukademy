@@ -65,5 +65,7 @@
 
     </div>
 </div>
+
+{{ \Asukademy\Session\CSRFToken::input()}}
 </form>
 @stop

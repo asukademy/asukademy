@@ -24,6 +24,9 @@
                 <legend>報名狀態</legend>
                 @if ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED || $item->state >= \Admin\Helper\OrderHelper::STATE_PROCESSING)
                     {{{ \Admin\Helper\OrderHelper::getStateTitle($item->state) }}}
+                    <input type="hidden" name="order[state]"
+                        value="{{{ $item->state >= \Admin\Helper\OrderHelper::STATE_PROCESSING ? \Admin\Helper\OrderHelper::STATE_PAID_SUCCESS : $item->state}}}"
+                        />
                 @else
                     <?php
                     $options = [];
@@ -62,4 +65,6 @@
             @endif
         </div>
     </div>
+
+    {{ \Asukademy\Session\CSRFToken::input()}}
 @stop

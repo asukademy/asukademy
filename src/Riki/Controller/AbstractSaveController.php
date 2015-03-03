@@ -9,6 +9,7 @@
 namespace Riki\Controller;
 
 use Admin\Model\AbstractFormModel;
+use Asukademy\Session\CSRFToken;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Model\Exception\ValidFailException;
@@ -50,6 +51,8 @@ abstract class AbstractSaveController extends Controller
 	 */
 	protected function prepareExecute()
 	{
+		CSRFToken::validate();
+
 		$this->model = $this->getModel();
 		$this->data = $this->input->getVar(strtolower($this->getName()));
 		$this->data['id'] = $this->input->get('id');

@@ -10,6 +10,7 @@ namespace Admin\Controller\Course;
 
 use Admin\Model\CourseModel;
 use Admin\Record\CourseRecord;
+use Asukademy\Session\CSRFToken;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
@@ -35,6 +36,8 @@ class SaveController extends Controller
 	 */
 	protected function doExecute()
 	{
+		CSRFToken::validate();
+
 		$session = Ioc::getSession();
 
 		$data = $this->input->post->getVar('course');

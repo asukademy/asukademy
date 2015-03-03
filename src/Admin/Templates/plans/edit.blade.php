@@ -109,6 +109,8 @@
         </div>
     </div>
 
+    {{ \Asukademy\Session\CSRFToken::input()}}
+
     <script>
         RikiEdit.confirmOnPageExit(jQuery('#adminForm'));
 

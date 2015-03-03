@@ -8,6 +8,7 @@
 
 namespace Admin\Controller\Classes;
 
+use Asukademy\Session\CSRFToken;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
@@ -40,6 +41,8 @@ class SaveController extends Controller
 	 */
 	protected function prepareExecute()
 	{
+		CSRFToken::validate();
+
 		$this->data = $this->input->getVar('classes');
 	}
 

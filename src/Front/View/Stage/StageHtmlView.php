@@ -36,7 +36,8 @@ class StageHtmlView extends AbstractFrontHtmlView
 		$data->item  = $this->model->getItem();
 		$data->plans = $this->model->getPlans();
 
-		if ($data->state < 1 && !User::get()->isAdmin())
+		// Access
+		if ($data->item->state < 1 && !User::get()->isAdmin())
 		{
 			throw new \Exception('找不到頁面', 404);
 		}

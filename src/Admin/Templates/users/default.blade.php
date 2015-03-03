@@ -17,15 +17,15 @@
     <tr>
         <th width="1%">#</th>
         <th width="1%">ID</th>
-        <th width="80">Name</th>
-        <th>Username</th>
+        <th width="80">名字</th>
+        <th>帳號</th>
         {{--<th width="20%">Email</th>--}}
-        <th width="12%">Phone</th>
-        <th>Org</th>
-        <th>State</th>
-        <th width="10%">Registered</th>
-        <th width="10%">Last Login</th>
-        <th width="1%">Del</th>
+        <th width="12%">電話</th>
+        <th>組織</th>
+        <th>狀態</th>
+        <th width="10%">註冊日</th>
+        <th width="10%">最後登入</th>
+        <th width="1%">刪除</th>
     </tr>
     </thead>
     <tbody>

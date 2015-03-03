@@ -61,7 +61,7 @@ class CourseModel extends DatabaseModel
 			return new DataSet;
 		}
 
-		$stages = (new StageMapper)->find(['state >= 1', 'course_id' => $courseId, sprintf('end > "%s"', gmdate('Y-m-d H:i:s'))], 'start asc');
+		$stages = (new StageMapper)->find(['state >= 1', 'course_id' => $courseId, sprintf('start > "%s"', gmdate('Y-m-d H:i:s'))], 'start asc');
 
 		$planMapper     = new DataMapper(Table::PLANS);
 		$classMapper    = new DataMapper(Table::CLASSES);

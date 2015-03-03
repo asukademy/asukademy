@@ -11,6 +11,7 @@ namespace Front\View\Order;
 use Front\View\AbstractFrontHtmlView;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Database\Schema\Column;
+use Windwalker\Ioc;
 
 /**
  * The OrderHtmlView class.
@@ -24,7 +25,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 	 *
 	 * @param \Windwalker\Data\Data $data
 	 *
-	 * @return  void
+	 * @throws \Exception
 	 */
 	protected function prepareData($data)
 	{
@@ -33,5 +34,13 @@ class OrderHtmlView extends AbstractFrontHtmlView
 		$data->plan = $this->model->getPlan();
 		$data->form = $this->model->getForm();
 		$data->user = User::get();
+
+		$start = new \DateTime($data->plan->stage->start);
+		$now = new \DateTime;
+
+		if ($now > $start)
+		{
+			throw new \Exception('課程已開始', 404);
+		}
 	}
 }

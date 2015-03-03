@@ -33,17 +33,17 @@ class StageFieldDefinition implements FieldDefinitionInterface
 	public function define(Form $form)
 	{
 
-		$form->addField(new Field\TextField('id', 'Id'))
+		$form->addField(new Field\TextField('id', 'ID'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('readonly', true);
 
-		$form->addField(new Field\TextField('course_id', 'Course_id'))
+		$form->addField(new Field\TextField('course_id', '課程'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('readonly', true);
 
-		$form->addField(new Field\TextField('title', 'Title'))
+		$form->addField(new Field\TextField('title', '標題'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
@@ -53,13 +53,13 @@ class StageFieldDefinition implements FieldDefinitionInterface
 //			->set('labelClass', '')
 //			->set('default', null);
 
-		$form->addField(new Field\TextareaField('description', 'Description'))
+		$form->addField(new Field\TextareaField('description', '說明'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('rows', 7)
 			->set('default', null);
 
-		$form->addField(new ItemlistField('tutors', 'Tutors'), 'basic')
+		$form->addField(new ItemlistField('tutors', '講師'), 'basic')
 			->set('table', Table::TUTORS)
 			->set('title_field', 'name')
 			->set('multiple', 1)
@@ -67,38 +67,38 @@ class StageFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new ItemlistField('position_id', 'Position'), 'info')
+		$form->addField(new ItemlistField('position_id', '場地'), 'info')
 			->set('table', Table::POSITIONS)
 			->set('class', '')
 			->set('labelClass', '')
 			->set('ordering', 'title')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('quota', 'Quota'), 'info')
+		$form->addField(new Field\TextField('quota', '人數限制'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('less', 'Less'), 'info')
+		$form->addField(new Field\TextField('less', '最少人數'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\RadioField('state', 'State'))
+		$form->addField(new Field\RadioField('state', '狀態'))
 			->addOption(new Option('Yes', 1))
 			->addOption(new Option('No', 0))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', 1);
 
-		$form->addField(new DatetimeField('start', 'Start'))
+		$form->addField(new DatetimeField('start', '開始時間'))
 			->required()
 			->set('class', '')
 			->set('format', 'YYYY-MM-DD hh:mm')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new DatetimeField('end', 'End'))
+		$form->addField(new DatetimeField('end', '結束時間'))
 			->set('class', '')
 			->set('format', 'YYYY-MM-DD hh:mm')
 			->set('labelClass', '')

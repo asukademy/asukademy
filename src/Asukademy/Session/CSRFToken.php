@@ -75,11 +75,11 @@ class CSRFToken
 	 *
 	 * @return  string
 	 */
-	public function getToken($forceNew = false)
+	public static function getToken($forceNew = false)
 	{
 		$session = Ioc::getSession();
 
-		$token = $session->get('session.token');
+		$token = $session->get('form.token');
 
 		// Create a token
 		if ($token === null || $forceNew)

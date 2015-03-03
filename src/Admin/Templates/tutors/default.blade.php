@@ -17,9 +17,9 @@
         <tr>
             <th width="1%">#</th>
             <th width="1%">ID</th>
-            <th width="80">Image</th>
-            <th width="150">Name</th>
-            <th>Nick</th>
+            <th width="80">圖片</th>
+            <th width="150">名稱</th>
+            <th>匿稱</th>
         </tr>
         </thead>
         <tbody>

@@ -30,50 +30,50 @@ class PositionFieldDefinition implements FieldDefinitionInterface
 	public function define(Form $form)
 	{
 
-		$form->addField(new Field\TextField('id', 'Id'))
+		$form->addField(new Field\TextField('id', 'ID'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('readonly', true);
 
-		$form->addField(new Field\TextField('title', 'Title'))
+		$form->addField(new Field\TextField('title', '標題'))
 			->required()
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('url', 'URL'))
+		$form->addField(new Field\TextField('url', '網站'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('address', 'Address'))
+		$form->addField(new Field\TextField('address', '地址'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('map', 'Map'))
+//		$form->addField(new Field\TextField('map', '地圖url'))
+//			->set('class', '')
+//			->set('labelClass', '')
+//			->set('default', null);
+
+		$form->addField(new Field\TextField('image', '圖片'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('image', 'Image'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('description', 'Description'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('rows', 7)
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('note', 'Note'))
+		$form->addField(new Field\TextareaField('description', '說明'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('rows', 7)
 			->set('default', null);
 
-		$form->addField(new Field\RadioField('state', 'State'))
+		$form->addField(new Field\TextareaField('note', '備註'))
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
+			->set('default', null);
+
+		$form->addField(new Field\RadioField('state', '狀態'))
 			->addOption(new Option('Yes', 1))
 			->addOption(new Option('No', 0))
 			->set('class', '')

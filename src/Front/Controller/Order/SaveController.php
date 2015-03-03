@@ -86,6 +86,14 @@ class SaveController extends Controller
 		$this->model['item.id'] = $this->plan_id;
 
 		$this->plan  = $this->model->getPlan();
+
+		$start = new \DateTime($this->plan->stage->start);
+		$now = new \DateTime;
+
+		if ($now > $start)
+		{
+			throw new \Exception('課程已開始', 404);
+		}
 	}
 
 	/**

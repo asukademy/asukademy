@@ -15,10 +15,10 @@
     <tr>
         <th width="1%">#</th>
         <th width="1%">ID</th>
-        <th width="80">Image</th>
-        <th>Title</th>
-        <th>Address</th>
-        <th>State</th>
+        <th width="80">圖片</th>
+        <th>標題</th>
+        <th>地址</th>
+        <th>狀態</th>
     </tr>
     </thead>
     <tbody>

@@ -34,30 +34,30 @@ class CategoryFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('readonly', true);
 
-		$form->addField(new Field\TextField('title', 'Title'))
+		$form->addField(new Field\TextField('title', '標題'))
 			->required()
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('alias', 'Alias'))
+		$form->addField(new Field\TextField('alias', '別名'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('eng_title', 'Eng Title'))
+		$form->addField(new Field\TextField('eng_title', '英文標題'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\RadioField('state', 'State'))
+		$form->addField(new Field\RadioField('state', '狀態'))
 			->addOption(new Option('Yes', 1))
 			->addOption(new Option('No', 0))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', 1);
 
-		$form->addField(new Field\TextField('ordering', 'Ordering'))
+		$form->addField(new Field\TextField('ordering', '排序'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);

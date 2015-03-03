@@ -17,10 +17,10 @@
         <tr>
             <th width="1%">#</th>
             <th width="1%">ID</th>
-            <th>Title</th>
-            <th>English</th>
-            <th width="10%">Ordering</th>
-            <th>State</th>
+            <th>標題</th>
+            <th>英文</th>
+            <th width="10%">排序</th>
+            <th>狀態</th>
         </tr>
         </thead>
         <tbody>

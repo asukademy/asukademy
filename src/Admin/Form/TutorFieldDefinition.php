@@ -28,35 +28,35 @@ class TutorFieldDefinition implements FieldDefinitionInterface
 	 */
 	public function define(Form $form)
 	{
-		$form->addField(new Field\TextField('id', 'Id'))
+		$form->addField(new Field\TextField('id', 'ID'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('readonly', true);
 
-		$form->addField(new Field\TextField('name', 'Name'))
+		$form->addField(new Field\TextField('name', '名稱'))
 			->required()
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('nick', 'Nick'))
+		$form->addField(new Field\TextField('nick', '匿稱'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextareaField('description', 'Description'))
-			->set('class', '')
-			->set('labelClass', '')
-			->set('rows', 7)
-			->set('default', null);
-
-		$form->addField(new Field\TextareaField('experience', 'Experience'))
+		$form->addField(new Field\TextareaField('description', '介紹'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('rows', 7)
 			->set('default', null);
 
-		$form->addField(new Field\TextField('image', 'Image'))
+		$form->addField(new Field\TextareaField('experience', '經歷'))
+			->set('class', '')
+			->set('labelClass', '')
+			->set('rows', 7)
+			->set('default', null);
+
+		$form->addField(new Field\TextField('image', '圖片'))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);

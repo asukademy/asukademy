@@ -16,11 +16,11 @@
         <tr>
             <th width="1%">#</th>
             <th width="1%">ID</th>
-            <th>Category</th>
-            <th>Title</th>
-            <th width="10%">Ordering</th>
-            <th>State</th>
-            <th width="1%">Del</th>
+            <th>分類</th>
+            <th>標題</th>
+            <th width="10%">排序</th>
+            <th>狀態</th>
+            <th width="1%">刪除</th>
         </tr>
         </thead>
         <tbody>

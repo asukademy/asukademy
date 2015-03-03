@@ -35,41 +35,41 @@ class UserFieldDefinition implements FieldDefinitionInterface
 		$form->addField(new TextField('id', 'ID'))
 			->set('readonly', true);
 
-		$form->addField(new TextField('name', 'Name'))
+		$form->addField(new TextField('name', '名稱'))
 			->required();
 
-		$form->addField(new TextField('username', 'Userame'))
+		$form->addField(new TextField('username', '帳號'))
 			->required();
 
-		$form->addField(new PasswordField('password', 'Password'));
+		$form->addField(new PasswordField('password', '密碼'));
 
-		$form->addField(new PasswordField('password2', 'Password2'));
+		$form->addField(new PasswordField('password2', '再次輸入密碼'));
 
 		$form->addField(new TextField('email', 'Email'))
 			->required();
 
-		$form->addField(new TextField('nick', 'Nick Name'));
+		$form->addField(new TextField('nick', '匿稱'));
 
-		$form->addField(new TextField('mobile', 'Mobile'));
+		$form->addField(new TextField('mobile', '手機'));
 
-		$form->addField(new TextField('phone', 'Phone'));
+		$form->addField(new TextField('phone', '電話'));
 
-		$form->addField(new TextField('address', 'Address'));
+		$form->addField(new TextField('address', '地址'));
 
-		$form->addField(new TextField('organization', 'Organization'));
+		$form->addField(new TextField('organization', '組織'));
 
-		$form->addField(new TextField('title', 'Title'));
+		$form->addField(new TextField('title', '職稱'));
 
 		$form->addField(new RadioField('group', '權限'))
 			->addOption(new Option('一般會員', 0))
 			->addOption(new Option('管理員', 1))
 			->set('default', 0);
 
-		$form->addField(new RadioField('state', 'State'))
+		$form->addField(new RadioField('state', '狀態'))
 			->addOption(new Option('Published', 1))
 			->addOption(new Option('Closed', 0))
 			->set('default', 1);
 
-		$form->addField(new TextField('activation', 'Activation'));
+		$form->addField(new TextField('activation', '驗證碼'));
 	}
 }

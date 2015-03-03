@@ -118,11 +118,7 @@ class SaveController extends Controller
 	 */
 	protected function mail($user = null)
 	{
-		$view = new MailHtmlView;
-		$view->setPackage($this->package);
-		$view['user'] = $user;
-
-		$emailBody = $view->setLayout('mail.activation')->render();
+		$emailBody = Mailer::render('mail.activation', ['user' => $user], $this->package);
 
 		$message = Mailer::newMessage()
 			->setSubject('歡迎加入飛鳥學院，請由此驗證 Email')

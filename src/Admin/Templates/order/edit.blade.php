@@ -53,4 +53,13 @@
             </fieldset>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @if ($item->attachment)
+                <h2>附件</h2>
+                <img src="{{{ $item->attachment }}}" alt="Attachment" style="max-width: 100%;" />
+            @endif
+        </div>
+    </div>
 @stop

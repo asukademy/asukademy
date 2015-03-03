@@ -23,6 +23,19 @@
         <div class="uk-form uk-form-horizontal">
             {{ \Front\Form\UikitFormRenderer::render($form->getFields(), '', 'uk-width-1-1'); }}
 
+            @if ($plan->require_validate)
+            <div class="uk-form-row">
+                <label for="upload" class="uk-form-label">上傳附件</label>
+
+                <div class=" uk-form-controls">
+                    <input id="upload" type="file" class="btn" name="upload" value="">
+                </div>
+                <div class="uk-alert">
+                    本方案需要預先審核，請上傳相關文件影本 (JPG or PNG)
+                </div>
+            </div>
+            @endif
+
             <div class="uk-form-row">
                 <label for="save-to-profile" class="uk-form-label">將這次填寫的內容儲存起來下次使用</label>
 

@@ -11,6 +11,8 @@ namespace Admin\Controller\Order;
 use Admin\Helper\OrderHelper;
 use Admin\Model\CourseModel;
 use Admin\Model\OrderModel;
+use Asukademy\Mail\Mailer;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
@@ -156,6 +158,21 @@ class StateController extends Controller
 			$model = $this->model;
 
 			$model->reduceQuantity();
+		}
+
+		$config = Ioc::getConfig();
+		$item = $this->model->getItem($data->id);
+
+		$user = User::get($item->user_id);
+
+		// Pending to Wait Pay
+		if ($state == OrderHelper::STATE_WAIT_PAY && $previousState == OrderHelper::STATE_PENDING)
+		{
+			$subject = sprintf('[飛鳥學院] 報名審核通過 - 課程： %s - %s (%s)', $item->course->title, $item->stage->title, $item->plan->title);
+			$from = $config['mail.from'];
+			$to = [$user->email, $item->email];
+
+			Mailer::quickSend($subject, $from, $to, Mailer::render('mail.confirmed', ['user' => $user, 'item' => $item], $this->package));
 		}
 	}
 

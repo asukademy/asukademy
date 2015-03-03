@@ -8,11 +8,15 @@
 
 namespace Asukademy\Mail;
 
+use Asukademy\View\Mail\MailHtmlView;
 use SendGrid\Email;
+use Windwalker\Core\Package\PackageHelper;
 use Windwalker\Ioc;
 
 /**
  * The Mailer class.
+ *
+ * @see  https://github.com/sendgrid/sendgrid-php#sendgrid-php
  * 
  * @since  {DEPLOY_VERSION}
  */
@@ -22,6 +26,8 @@ class Mailer
 	 * send
 	 *
 	 * @param Email $message
+	 *
+	 * @see  https://github.com/sendgrid/sendgrid-php#sendgrid-php
 	 *
 	 * @return  boolean
 	 */
@@ -34,18 +40,21 @@ class Mailer
 	 * quickSend
 	 *
 	 * @param string $subject
-	 * @param string $body
 	 * @param mixed  $from
 	 * @param mixed  $to
+	 * @param string $body
 	 *
-	 * @return  bool
+	 * @return bool
+	 * @see  https://github.com/sendgrid/sendgrid-php#sendgrid-php
+	 *
 	 */
-	public static function quickSend($subject, $body, $from, $to)
+	public static function quickSend($subject, $from, $to, $body)
 	{
 		$message = static::newMessage()
 			->setSubject($subject)
 			->setFrom($from)
-			->setTos($to)
+			->setFromName('Asukademy 飛鳥學院')
+			->setTos((array) $to)
 			->setHtml($body);
 
 		return static::send($message);
@@ -54,10 +63,34 @@ class Mailer
 	/**
 	 * newMessage
 	 *
+	 * @see  https://github.com/sendgrid/sendgrid-php#sendgrid-php
+	 *
 	 * @return  Email
 	 */
 	public static function newMessage()
 	{
 		return new Email;
+	}
+
+	/**
+	 * render
+	 *
+	 * @param string $tmpl
+	 * @param array  $data
+	 * @param string $package
+	 *
+	 * @return  string
+	 */
+	public static function render($tmpl, $data = array(), $package = 'asukademy')
+	{
+		if (is_string($package))
+		{
+			$package = PackageHelper::getPackage($package);
+		}
+
+		$view = new MailHtmlView($data);
+		$view->setPackage($package);
+
+		return $view->setLayout($tmpl)->render();
 	}
 }

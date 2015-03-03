@@ -8,7 +8,8 @@
 
 namespace Front\Controller\Order;
 
-use Admin\Helper\TransactionHelper;
+use Admin\S3\S3Helper;
+use Asukademy\Mail\Mailer;
 use DateTime;
 use Front\Model\OrderModel;
 use Windwalker\Core\Authenticate\User;
@@ -17,7 +18,11 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
+use Windwalker\Filesystem\File;
+use Windwalker\Filesystem\Folder;
 use Windwalker\Ioc;
+use Windwalker\Table\Table;
 use Windwalker\Validator\Rule\EmailValidator;
 
 /**
@@ -121,6 +126,37 @@ class SaveController extends Controller
 
 				$session->set('user', User::get($user->id));
 			}
+
+			// Upload Attachment
+			$upload = $this->input->files->get('upload');
+
+			if ($upload && $upload['size'] > 0)
+			{
+				if ($upload['size'] > 5000000)
+				{
+					throw new ValidFailException('請勿大於 5 MB');
+				}
+
+				$tmp = WINDWALKER_TEMP . '/upload/' . md5(uniqid()) . '.' . File::getExtension($upload['name']);
+
+				Folder::create(dirname($tmp));
+
+				File::upload($upload['tmp_name'], $tmp);
+
+				$src = new \SplFileInfo($tmp);
+				$dest = new \SplFileInfo('order/attachment/' . md5('AsukademyOrder' . $this->model['item.id']) . '.' . File::getExtension($upload['name']));
+
+				if (!S3Helper::put($src, $dest))
+				{
+					throw new ValidFailException('上傳失敗');
+				}
+
+				$url = 'https://asukademy.s3.amazonaws.com/' . $dest->getPathname();
+
+				(new DataMapper(Table::ORDERS))->updateOne(['id' => $this->model['item.id'], 'attachment' => $url]);
+			}
+
+			$this->mail($this->model->getItem());
 		}
 		catch (ValidFailException $e)
 		{
@@ -183,6 +219,33 @@ class SaveController extends Controller
 		if (!$emailValidator->validate($user->email))
 		{
 			throw new ValidFailException('Email 格式不正確');
+		}
+	}
+
+	/**
+	 * mail
+	 *
+	 * @param Data $data
+	 *
+	 * @return  void
+	 */
+	protected function mail($data)
+	{
+		$config = Ioc::getConfig();
+
+		$user = User::get();
+
+		if ($this->plan->require_validate)
+		{
+			$subject = '[飛鳥學院] 您的報名正在等待審核 - 課程：' . $this->plan->course->title . ' - ' . $this->plan->stage->title;
+			$body = Mailer::render('mail.wait-confirm', ['item' => $data, 'user' => $user]);
+
+			Mailer::quickSend($subject, $config['mail.from'], [$data->email, $user->email], $body);
+
+			$subject = '[飛鳥學院] ' . $data->name . ' 的報名資料需要審核 - 課程：' . $this->plan->course->title . ' - ' . $this->plan->stage->title;
+			$body = Mailer::render('mail.wait-confirm-admin', ['item' => $data, 'user' => $user]);
+
+			Mailer::quickSend($subject, $config['mail.from'], $config['mail.admin'], $body);
 		}
 	}
 }

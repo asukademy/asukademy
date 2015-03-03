@@ -150,23 +150,34 @@
                 </div>
             </div>
 
-            @if ($item->payment && $item->state == 1)
-                <h2 id="payment">付款詳細資訊</h2>
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-2">
+                    @if ($item->payment && $item->state == 1)
+                        <h2 id="payment">付款詳細資訊</h2>
 
-                <?php
-                $params = ['table_class' => 'uk-table', 'title_width' => '200'];
-                $params['print_barcode_url'] = $item->payment == \Windwalker\Pay2Go\AbstractPayment::BARCODE
-                    ? \Windwalker\Core\Router\Router::buildHtml('user:barcode', ['id' => $item->id])
-                    : null;
-                ?>
-                {{ $feedback->render($params) }}
-            @endif
+                        <?php
+                        $params = ['table_class' => 'uk-table', 'title_width' => '200'];
+                        $params['print_barcode_url'] = $item->payment == \Windwalker\Pay2Go\AbstractPayment::BARCODE
+                                ? \Windwalker\Core\Router\Router::buildHtml('user:barcode', ['id' => $item->id])
+                                : null;
+                        ?>
+                        {{ $feedback->render($params) }}
+                    @endif
 
-            @if ($item->payment && $item->state >= 2)
-                <h2 id="payment">付款詳細資訊</h2>
+                    @if ($item->payment && $item->state >= 2)
+                        <h2 id="payment">付款詳細資訊</h2>
 
-                {{ $payment->render(['table_class' => 'uk-table', 'title_width' => '200']) }}
-            @endif
+                        {{ $payment->render(['table_class' => 'uk-table', 'title_width' => '200']) }}
+                    @endif
+                </div>
+
+                <div class="uk-width-medium-1-2">
+                    @if ($item->attachment)
+                        <h2>附件</h2>
+                        <img src="{{{ $item->attachment }}}" alt="Attachment" style="max-width: 100%;" />
+                    @endif
+                </div>
+            </div>
         </article>
 
     </div>

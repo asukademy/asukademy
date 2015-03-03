@@ -27,7 +27,8 @@
 		"windwalker/pay2go": "1.*",
 		"joomla/image": "~1.0@stable",
 
-        "monolog/monolog": "1.*@stable"
+        "monolog/monolog": "1.*@stable",
+        "tpyo/amazon-s3-php-class" : "*"
 	},
 	"require-dev": {
 		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"

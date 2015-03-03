@@ -22,3 +22,5 @@ pay2go:
 mail:
     admin:
         - service@asukademy.com
+        # - simon@asukademy.com
+    from: service@asukademy.com

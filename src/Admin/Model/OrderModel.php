@@ -9,6 +9,8 @@
 namespace Admin\Model;
 
 use Admin\Form\OrderFieldDefinition;
+use Admin\Helper\OrderHelper;
+use Asukademy\Mail\Mailer;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Core\Model\Exception\ValidFailException;
@@ -89,6 +91,7 @@ class OrderModel extends DatabaseModel
 			$item->plan = (new DataMapper(Table::PLANS))->findOne($item->plan_id);
 			$item->stage = (new DataMapper(Table::STAGES))->findOne($item->stage_id);
 			$item->course = (new DataMapper(Table::COURSES))->findOne($item->stage->course_id);
+			$item->category = (new DataMapper(Table::CATEGORIES))->findOne($item->course->catid);
 
 			return $item;
 		});
@@ -161,15 +164,52 @@ class OrderModel extends DatabaseModel
 	public function update($data)
 	{
 		$record = new Record(Table::ORDERS);
+		$previous = new Record(Table::ORDERS);
 
-		$record->load($data->id)
-			->bind($data)
+		$previous->load($data->id);
+		$record->load($data->id);
+
+		$record->bind($data)
 			->check()
 			->store(true);
 
 		$this['item.id'] = $record->id;
 
+		$this->mail($this->getItem(), $previous);
+
 		return true;
+	}
+
+	/**
+	 * mail
+	 *
+	 * @param Data   $item
+	 * @param Record $previous
+	 *
+	 * @return  void
+	 */
+	protected function mail($item, $previous)
+	{
+		$config = Ioc::getConfig();
+		$user = User::get($item->user_id);
+
+		if ($item->state == OrderHelper::STATE_PAID_SUCCESS && $previous->state != OrderHelper::STATE_PAID_SUCCESS)
+		{
+			$subject = sprintf('[飛鳥學院] 報名成功 - 課程： %s - %s (%s)', $item->course->title, $item->stage->title, $item->plan->title);
+			$from = $config['mail.from'];
+			$to = [$user->email, $item->email];
+
+			Mailer::quickSend($subject, $from, $to, Mailer::render('mail.success', ['user' => $user, 'item' => $item], 'admin'));
+		}
+
+		if ($item->state == OrderHelper::STATE_CANCELED && $previous->state != OrderHelper::STATE_CANCELED)
+		{
+			$subject = sprintf('[飛鳥學院] 報名已取消 - 課程： %s - %s (%s)', $item->course->title, $item->stage->title, $item->plan->title);
+			$from = $config['mail.from'];
+			$to = [$user->email, $item->email];
+
+			Mailer::quickSend($subject, $from, $to, Mailer::render('mail.canceled', ['user' => $user, 'item' => $item], 'admin'));
+		}
 	}
 
 	/**

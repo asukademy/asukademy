@@ -3,7 +3,7 @@
 @extends('layouts.global.manager')
 
 @section('page_title')
-報名課程: <br />{{{ $plan->course->title }}}@stop
+報名課程: {{{ $plan->course->title }}}@stop
 
 @section('left')
     <p>

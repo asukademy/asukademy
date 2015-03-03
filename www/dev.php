@@ -29,8 +29,6 @@ $allowRemotes = array(
 
 $allowRemotes = array_merge($allowRemotes, $app->get('system.allow_ips'));
 
-show($allowRemotes);
-
 if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
 	|| !(in_array(@$_SERVER['REMOTE_ADDR'], $allowRemotes)))
 {

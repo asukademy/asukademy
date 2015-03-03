@@ -154,6 +154,8 @@ class SaveController extends Controller
 				$url = 'https://asukademy.s3.amazonaws.com/' . $dest->getPathname();
 
 				(new DataMapper(Table::ORDERS))->updateOne(['id' => $this->model['item.id'], 'attachment' => $url]);
+
+				File::delete($src->getPathname());
 			}
 
 			$this->mail($this->model->getItem());

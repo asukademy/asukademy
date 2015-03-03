@@ -68,6 +68,11 @@ class StateController extends Controller
 			// -----------------------------------------
 			$data['id'] = $id;
 			$data['state'] = $state;
+
+			if ($state == OrderHelper::STATE_WAIT_PAY && 0 == (int) $previous->price)
+			{
+				$data['state'] = OrderHelper::STATE_PAID_SUCCESS;
+			}
 			// -----------------------------------------
 
 			$model->update($data);

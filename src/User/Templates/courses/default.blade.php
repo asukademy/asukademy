@@ -65,7 +65,7 @@
                         <span data-uk-tooltip title="{{{ $stateTitle }}}" class="uk-icon-check uk-text-success"></span>
                     @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_PROCESSING)
                         <span data-uk-tooltip title="{{{ $stateTitle }}}" class="uk-icon-group uk-text-primary"></span>
-                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_PROCESSING)
+                    @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_END)
                         <span data-uk-tooltip title="{{{ $stateTitle }}}" class="uk-icon-graduation-cap"></span>
                     @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED)
                         <span data-uk-tooltip title="{{{ $stateTitle }}}" class="uk-icon-close uk-text-danger"></span>

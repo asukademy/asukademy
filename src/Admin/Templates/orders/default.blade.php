@@ -16,15 +16,16 @@
     <tr>
         <th width="1%">#</th>
         <th width="1%">ID</th>
-        <th width="1%">EDIT</th>
-        <th>Course</th>
-        <th>Stage</th>
-        <th>Plan</th>
-        <th>Price</th>
-        <th>Date</th>
-        <th>Name</th>
-        <th>User</th>
-        <th width="125">State</th>
+        <th width="1%">編輯</th>
+        <th>課程</th>
+        <th>梯次</th>
+        <th>方案</th>
+        <th>價格</th>
+        <th width="92px">上課日</th>
+        <th>報名者</th>
+        <th>會員</th>
+        <th>狀態</th>
+        <th width="125">更改狀態</th>
     </tr>
     </thead>
     <tbody>
@@ -40,10 +41,32 @@
             <td>{{{ $item->course_title }}}</td>
             <td>{{{ $item->stage_title }}}</td>
             <td>{{{ $item->plan_title }}}</td>
-            <td>{{{ number_format($item->price, 0) }}}</td>
+            <td>
+                @if ((int) $item->price)
+                    {{{ number_format($item->price, 0) }}}
+                @else
+                    免費
+                @endif
+            </td>
             <td>{{{ \Asukademy\Helper\DateTimeHelper::format($item->stage_start, 'Y-m-d', true) }}}</td>
             <td>{{{ $item->name }}}</td>
             <td>{{{ $item->user_name }}}</td>
+            <td class="text-center">
+                <?php $stateTitle = \Admin\Helper\OrderHelper::getStateTitle($item->state); ?>
+                @if ($item->state == \Admin\Helper\OrderHelper::STATE_PENDING)
+                    <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-time text-warning"></span>
+                @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_WAIT_PAY)
+                    <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-credit-card text-warning"></span>
+                @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_PAID_SUCCESS)
+                    <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-ok text-success"></span>
+                @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_PROCESSING)
+                    <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-forward text-primary"></span>
+                @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_END)
+                    <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-minus"></span>
+                @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED)
+                    <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-remove text-danger"></span>
+                @endif
+            </td>
             <td>
                 @if ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED || $item->state >= \Admin\Helper\OrderHelper::STATE_PROCESSING)
                     {{{ \Admin\Helper\OrderHelper::getStateTitle($item->state) }}}
@@ -82,4 +105,9 @@
     </tr>
     </tfoot>
 </table>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @stop

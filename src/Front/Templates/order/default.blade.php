@@ -56,7 +56,11 @@
 
         <h3>價格</h3>
         <p>
-            {{{ number_format($plan->price, 0) }}}
+            @if ((int) $plan->price)
+                ${{{ number_format($plan->price, 0) }}}
+            @else
+                免費
+            @endif
         </p>
 
     </div>

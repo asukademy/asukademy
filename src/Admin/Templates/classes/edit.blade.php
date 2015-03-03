@@ -3,7 +3,7 @@
 @extends('admin._global.layout')
 
 @section('page_title')
-    票價方案@stop
+課程內容@stop
 
 @section('toolbar')
     {{ \Riki\Toolbar\Toolbar::save('admin:classes', ['course_id' => $course_id, 'stage_id' => $stage_id], 'btn-lg') }}

@@ -8,6 +8,7 @@
 
 namespace Front\Controller\Order;
 
+use Admin\Helper\OrderHelper;
 use Admin\S3\S3Helper;
 use Asukademy\Mail\Mailer;
 use DateTime;
@@ -110,10 +111,16 @@ class SaveController extends Controller
 			$data->stage_id   = $this->plan->stage->id;
 			$data->price      = $this->plan->price;
 			$data->created    = (new DateTime('now'))->format('Y-m-d H:i:s');
-			$data->state      = $this->plan->require_validate ? 0 : 1;
+			$data->state      = $this->plan->require_validate ? OrderHelper::STATE_PENDING : OrderHelper::STATE_WAIT_PAY;
+
+			if (!$this->plan->require_validate && 0 == (int) $this->plan->price)
+			{
+				$data->state = OrderHelper::STATE_PAID_SUCCESS;
+			}
 
 			$this->model->create($data);
 
+			// Save to profile
 			if ($this->input->get('save_to_profile'))
 			{
 				$user = User::get();
@@ -158,6 +165,7 @@ class SaveController extends Controller
 				File::delete($src->getPathname());
 			}
 
+			// Send mail
 			$this->mail($this->model->getItem());
 		}
 		catch (ValidFailException $e)

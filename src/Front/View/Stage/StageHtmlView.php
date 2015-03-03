@@ -45,10 +45,19 @@ class StageHtmlView extends AbstractFrontHtmlView
 		// Count price
 		$data->item->price_min = PHP_INT_MAX;
 
+		$data->item->all_free = true;
+
 		foreach ($data->plans as $plan)
 		{
 			$plan->people = $plan->total;
 			$plan->attendable = $plan->quota ? $plan->quota > $plan->total : true;
+
+			if (!(int) $plan->price)
+			{
+				$data->item->has_free = true;
+
+				continue;
+			}
 
 			if ($data->item->price_max < $plan->price)
 			{
@@ -59,6 +68,8 @@ class StageHtmlView extends AbstractFrontHtmlView
 			{
 				$data->item->price_min = $plan->price;
 			}
+
+			$data->item->all_free = false;
 		}
 
 		// Count hours

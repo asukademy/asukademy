@@ -34,10 +34,18 @@
     <tr>
         <th>課程費用</th>
         <td>
-            @if (count($plans) == 1)
-                ${{{ number_format($item->price_max, 0) }}}
+            @if ($item->all_free)
+                免費
             @else
-                ${{{ number_format($item->price_min, 0) }}} ~ ${{{ number_format($item->price_max, 0) }}}
+                @if (count($plans) == 1)
+                    ${{{ number_format($item->price_max, 0) }}}
+                @elseif ($item->price_min == $item->price_max)
+                    ${{{ number_format($item->price_max, 0) }}}
+                @else
+                    ${{{ number_format($item->price_min, 0) }}} ~ ${{{ number_format($item->price_max, 0) }}}
+                @endif
+
+                {{{ $item->has_free ? '(含免費方案)' : null }}}
             @endif
         </td>
     </tr>

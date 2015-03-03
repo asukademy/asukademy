@@ -19,3 +19,6 @@ language:
 pay2go:
     test: true
     notify:
+mail:
+    admin:
+        - service@asukademy.com

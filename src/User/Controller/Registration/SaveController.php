@@ -9,6 +9,7 @@
 namespace User\Controller\Registration;
 
 use Asukademy\Mail\Mailer;
+use Asukademy\View\Mail\MailHtmlView;
 use User\Helper\UserHelper;
 use User\Model\RegistrationModel;
 use Windwalker\Core\Authenticate\User;
@@ -117,7 +118,11 @@ class SaveController extends Controller
 	 */
 	protected function mail($user = null)
 	{
-		$emailBody = (new BladeWidget('mail.activation', 'user'))->render(['user' => $user]);
+		$view = new MailHtmlView;
+		$view->setPackage($this->package);
+		$view['user'] = $user;
+
+		$emailBody = $view->setLayout('mail.activation')->render();
 
 		$message = Mailer::newMessage()
 			->setSubject('歡迎加入飛鳥學院，請由此驗證 Email')

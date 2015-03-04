@@ -27,7 +27,7 @@ $allowRemotes = array(
 	'::1',
 );
 
-$allowRemotes = array_merge($allowRemotes, $app->get('system.allow_ips'));
+$allowRemotes = array_merge($allowRemotes, $app->get('system.allow_ips', array()));
 
 if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
 	|| !(in_array(@$_SERVER['REMOTE_ADDR'], $allowRemotes)))

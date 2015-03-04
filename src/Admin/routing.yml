@@ -51,6 +51,14 @@ stage:
         course_id: \d+
         id: \d+
 
+stage_copy:
+    pattern: /stage/(id)
+    controller: Admin\Controller\Stage
+    action:
+        '*': CopyController
+    requirements:
+        id: \d+
+
 # Plan
 plans:
     pattern: /course/(course_id)/stage/(stage_id)/plans

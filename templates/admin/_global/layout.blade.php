@@ -67,6 +67,15 @@ Asset::setIndents("    ");
                     {{ $profiler->render() }}
                 </div>
             </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Queries</h3>
+                </div>
+                <div class="panel-body">
+                    {{ show($_SESSION) }}
+                </div>
+            </div>
         @endif
     </div>
 @stop

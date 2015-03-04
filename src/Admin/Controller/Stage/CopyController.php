@@ -8,19 +8,18 @@
 
 namespace Admin\Controller\Stage;
 
-use Admin\Record\StageRecord;
 use Riki\Controller\AbstractSaveController;
-use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
 use Windwalker\Record\Record;
+use Windwalker\String\String;
 use Windwalker\Table\Table;
 
 /**
- * The DeleteController class.
+ * The CopyController class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class DeleteController extends AbstractSaveController
+class CopyController extends AbstractSaveController
 {
 	/**
 	 * doSave
@@ -31,13 +30,18 @@ class DeleteController extends AbstractSaveController
 	 */
 	protected function doSave(Data $data)
 	{
-		$record = new StageRecord;
+		$record = new Record(Table::STAGES);
 
 		$record->load($data->id);
 
-		$record->delete();
+		$record->id = null;
+		$record->state = 0;
+		$record->title = String::increment($record->title);
 
-		$data->bind($record);
+		$record->check()
+			->store();
+
+		$data->bind($record->toArray());
 	}
 
 	/**

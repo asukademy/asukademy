@@ -15,7 +15,8 @@
         <th>日期</th>
         <th>人數限制</th>
         <th>狀態</th>
-        <th>刪除</th>
+        <th width="5%">複製</th>
+        <th width="5%">刪除</th>
     </tr>
     </thead>
     @forelse($stages as $k => $stage)
@@ -44,8 +45,14 @@
                 @endif
             </td>
             <td>
+                <button type="button" class="btn btn-success"
+                        onclick="RikiForm.post('{{{ $router->buildHtml('stage_copy', ['id' => $stage->id]) }}}');">
+                    <span class="glyphicon glyphicon-duplicate"></span>
+                </button>
+            </td>
+            <td>
                 <button type="button" class="btn btn-default"
-                        onclick="RikiForm.deleteItem('{{{ $router->buildHttp('stage', ['id' => $item->id]) }}}');">
+                        onclick="RikiForm.deleteItem('{{{ $router->buildHtml('stage', ['id' => $stage->id, 'course_id' => $stage->course_id]) }}}');">
                     <span class="glyphicon glyphicon-trash text-danger"></span>
                 </button>
             </td>

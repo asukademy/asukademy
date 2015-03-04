@@ -20,6 +20,8 @@ use Windwalker\Ioc;
  */
 class CSRFToken
 {
+	const TOKEN_KEY = 'form.token';
+
 	/**
 	 * validate
 	 *
@@ -42,7 +44,7 @@ class CSRFToken
 	 */
 	public static function input()
 	{
-		return new HtmlElement('input', null, array('name' => static::getFormToken(true), 'type' => 'hidden', 'value' => 1));
+		return new HtmlElement('input', null, array('name' => static::getFormToken(), 'type' => 'hidden', 'value' => 1));
 	}
 
 	/**
@@ -79,14 +81,14 @@ class CSRFToken
 	{
 		$session = Ioc::getSession();
 
-		$token = $session->get('form.token');
+		$token = $session->get(static::TOKEN_KEY);
 
 		// Create a token
 		if ($token === null || $forceNew)
 		{
 			$token = static::createToken(12);
 
-			$session->set('session.token', $token);
+			$session->set(static::TOKEN_KEY, $token);
 		}
 
 		return $token;

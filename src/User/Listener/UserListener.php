@@ -36,9 +36,7 @@ class UserListener
 		{
 			$session = Ioc::getSession();
 
-			$session->start();
-
-			setcookie(session_name(), $_COOKIE[session_name()], time() + 60 * 60 * 24 * 100, $session->getOption('cookie_path'), $session->getOption('cookie_domain'), true, true);
+			setcookie(session_name(), $_COOKIE[session_name()], time() + 60 * 60 * 24 * 100, $session->getOption('cookie_path'), $session->getOption('cookie_domain'), false, true);
 		}
 	}
 

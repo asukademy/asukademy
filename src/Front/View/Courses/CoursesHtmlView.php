@@ -39,6 +39,7 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 		$data->currentCategory = $this->model->getCategory();
 		$data->cats            = (new DataMapper(Table::CATEGORIES))->findAll();
 		$data->state           = $this->model->getState();
+		$data->total           = $this->model->getTotal();
 
 		// Prepare item data
 		foreach ($data->items as $item)
@@ -83,7 +84,7 @@ class CoursesHtmlView extends AbstractFrontHtmlView
 
 		if ($this->model->get('list.page') > 1)
 		{
-			$data->pageTitle .= ' - 第 ' . $data->pageTitle . ' 頁';
+			$data->pageTitle .= ' - 第 ' . $this->model->get('list.page') . ' 頁';
 		}
 
 		$this->prepareMeta();

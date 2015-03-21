@@ -53,6 +53,10 @@
                 </p>
             @endforelse
 
+            <p class="uk-text-center">
+                共 {{ ceil($total / $state['list.limit']) }} 頁
+            </p>
+
             <div class="uk-margin-large-top">
                 <?php
                 $pagin = $pagination->render(function($queries) use ($state)

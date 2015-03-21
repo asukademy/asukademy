@@ -6,7 +6,7 @@
     <section id="features" class="main-block">
         <div class="uk-container uk-container-center">
             <div class="uk-grid" data-uk-grid-match>
-                <div class="uk-width-medium-1-2 feature-desc">
+                <div class="uk-width-medium-1-2 uk-margin-top uk-margin-bottom feature-desc">
                     <h2>What Is Asukademy</h2>
                     <p>
                         飛鳥，在日文中意味著「安居之地」，意即這個地方，既能如飛鳥般意氣風發、前程萬里，卻又是一個讓人寧靜定居的故鄉。
@@ -17,13 +17,13 @@
                     </p>
                 </div>
 
-                <div class="uk-width-medium-1-4 feature-img">
+                <div class="uk-width-medium-1-4 uk-margin-top uk-margin-bottom feature-img">
                     <a href="{{{ $router->buildHtml('courses') }}}">
                         <img src="{{{ $uri['media.path'] }}}img/home/course-info.jpg" alt="Image" />
                     </a>
                 </div>
 
-                <div class="uk-width-medium-1-4 feature-img">
+                <div class="uk-width-medium-1-4 uk-margin-top uk-margin-bottom feature-img">
                     <a href="{{{ $router->buildHtml('page', ['paths' => 'faq']) }}}">
                         <img src="{{{ $uri['media.path'] }}}img/home/faq.jpg" alt="Image" />
                     </a>

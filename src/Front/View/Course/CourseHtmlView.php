@@ -8,12 +8,16 @@
 
 namespace Front\View\Course;
 
+use Asukademy\Helper\PreviewHelper;
 use Front\View\AbstractFrontHtmlView;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Router\Router;
+use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\DataMapper\RelationDataMapper;
 use Windwalker\Ioc;
 use Windwalker\Table\Table;
+use Windwalker\Uri\Uri;
 
 /**
  * The CourseHtmlView class.
@@ -35,10 +39,7 @@ class CourseHtmlView extends AbstractFrontHtmlView
 
 		$data->item   = $this->model->getItem();
 
-		if ($data->item->isNull())
-		{
-			throw new \Exception('沒有此課程', 404);
-		}
+		$this->checkAccess($data);
 
 		$data->stages = $this->model->getStages($data->item->id);
 		$data->category = (new DataMapper(Table::CATEGORIES))->findOne(['id' => $data->item->catid]);
@@ -94,5 +95,40 @@ class CourseHtmlView extends AbstractFrontHtmlView
 		$config['meta.description'] = $this->data->item->introtext;
 
 		$config['og.image'] = $this->data->item->image;
+	}
+
+	/**
+	 * checkAccess
+	 *
+	 * @param Data $data
+	 *
+	 * @return  void
+	 *
+	 * @throws \Exception
+	 */
+	protected function checkAccess($data)
+	{
+		// Access
+		if ($data->item->state < 1)
+		{
+			if (User::get()->isAdmin() || PreviewHelper::checkStageToken($data->item))
+			{
+				$uri = new Uri(\Riki\Uri\Uri::current());
+				$uri->setVar(PreviewHelper::getStageToken($data->item->id, $data->item->course_id), 1);
+
+				$msg = [
+					'此課程尚未發布，目前是預覽狀態',
+					'分享預覽網址: ' . $uri
+				];
+
+				Ioc::getApplication()
+					->addFlash($msg, 'warning')
+					->set('meta.robots', 'noindex, nofollow');
+			}
+			else
+			{
+				throw new \Exception('找不到頁面', 404);
+			}
+		}
 	}
 }

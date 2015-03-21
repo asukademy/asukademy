@@ -25,7 +25,7 @@ class IntroHelper
 	 */
 	public static function cutParagraphs($text, $paragraphs = 3)
 	{
-		$ps = explode("\n\n", $text);
+		$ps = explode("\n", $text);
 
 		if (count($ps) <= 1)
 		{
@@ -34,6 +34,6 @@ class IntroHelper
 
 		$ps = array_slice($ps, 0, $paragraphs);
 
-		return implode("\n\n", $ps);
+		return implode("\n", $ps);
 	}
 }

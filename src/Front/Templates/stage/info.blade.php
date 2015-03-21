@@ -14,6 +14,14 @@
             {{{ $item->title }}}
         </td>
     </tr>
+    <tr>
+        <th>開課日期</th>
+        <td>
+            {{{ \Asukademy\Helper\DateTimeHelper::format($item->start, \Asukademy\Helper\DateTimeHelper::FORMAT_YMD) }}}
+            ({{{ \Asukademy\Helper\DateTimeHelper::getWeekday($item->start) }}})
+            {{{ \Asukademy\Helper\DateTimeHelper::format($item->start, 'H:i') }}}
+        </td>
+    </tr>
     @if (count($tutors))
     <tr>
         <th>課程講師</th>

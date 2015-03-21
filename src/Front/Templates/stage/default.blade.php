@@ -23,7 +23,7 @@
 
                 <h1 id="intro">課程簡介</h1>
 
-                {{ \Asukademy\Markdown\Markdown::defaultTransform(\Front\Helper\IntroHelper::cutParagraphs($item->course->fulltext, 7)) }}
+                {{ \Asukademy\Markdown\Markdown::defaultTransform(\Front\Helper\IntroHelper::cutParagraphs($item->course->fulltext, 20)) }}
 
                 <p class="uk-text-center">
                     <a class="uk-button uk-button-hero uk-button-primary"

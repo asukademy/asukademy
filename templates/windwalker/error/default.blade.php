@@ -21,6 +21,12 @@
         #footer {
             margin-top: 0;
         }
+
+        @media (max-width: 767px) {
+            #banner .error-code {
+                font-size: 150px;
+            }
+        }
     </style>
     <div class="uk-container uk-container-center">
         <section id="error-section" class="main-block">

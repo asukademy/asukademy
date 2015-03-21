@@ -191,7 +191,7 @@ class SaveController extends Controller
 			throw new ValidFailException(sprintf('第 %s 個課程必須同時有開始與結束時間，或者都留空', $k));
 		}
 
-		if ($data->end && $data->start && strcmp($data->end, $data->start) <= 0)
+		if ($data->end && $data->start && $data->end <= $data->start)
 		{
 			throw new ValidFailException(sprintf('第 %s 個課程的結束時間必須比開始時間晚', $k));
 		}

@@ -94,13 +94,13 @@ class StageFieldDefinition implements FieldDefinitionInterface
 		$form->addField(new DatetimeField('start', '開始時間'))
 			->required()
 			->set('class', '')
-			->set('format', 'YYYY-MM-DD hh:mm')
+			->set('format', 'YYYY-MM-DD HH:mm')
 			->set('labelClass', '')
 			->set('default', null);
 
 		$form->addField(new DatetimeField('end', '結束時間'))
 			->set('class', '')
-			->set('format', 'YYYY-MM-DD hh:mm')
+			->set('format', 'YYYY-MM-DD HH:mm')
 			->set('labelClass', '')
 			->set('default', null);
 

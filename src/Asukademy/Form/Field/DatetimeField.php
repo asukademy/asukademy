@@ -40,7 +40,7 @@ class DatetimeField extends TextField
 	 */
 	public function buildInput($attrs)
 	{
-		$format = $this->get('format', 'YYYY-MM-DD hh:mm:ss');
+		$format = $this->get('format', 'YYYY-MM-DD HH:mm:ss');
 		$input =  parent::buildInput($attrs);
 		$id = $this->getId();
 

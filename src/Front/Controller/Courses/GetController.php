@@ -32,7 +32,7 @@ class GetController extends Controller
 		$model['list.start']    = ($model['list.page'] - 1) * $model['list.limit'];
 		$model['list.search']   = $this->input->getString('q');
 		$model['list.ordering'] = 'category.ordering, course.ordering';
-		$model['list.search']   = $this->input->getString('q');
+		$model['list.search']   = trim($this->input->getString('q'));
 		$model['filter.category_alias'] = urldecode($this->input->getString('category_alias'));
 
 		$view->setModel($model);

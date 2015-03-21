@@ -31,7 +31,7 @@ class GetController extends Controller
 //		$stagesModel = $this->getModel('Stages');
 
 		// Default model
-		$model['item.id'] = ['alias' => $this->input->getUrl('alias')];
+		$model['item.id'] = ['alias' => urldecode($this->input->getUrl('alias'))];
 
 		// Stage model
 //		$stagesModel['course.id'] = $model->getItem()->id;

@@ -62,7 +62,7 @@ class SaveController extends Controller
 
 			$data->alias = OutputFilter::stringURLUnicodeSlug($data->alias);
 
-			if (!$data->id)
+			if (!$data->id || !$data->ordering)
 			{
 				$data->ordering = (new CourseModel)->getMaxOrdering(['catid' => $data->catid]) + 1;
 			}

@@ -11,7 +11,7 @@
         <h2 class="sub-title">@yield('sub_title')</h2>
 
         <div class="search-bar">
-            <form class="uk-form" action="{{{ $uri['current'] }}}" method="get">
+            <form class="uk-form" action="{{{ $router->buildHtml('courses') }}}" method="get">
 
                 <input type="text" name="q" class="uk-form-large uk-form-width-large uk-text-center"
                         value="{{{ $state['list.search'] }}}" placeholder="搜尋課程" />
@@ -54,7 +54,15 @@
             @endforelse
 
             <div class="uk-margin-large-top">
-                {{ $pagination->render('front:courses', 'widget.pagination') }}
+                <?php
+                $pagin = $pagination->render(function($queries) use ($state)
+                {
+                    $queries['q'] = $state['list.search'];
+
+                    return \Windwalker\Core\Router\Router::buildHtml('front:courses', $queries);
+                }, 'widget.pagination');
+                ?>
+                {{ $pagin }}
             </div>
         </article>
     </div>

@@ -84,9 +84,9 @@ class StageFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\RadioField('state', '狀態'))
-			->addOption(new Option('Yes', 1))
-			->addOption(new Option('No', 0))
+		$form->addField(new Field\ListField('state', '狀態'))
+			->addOption(new Option('開啟', 1))
+			->addOption(new Option('關閉', 0))
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', 1);

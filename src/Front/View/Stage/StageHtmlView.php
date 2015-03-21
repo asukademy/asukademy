@@ -48,6 +48,7 @@ class StageHtmlView extends AbstractFrontHtmlView
 
 		foreach ($data->plans as $plan)
 		{
+			// Quota
 			$plan->people = $plan->total;
 			$plan->attendable = $plan->quota ? $plan->quota > $plan->total : true;
 
@@ -58,6 +59,7 @@ class StageHtmlView extends AbstractFrontHtmlView
 				continue;
 			}
 
+			// Price
 			if ($data->item->price_max < $plan->price)
 			{
 				$data->item->price_max = $plan->price;
@@ -69,6 +71,22 @@ class StageHtmlView extends AbstractFrontHtmlView
 			}
 
 			$data->item->all_free = false;
+
+			// Time
+			$now = new \DateTime;
+
+			if ($plan->start && $plan->end)
+			{
+				$plan->attendable = ($now >= new \DateTime($plan->start) && $now <= new \DateTime($plan->end));
+			}
+			elseif ($plan->start)
+			{
+				$plan->attendable = ($now >= new \DateTime($plan->start));
+			}
+			elseif ($plan->end)
+			{
+				$plan->attendable = ($now <= new \DateTime($plan->end));
+			}
 		}
 
 		// Count hours

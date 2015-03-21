@@ -86,14 +86,6 @@ class SaveController extends Controller
 		$this->model['item.id'] = $this->plan_id;
 
 		$this->plan  = $this->model->getPlan();
-
-		$start = new \DateTime($this->plan->stage->start);
-		$now = new \DateTime;
-
-		if ($now > $start)
-		{
-			throw new \Exception('課程已開始', 404);
-		}
 	}
 
 	/**
@@ -224,6 +216,38 @@ class SaveController extends Controller
 	private function validate($data)
 	{
 		$user = $data;
+
+		$now = new \DateTime;
+		$start = new \DateTime($this->plan->stage->start);
+
+		if ($now > $start)
+		{
+			throw new ValidFailException('課程已開始', 404);
+		}
+
+		// Check attendable
+		if ($this->plan->start && $this->plan->end)
+		{
+			$this->plan->attendable = ($now >= new \DateTime($this->plan->start) && $now <= new \DateTime($this->plan->end));
+		}
+		elseif ($this->plan->start)
+		{
+			$this->plan->attendable = ($now >= new \DateTime($this->plan->start));
+		}
+		elseif ($this->plan->end)
+		{
+			$this->plan->attendable = ($now <= new \DateTime($this->plan->end));
+		}
+
+		if ($this->plan->state < 1)
+		{
+			$this->plan->attendable = false;
+		}
+
+		if (!$this->plan->attendable)
+		{
+			throw new ValidFailException('本方案目前不可報名');
+		}
 
 		if (!$user->name)
 		{

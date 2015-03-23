@@ -225,6 +225,8 @@ class SaveController extends Controller
 			throw new ValidFailException('課程已開始', 404);
 		}
 
+		$this->plan->attendable = true;
+
 		// Check attendable
 		if ($this->plan->start && $this->plan->end)
 		{

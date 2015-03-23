@@ -309,7 +309,7 @@ class OrderModel extends DatabaseModel
 			return false;
 		}
 
-		if ($stage->quota && ($stage->total >= $reduces))
+		if ($stage->total >= $reduces)
 		{
 			$query = $this->db->getQuery(true);
 
@@ -320,7 +320,7 @@ class OrderModel extends DatabaseModel
 			$this->db->setQuery($query)->execute();
 		}
 
-		if ($plan->quota && ($plan->total >= $reduces))
+		if ($plan->total >= $reduces)
 		{
 			$query = $this->db->getQuery(true);
 

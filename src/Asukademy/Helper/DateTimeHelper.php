@@ -99,7 +99,7 @@ class DateTimeHelper
 			4 => '四',
 			5 => '五',
 			6 => '六',
-			7 => '七',
+			7 => '日',
 		];
 
 		$weekday = static::format($date, 'N');

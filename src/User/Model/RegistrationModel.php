@@ -8,6 +8,7 @@
 
 namespace User\Model;
 
+use Asukademy\Helper\DateTimeHelper;
 use User\Form\RegistrationFieldDefinition;
 use User\Helper\UserHelper;
 use Windwalker\Core\Authenticate\User;
@@ -78,6 +79,7 @@ class RegistrationModel extends DatabaseModel
 		unset($user->password2);
 
 		$user->activation = UserHelper::createActivationCode($user->username);
+		$user->registered = DateTimeHelper::format('now');
 
 		return User::save($user);
 	}

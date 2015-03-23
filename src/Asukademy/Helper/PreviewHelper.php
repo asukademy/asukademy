@@ -79,7 +79,7 @@ class PreviewHelper
 	 *
 	 * @return  string
 	 */
-	public function getToken($string)
+	public static function getToken($string)
 	{
 		return strtoupper(substr(md5($string . 'Asukademy-qwerasdf'), 0, 10));
 	}

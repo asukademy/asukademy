@@ -31,7 +31,6 @@
         "tpyo/amazon-s3-php-class" : "*"
 	},
 	"require-dev": {
-		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
 	},
 	"repositories": [
 		{

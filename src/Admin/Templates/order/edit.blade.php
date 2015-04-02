@@ -47,9 +47,9 @@
                 <legend>付款狀態</legend>
 
                 @if ($item->payment && $item->state == \Admin\Helper\OrderHelper::STATE_WAIT_PAY)
-                    {{ $feedback->render() }}
+                    {{ $feedback->render(['table_class' => 'table table-striped']) }}
                 @elseif ($item->payment && $item->state >= \Admin\Helper\OrderHelper::STATE_PAID_SUCCESS)
-                    {{ $receiver->render() }}
+                    {{ $receiver->render(['table_class' => 'table table-striped']) }}
                 @else
                     沒有付款資料
                 @endif

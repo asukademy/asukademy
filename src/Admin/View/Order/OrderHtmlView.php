@@ -32,6 +32,8 @@ class OrderHtmlView extends BladeHtmlView
 		$data->item = $this->model->getItem();
 		$data->form = $this->model->getForm();
 
+		$data->item->params = json_decode($data->item->params);
+
 		$data->receiver = new PaidReceiver;
 		$data->receiver->setData($data->item->params);
 

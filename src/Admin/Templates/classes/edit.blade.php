@@ -5,6 +5,9 @@
 @section('page_title')
 課程內容@stop
 
+@section('sub_title')
+{{{ $course->title }}} - {{{ $stage->title }}}@stop
+
 @section('toolbar')
     {{ \Riki\Toolbar\Toolbar::save('admin:classes', ['course_id' => $course_id, 'stage_id' => $stage_id], 'btn-lg') }}
 

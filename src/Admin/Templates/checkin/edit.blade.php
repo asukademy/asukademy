@@ -5,6 +5,9 @@
 @section('page_title')
 簽到管理@stop
 
+@section('sub_title')
+{{{ $course->title }}} - {{{ $stage->title }}}@stop
+
 @section('content')
     <div class="row">
         <div class="col-md-10">

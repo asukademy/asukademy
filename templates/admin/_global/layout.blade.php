@@ -23,7 +23,10 @@ Asset::setIndents("    ");
     <div class="jumbotron">
         <div class="container">
             @section('header')
-                <h1 class="pull-left">@yield('page_title')</h1>
+                <div class="pull-left">
+                    <h1>@yield('page_title')</h1>
+                    <h3>@yield('sub_title')</h3>
+                </div>
             @show
 
             <div class="toolbar pull-right">

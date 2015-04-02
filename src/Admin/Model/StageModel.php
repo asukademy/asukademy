@@ -25,6 +25,13 @@ use Windwalker\Table\Table;
 class StageModel extends DatabaseModel
 {
 	/**
+	 * Property name.
+	 *
+	 * @var  string
+	 */
+	protected $name = 'stage';
+
+	/**
 	 * getItem
 	 *
 	 * @param   mixed  $pk
@@ -50,6 +57,7 @@ class StageModel extends DatabaseModel
 			}
 
 			$item->tutors = (new DataMapper(Table::TUTOR_STAGE_MAPS))->findColumn('tutor_id', ['stage_id' => $item->id]);
+			$item->course = (new DataMapper(Table::COURSES))->findOne(['id' => $item->course_id]);
 
 			return $item;
 		});

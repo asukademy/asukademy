@@ -294,5 +294,17 @@ class SaveController extends Controller
 
 			Mailer::quickSend($subject, $config['mail.from'], $config['mail.admin'], $body);
 		}
+		else
+		{
+			$subject = '[飛鳥學院] 您已經報名課程：' . $this->plan->course->title . ' - ' . $this->plan->stage->title;
+			$body = Mailer::render('mail.attended', ['item' => $data, 'user' => $user]);
+
+			Mailer::quickSend($subject, $config['mail.from'], [$data->email, $user->email], $body);
+
+			$subject = '[飛鳥學院] ' . $data->name . ' 報名課程：' . $this->plan->course->title . ' - ' . $this->plan->stage->title;
+			$body = Mailer::render('mail.attended-admin', ['item' => $data, 'user' => $user]);
+
+			Mailer::quickSend($subject, $config['mail.from'], $config['mail.admin'], $body);
+		}
 	}
 }

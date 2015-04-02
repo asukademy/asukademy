@@ -7,7 +7,7 @@
 
         <br />
 
-        <h3>您已經成功報名此課程:</h3>
+        <h3>這是您報名的課程</h3>
 
         <table class="uk-table">
             <tbody>
@@ -46,15 +46,57 @@
             </tbody>
         </table>
 
+        <h3>報名者資料</h3>
+        <table>
+            <tbody>
+            <tr>
+                <th style="min-width: 130px;">姓名</th>
+                <td>{{{ $item->name }}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{{ $item->email }}}</td>
+            </tr>
+            <tr>
+                <th>匿稱</th>
+                <td>{{{ $item->nick }}}</td>
+            </tr>
+            <tr>
+                <th>手機</th>
+                <td>{{{ $item->mobile }}}</td>
+            </tr>
+            <tr>
+                <th>電話</th>
+                <td>{{{ $item->phone }}}</td>
+            </tr>
+            <tr>
+                <th>地址</th>
+                <td>{{{ $item->address }}}</td>
+            </tr>
+            <tr>
+                <th>組織</th>
+                <td>{{{ $item->organization }}}</td>
+            </tr>
+            <tr>
+                <th>統編</th>
+                <td>{{{ $item->vat }}}</td>
+            </tr>
+            <tr>
+                <th>職稱</th>
+                <td>{{{ $item->title }}}</td>
+            </tr>
+            </tbody>
+        </table>
+
         <br />
 
-        <p>前往報名資訊頁面確認您的資訊</p>
+        <p>可隨時前往報名資訊頁面完成付款手續，才算報名成功</p>
 
         <p>
             <a href="{{{ $router->buildHtml('user:order', ['id' => $item->id], \Windwalker\Core\Router\RestfulRouter::TYPE_FULL) }}}"
-                    style="padding: 9px 10px; background-color: #8cc14c; color: #fff;
+                style="padding: 7px 10px; background-color: #00a8e6; box-shadow: 0 4px 0 #0091cc; color: #fff;
 				display: inline-block; border-radius: 3px; text-decoration: none;"
-                    >報名資訊
+                >前往付款
             </a>
         </p>
 

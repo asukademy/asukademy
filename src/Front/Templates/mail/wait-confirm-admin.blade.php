@@ -78,6 +78,10 @@
                 <td>{{{ $item->organization }}}</td>
             </tr>
             <tr>
+                <th>統編</th>
+                <td>{{{ $item->vat }}}</td>
+            </tr>
+            <tr>
                 <th>職稱</th>
                 <td>{{{ $item->title }}}</td>
             </tr>

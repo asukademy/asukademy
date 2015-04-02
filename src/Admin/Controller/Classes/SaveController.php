@@ -73,6 +73,11 @@ class SaveController extends Controller
 				$class['state'] = !empty($class['enabled']);
 
 				$this->validate($class, $k + 1);
+
+				if ($class['date'] === '')
+				{
+					$class['date'] = null;
+				}
 			}
 
 			$mapper = new DataMapper(Table::CLASSES);

@@ -75,6 +75,15 @@ classes:
         course_id: \d+
         stage_id: \d+
 
+# Checkin
+checkin:
+    pattern: /course/(course_id)/stage/(stage_id)/checkin(/id)
+    controller: Admin\Controller\Checkin
+    requirements:
+        id: \d+
+        course_id: \d+
+        stage_id: \d+
+
 # Order
 orders:
     pattern: /orders(/page)

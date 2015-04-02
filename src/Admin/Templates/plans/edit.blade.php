@@ -15,7 +15,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <fieldset class="form-horizontal">
             @foreach(range(1, 10) as $i)
                 <?php $item = $items[$i - 1]; ?>
@@ -101,7 +101,7 @@
             </fieldset>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <fieldset>
 
                 @include('stage.submenu', ['active' => 'plans'])

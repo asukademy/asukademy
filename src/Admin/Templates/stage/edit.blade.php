@@ -15,13 +15,13 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <fieldset class="form-horizontal">
                 {{ \Admin\Form\FormRenderer::render($form->getFields()) }}
             </fieldset>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <fieldset>
 
                 @include('stage.submenu', ['active' => 'stage'])

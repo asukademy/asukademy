@@ -19,6 +19,9 @@ if (!$stage_id)
     <li role="presentation" class="{{ $active == 'classes' ? 'active' : null }} {{ $disabled }}">
         <a href="{{{ $disabled ? '#' : $router->buildHtml('classes', ['course_id' => $course_id, 'stage_id' => $stage_id]) }}}">課程內容</a>
     </li>
+    <li role="presentation" class="{{ $active == 'checkin' ? 'active' : null }} {{ $disabled }}">
+        <a href="{{{ $disabled ? '#' : $router->buildHtml('checkin', ['course_id' => $course_id, 'stage_id' => $stage_id]) }}}">簽到管理</a>
+    </li>
 </ul>
 
 <hr />

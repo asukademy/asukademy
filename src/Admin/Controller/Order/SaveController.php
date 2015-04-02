@@ -79,6 +79,9 @@ class SaveController extends AbstractSaveController
 	 */
 	protected function doSave(Data $data)
 	{
+		$tmpState = $data->state;
+		unset($data->state);
+
 		if ($this->isNew)
 		{
 			$this->model['item.id'] = $data->plan_id;
@@ -91,6 +94,7 @@ class SaveController extends AbstractSaveController
 		}
 
 		$data->id = $this->model['item.id'];
+		$data->state = $tmpState;
 
 		return true;
 	}

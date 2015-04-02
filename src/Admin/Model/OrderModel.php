@@ -181,7 +181,7 @@ class OrderModel extends DatabaseModel
 	}
 
 	/**
-	 * mail
+	 * We have to share this method to front-end so we write it in Model.
 	 *
 	 * @param Data   $item
 	 * @param Record $previous

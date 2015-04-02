@@ -34,11 +34,19 @@ order_notify:
   action:
     '*': NotifyController
 
+clean_expired:
+  pattern: /order/clean
+  controller: Front\Controller\Order
+  action:
+    '*': CleanController
+
 page:
   pattern: (*paths)
   controller: Front\Controller\Page
   action:
     '*': GetController
+
+
 #about:
 #  pattern: /about
 #  controller: Front\Controller\Page

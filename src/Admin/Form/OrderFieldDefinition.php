@@ -68,6 +68,11 @@ class OrderFieldDefinition implements FieldDefinitionInterface
 			->set('labelClass', '')
 			->set('default', null);
 
+		$form->addField(new Field\TextField('vat', '統編'), 'info')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
+
 		$form->addField(new Field\TextField('title', '職稱'), 'info')
 			->set('class', '')
 			->set('labelClass', '')

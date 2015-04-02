@@ -31,7 +31,7 @@
                     <input id="upload" type="file" class="btn" name="upload" value="">
                 </div>
                 <div class="uk-alert">
-                    本方案需要預先審核，請上傳相關文件影本 (JPG or PNG)
+                    本方案需要預先審核，請根據課程注意事項所述上傳相關文件影本 (JPG or PNG)，若未提到則可以省略
                 </div>
             </div>
             @endif

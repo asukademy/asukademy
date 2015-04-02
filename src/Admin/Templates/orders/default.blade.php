@@ -18,12 +18,12 @@
         <th width="1%">ID</th>
         <th width="1%">編輯</th>
         <th>課程</th>
-        <th>梯次</th>
         <th>方案</th>
         <th>價格</th>
         <th width="92px">上課日</th>
         <th>報名者</th>
         <th>會員</th>
+        <th>付款方式</th>
         <th>狀態</th>
         <th width="125">更改狀態</th>
     </tr>
@@ -38,8 +38,13 @@
                     <span class="glyphicon glyphicon-edit"></span>
                 </a>
             </td>
-            <td>{{{ $item->course_title }}}</td>
-            <td>{{{ $item->stage_title }}}</td>
+            <td>
+                <a href="{{{ $router->buildHtml('course', ['id' => $item->course_id]) }}}" target="_blank">
+                    {{{ $item->course_title }}}
+                </a>
+                <br />
+                <small>{{{ $item->stage_title }}}</small>
+            </td>
             <td>{{{ $item->plan_title }}}</td>
             <td>
                 @if ((int) $item->price)
@@ -50,7 +55,16 @@
             </td>
             <td>{{{ \Asukademy\Helper\DateTimeHelper::format($item->stage_start, 'Y-m-d', true) }}}</td>
             <td>{{{ $item->name }}}</td>
-            <td>{{{ $item->user_name }}}</td>
+            <td>
+                <a href="{{{ $router->buildHtml('user', ['id' => $item->user_id]) }}}" target="_blank">
+                    {{{ $item->user_name }}}
+                </a>
+            </td>
+            <td>
+                @if ($item->payment)
+                    {{{ \Windwalker\Pay2Go\Pay2GoHelper::getPaymentTitle($item->payment) }}}
+                @endif
+            </td>
             <td class="text-center">
                 <?php $stateTitle = \Admin\Helper\OrderHelper::getStateTitle($item->state); ?>
                 @if ($item->state == \Admin\Helper\OrderHelper::STATE_PENDING)
@@ -65,6 +79,13 @@
                     <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-minus"></span>
                 @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED)
                     <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-remove text-danger"></span>
+                @endif
+                &nbsp;&nbsp;
+
+                @if ($item->checked_in)
+                    <span data-toggle="tooltip" data-placement="top" title="已簽到。簽到時間：{{{ $item->checked_in }}}" class="glyphicon glyphicon-check text-success"></span>
+                @else
+                    <span data-toggle="tooltip" data-placement="top" title="尚未簽到" class="glyphicon glyphicon-check text-muted" style="opacity: .5;"></span>
                 @endif
             </td>
             <td>

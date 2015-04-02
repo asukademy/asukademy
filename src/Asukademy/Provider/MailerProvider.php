@@ -31,7 +31,7 @@ class MailerProvider implements ServiceProviderInterface
 		{
 			$config = $container->get('system.config');
 
-			return new \SendGrid($config['smtp.username'], $config['smtp.password']);
+			return new \SendGrid($config['smtp.username'], $config['smtp.password'], ['turn_off_ssl_verification' => !$config->get('smtp.ssl_verification', true)]);
 		};
 
 		$container->set('mailer', $closure);

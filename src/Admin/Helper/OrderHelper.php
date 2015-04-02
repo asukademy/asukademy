@@ -94,6 +94,13 @@ class OrderHelper
 	 */
 	public static function setExtraState(Data $order)
 	{
+		if (!$order->id)
+		{
+			$order->state = OrderHelper::STATE_WAIT_PAY;
+
+			return $order;
+		}
+
 		if ($order->stage->end)
 		{
 			$end = new \DateTime($order->stage->end);

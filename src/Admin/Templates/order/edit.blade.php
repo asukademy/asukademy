@@ -13,9 +13,16 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
+            @if (!$item->id)
+            <fieldset class="form-horizontal">
+                <legend>NEW</legend>
+                {{ \Admin\Form\FormRenderer::render($form->getFields('new')) }}
+            </fieldset>
+            @endif
+
             <fieldset class="form-horizontal">
                 <legend>基礎資料</legend>
-                {{ \Admin\Form\FormRenderer::render($form->getFields()) }}
+                {{ \Admin\Form\FormRenderer::render($form->getFields('info')) }}
             </fieldset>
         </div>
 

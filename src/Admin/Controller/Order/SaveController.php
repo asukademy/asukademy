@@ -9,9 +9,11 @@
 namespace Admin\Controller\Order;
 
 use Riki\Controller\AbstractSaveController;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Data\Data;
 use Windwalker\Record\Record;
+use Windwalker\String\String;
 use Windwalker\Table\Table;
 
 /**
@@ -22,6 +24,53 @@ use Windwalker\Table\Table;
 class SaveController extends AbstractSaveController
 {
 	/**
+	 * Property isNew.
+	 *
+	 * @var  boolean
+	 */
+	public $isNew = false;
+
+	/**
+	 * preSave
+	 *
+	 * @param Data $data
+	 *
+	 * @return void
+	 */
+	protected function preSave(Data $data)
+	{
+		$this->isNew = !(bool) $data->id;
+
+		if ($this->isNew)
+		{
+			$user = User::get(['username' => $data->username]);
+
+			if ($user->isNull())
+			{
+				throw new ValidFailException('User not found');
+			}
+
+			$data->user_id = $user->id;
+
+			unset($user->state);
+			unset($user->id);
+
+			foreach ($data as $k => $v)
+			{
+				if (String::isEmpty($v))
+				{
+					$data->$k = $user->$k;
+				}
+			}
+
+			$plan = $this->model->getPlan($data->plan_id);
+
+			$data->stage_id = $plan->stage->id;
+			$data->course_id = $plan->course->id;
+		}
+	}
+
+	/**
 	 * doSave
 	 *
 	 * @param Data $data
@@ -30,19 +79,18 @@ class SaveController extends AbstractSaveController
 	 */
 	protected function doSave(Data $data)
 	{
-		$record = new Record(Table::ORDERS);
+		if ($this->isNew)
+		{
+			$this->model['item.id'] = $data->plan_id;
 
-		$tmp = $data->state;
+			$this->model->create($data);
+		}
+		else
+		{
+			$this->model->update($data);
+		}
 
-		unset($data->state);
-
-		$record->load($data->id)
-			->bind($data)
-			->check()
-			->store(Record::UPDATE_NULLS);
-
-		$data->state = $tmp;
-		$data->id = $record->id;
+		$data->id = $this->model['item.id'];
 
 		return true;
 	}
@@ -69,6 +117,19 @@ class SaveController extends AbstractSaveController
 
 	protected function validate(Data $data)
 	{
+		if ($this->isNew)
+		{
+			if (!$data->username)
+			{
+				throw new ValidFailException('Please enter Username');
+			}
+
+			if (!$data->plan_id)
+			{
+				throw new ValidFailException('Please choose a Plan');
+			}
+		}
+
 		if (!$data->name)
 		{
 			throw new ValidFailException('需要名字');

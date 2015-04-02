@@ -81,7 +81,7 @@ orders:
     controller: Admin\Controller\Orders
 
 order:
-    pattern: /order/(id)
+    pattern: /order(/id)
     controller: Admin\Controller\Order
 
 order_state:

@@ -86,33 +86,4 @@ class OrderModel extends \Admin\Model\OrderModel
 
 		return $form;
 	}
-
-	/**
-	 * save
-	 *
-	 * @param   Data  $data
-	 *
-	 * @return  bool
-	 *
-	 * @throws ValidFailException
-	 */
-	public function create($data)
-	{
-		if (!$this->checkQuantity())
-		{
-			throw new ValidFailException('本次開課已額滿');
-		}
-
-		$record = new Record(Table::ORDERS);
-
-		$record->bind($data)
-			->check()
-			->store();
-
-		$this->addQuantity();
-
-		$this['item.id'] = $record->id;
-
-		return true;
-	}
 }

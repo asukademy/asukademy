@@ -8,6 +8,7 @@
 
 namespace Admin\Form;
 
+use Asukademy\Form\Field\PlansField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 use Windwalker\Form\Field;
@@ -28,42 +29,46 @@ class OrderFieldDefinition implements FieldDefinitionInterface
 	 */
 	public function define(Form $form)
 	{
-		$form->addField(new Field\TextField('name', '姓名'))
+		$form->addField(new Field\TextField('username', 'User'), 'new');
+
+		$form->addField(new PlansField('plan_id', 'Plan'), 'new');
+
+		$form->addField(new Field\TextField('name', '姓名'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('email', 'Email'))
+		$form->addField(new Field\TextField('email', 'Email'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('nick', '暱稱'))
+		$form->addField(new Field\TextField('nick', '暱稱'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('mobile', '手機'))
+		$form->addField(new Field\TextField('mobile', '手機'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('phone', '電話'))
+		$form->addField(new Field\TextField('phone', '電話'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('address', '地址'))
+		$form->addField(new Field\TextField('address', '地址'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('organization', '組織單位'))
+		$form->addField(new Field\TextField('organization', '組織單位'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
 
-		$form->addField(new Field\TextField('title', '職稱'))
+		$form->addField(new Field\TextField('title', '職稱'), 'info')
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);

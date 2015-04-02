@@ -80,12 +80,21 @@
                 @elseif ($item->state == \Admin\Helper\OrderHelper::STATE_CANCELED)
                     <span data-toggle="tooltip" data-placement="top" title="{{{ $stateTitle }}}" class="glyphicon glyphicon-remove text-danger"></span>
                 @endif
+
                 &nbsp;&nbsp;
 
                 @if ($item->checked_in)
                     <span data-toggle="tooltip" data-placement="top" title="已簽到。簽到時間：{{{ $item->checked_in }}}" class="glyphicon glyphicon-check text-success"></span>
                 @else
                     <span data-toggle="tooltip" data-placement="top" title="尚未簽到" class="glyphicon glyphicon-check text-muted" style="opacity: .5;"></span>
+                @endif
+
+                &nbsp;&nbsp;
+
+                @if ($item->invoice)
+                    <span data-toggle="tooltip" data-placement="top" title="發票已開出，編號：{{{ $item->invoice }}}" class="glyphicon glyphicon-file text-success"></span>
+                @else
+                    <span data-toggle="tooltip" data-placement="top" title="尚未開出發票" class="glyphicon glyphicon-file text-muted" style="opacity: .5;"></span>
                 @endif
             </td>
             <td>

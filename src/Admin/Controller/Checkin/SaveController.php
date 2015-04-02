@@ -59,12 +59,19 @@ class SaveController extends AbstractSaveController
 	{
 		$record = new Record(Table::ORDERS);
 
-		$record->id = $data->id;
-		$record->checked_in = DateTimeHelper::format('now');
+		$record->load($data->id);
 
-		//show($data, $record);die;
+		if ($this->input->get('task') == 'invoice')
+		{
+			$record->invoice = $this->input->get('invoice');
+		}
+		else
+		{
+			$record->checked_in = DateTimeHelper::format('now');
+		}
 
-		$record->store();
+		$record->check()
+			->store(Record::UPDATE_NULLS);
 	}
 
 	/**

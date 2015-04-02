@@ -15,7 +15,7 @@
         <div class="col-md-6">
             @if (!$item->id)
             <fieldset class="form-horizontal">
-                <legend>NEW</legend>
+                <legend>新增</legend>
                 {{ \Admin\Form\FormRenderer::render($form->getFields('new')) }}
             </fieldset>
             @endif
@@ -47,7 +47,14 @@
                     {{ $select->toString() }}
                 @endif
 
-                <br /><br /><br />
+                <br /><br />
+            </fieldset>
+
+            <fieldset class="form-horizontal">
+                <legend>發票</legend>
+                {{ \Admin\Form\FormRenderer::render($form->getFields('invoice')) }}
+
+                <br /><br />
             </fieldset>
 
             <fieldset>

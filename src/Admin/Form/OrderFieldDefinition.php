@@ -77,5 +77,10 @@ class OrderFieldDefinition implements FieldDefinitionInterface
 			->set('class', '')
 			->set('labelClass', '')
 			->set('default', null);
+
+		$form->addField(new Field\TextField('invoice', '發票編號'), 'invoice')
+			->set('class', '')
+			->set('labelClass', '')
+			->set('default', null);
 	}
 }

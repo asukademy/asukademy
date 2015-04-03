@@ -5,7 +5,7 @@
     <th>梯次名稱</th>
     <th width="100">日期</th>
     <th>地點</th>
-    <th width="60" class="uk-hidden-small">人數</th>
+    <th width="60" class="uk-hidden-small">名額</th>
     <th width="95">詳細資訊</th>
     <th width="95" class="uk-hidden-small">立即報名</th>
     </thead>
@@ -18,9 +18,11 @@
             <td>{{{ $stage->position->title }}}</td>
             <td class="uk-hidden-small">
                 @if ($stage->attendable && !$stage->quota)
-                    不限 ({{{ $stage->total }}})
+                    不限
+                    {{--({{{ $stage->total }}})--}}
                 @elseif ($stage->attendable)
-                    {{{ $stage->people }}} / {{{ $stage->quota }}}
+                    {{--{{{ $stage->people }}} / --}}
+                    {{{ $stage->quota }}}
                 @else
                     <span data-uk-tooltip title="{{{ $stage->people }}} / {{{ $stage->quota }}}">
                         額滿

@@ -18,10 +18,8 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Package\PackageHelper;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\IO\Input;
-use Windwalker\Ioc;
 use Windwalker\String\String;
 use Windwalker\Table\Table;
-use Windwalker\Web\Application;
 
 /**
  * The CleanController class.

@@ -5,7 +5,7 @@
     <th style="min-width: 55px;">方案<span class="uk-hidden-small">名稱</span></th>
     <th></th>
     <th>價格</th>
-    <th>人數</th>
+    <th>名額</th>
     <th><span class="uk-hidden-small">立即</span>報名</th>
     </thead>
 
@@ -35,11 +35,15 @@
             </td>
             <td>
                 @if (!$plan->quota)
-                    不限 ({{{ $plan->people }}})
+                    不限
+                    {{--({{{ $plan->people }}})--}}
                 @elseif ($plan->attendable)
-                    {{{ $plan->people }}} / {{{ (int) $plan->quota }}}
+                    {{--{{{ $plan->people }}} / --}}
+                    {{{ (int) $plan->quota }}}
                 @else
-                    額滿 ({{{ $plan->people }}} / {{{ (int) $plan->quota }}})
+                    {{--額滿 ({{{ $plan->people }}} / {{{ (int) $plan->quota }}})--}}
+
+                    {{{ (int) $plan->quota }}} (額滿)
                 @endif
             </td>
             <td>
@@ -58,12 +62,13 @@
         </tr>
     @endforeach
     <tr>
-        <th>總人數</th>
+        <th>總人數限制</th>
         <td colspan="5">
             @if (!$item->quota)
                 不限
             @else
-            {{{ $item->total }}} / {{{ $item->quota }}}
+            {{--{{{ $item->total }}} / --}}
+            {{{ $item->quota }}}
             @endif
         </td>
     </tr>

@@ -59,7 +59,13 @@
     </tr>
     <tr>
         <th>招生人數</th>
-        <td>{{{ $item->quota }}} 人</td>
+        <td>
+            {{{ $item->quota }}} 人
+
+            @if ($item->less)
+                (最低開班人數 {{{ $item->less }}})
+            @endif
+        </td>
     </tr>
     <tr>
         <th>上課地點</th>

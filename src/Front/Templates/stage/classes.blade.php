@@ -3,7 +3,7 @@
 <table class="uk-table uk-table-striped">
     <thead>
     <th width="1%">#</th>
-    @if ($item->classes->date)
+    @if (array_filter($item->classes->date))
     <th>上課時間</th>
     @endif
     <th width="15%">時數</th>
@@ -16,7 +16,7 @@
             <td>
                 {{{ $k + 1 }}}
             </td>
-            @if ($item->classes->date)
+            @if (array_filter($item->classes->date))
             <td style="white-space: nowrap;">
                 @if ($class->date)
                     {{{ $class->date }}}

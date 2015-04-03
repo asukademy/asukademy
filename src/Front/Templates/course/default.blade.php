@@ -58,7 +58,8 @@
 
             <aside class="comments uk-margin-large-top">
                 <h1>留言</h1>
-                <div class="fb-comments" data-href="{{{ \Riki\Uri\Uri::current() }}}" data-width="100%" data-numposts="20" data-colorscheme="light"></div>
+                {{--<div class="fb-comments" data-href="{{{ \Riki\Uri\Uri::current() }}}" data-width="100%" data-numposts="20" data-colorscheme="light"></div>--}}
+                {{ \Front\Helper\DisqusHelper::render() }}
             </aside>
         </div>
     </div>

@@ -24,3 +24,6 @@ mail:
         - service@asukademy.com
         # - simon@asukademy.com
     from: service@asukademy.com
+facebook:
+    app_id: 437959596371503
+

@@ -32,6 +32,7 @@ class GetController extends Controller
 		$model['filter.stage_id']  = $this->input->get('stage_id');
 		$model['stage.id']  = $this->input->get('stage_id');
 		$model['course.id'] = $this->input->get('course_id');
+		$model['list.ordering'] = 'order.id ASC';
 
 		$stageModel['course.id'] = $this->input->get('course_id');
 		$stageModel['item.id']   = $this->input->get('stage_id');

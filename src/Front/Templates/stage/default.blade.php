@@ -64,6 +64,11 @@
                     沒有報名方案可選
                 @endif
             </article>
+
+            <aside class="comments uk-margin-large-top">
+                <h1>留言</h1>
+                <div class="fb-comments" data-href="{{{ \Riki\Uri\Uri::current() }}}" data-width="100%" data-numposts="20" data-colorscheme="light"></div>
+            </aside>
         </div>
     </div>
 @stop

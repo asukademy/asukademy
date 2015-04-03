@@ -24,7 +24,9 @@ class AuthoriseListener
 	/**
 	 * onBeforeExecute
 	 *
-	 * @param Event $event
+	 * @param  Event  $event
+	 *
+	 * @throws \Exception
 	 *
 	 * @return  void
 	 */
@@ -52,6 +54,10 @@ class AuthoriseListener
 		{
 			UserHelper::checkLogin();
 		}
+
+		// Test remember me
+		// $session = Ioc::getSession();
+		// show($session->getOption('cookie_path'), $session->getOption('cookie_domain'), $session);
 	}
 
 	public function onUserBeforeLogin(Event $event)

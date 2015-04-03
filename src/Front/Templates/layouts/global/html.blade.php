@@ -28,6 +28,7 @@ $titleSuffix = ($view->layout != 'index') ? ' | Asukademy 飛鳥學院' : '';
 @if ($app->get('meta.description'))
     <meta property="og:description" content="{{{ $app->get('meta.description') }}}">
 @endif
+    <meta property="fb:app_id" content="{{{ $app->get('facebook.app_id') }}}" />
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->

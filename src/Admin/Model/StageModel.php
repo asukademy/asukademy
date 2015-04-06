@@ -46,7 +46,11 @@ class StageModel extends DatabaseModel
 
 			if (!$pk)
 			{
-				return new Data;
+				$item = new Data;
+
+				$item->course = (new DataMapper(Table::COURSES))->findOne(['id' => $item['course.id']]);
+
+				return $item;
 			}
 
 			$item = (new StageMapper)->findOne($pk);

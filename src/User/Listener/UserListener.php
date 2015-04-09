@@ -49,5 +49,9 @@ class UserListener
 	 */
 	public function onAfterInitialise(Event $event)
 	{
+		if (isset($_COOKIE[session_name()]))
+		{
+			session_id($_COOKIE[session_name()]);
+		}
 	}
 }

@@ -3,7 +3,7 @@
 @extends('layouts.global.course')
 
 @section('page_title')
-{{{ $item->title }}}@stop
+{{{ $item->title }}} - 課程資訊@stop
 
 @section('banner')
     <div class="uk-container uk-container-center course-toolbar banner-toolbar">

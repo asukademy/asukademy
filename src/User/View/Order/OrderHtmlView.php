@@ -102,7 +102,7 @@ class OrderHtmlView extends AbstractFrontHtmlView
 
 		$pay2go->creditCard->enable()
 			//->setUNIONPAY(1)
-			->installment(0);
+			->installment('3, 6, 12');
 		/*
 		$pay2go->alipay->enable()
 			->setReceiver('ASukademy')

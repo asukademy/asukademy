@@ -4,6 +4,7 @@ system:
 session:
     handler: native
     expire_time: 144000
+    cookie_path: /
 cache:
     enabled: 0
     storage: file

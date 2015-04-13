@@ -54,6 +54,11 @@ class OrdersModel extends ListModel
 			$query->where('stage.id = ' . $this['filter.stage_id']);
 		}
 
+		if ($this['filter.state'])
+		{
+			$query->where('order.state = ' . $this['filter.state']);
+		}
+
 		if ($this['list.ordering'])
 		{
 			$query->order($this['list.ordering']);

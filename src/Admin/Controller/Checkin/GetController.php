@@ -8,6 +8,7 @@
 
 namespace Admin\Controller\Checkin;
 
+use Admin\Helper\OrderHelper;
 use Windwalker\Core\Controller\Controller;
 
 /**
@@ -30,6 +31,7 @@ class GetController extends Controller
 		$courseModel = $this->getModel('Course');
 
 		$model['filter.stage_id']  = $this->input->get('stage_id');
+		$model['filter.state']  = OrderHelper::STATE_PAID_SUCCESS;
 		$model['stage.id']  = $this->input->get('stage_id');
 		$model['course.id'] = $this->input->get('course_id');
 		$model['list.ordering'] = 'order.id ASC';

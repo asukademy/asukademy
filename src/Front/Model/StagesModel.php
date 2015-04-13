@@ -20,7 +20,7 @@ use Windwalker\Table\Table;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class CoursesModel extends ListModel
+class StagesModel extends ListModel
 {
 	/**
 	 * getListQuery
@@ -35,7 +35,7 @@ class CoursesModel extends ListModel
 
 		$queryHelper->addTable('stage', Table::STAGES)
 			->addTable('course', Table::COURSES, 'course.id = stage.course_id')
-			->addTable('plans', Table::COURSES, 'course.id = stage.course_id');
+			->addTable('category', Table::CATEGORIES, 'category.id = course.catid');
 
 		$query->select($queryHelper->getSelectFields());
 
@@ -48,6 +48,15 @@ class CoursesModel extends ListModel
 		if ($category->notNull())
 		{
 			$query->where('category.id = ' . $query->quote($category->id));
+		}
+
+		if (!$this['filter.state'])
+		{
+			$query->where('stage.state >= 1');
+		}
+		else
+		{
+			$query->where('stage.state = ' . $this['filter.state']);
 		}
 
 		// Search

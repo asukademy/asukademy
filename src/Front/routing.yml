@@ -40,6 +40,11 @@ clean_expired:
   action:
     '*': CleanController
 
+# Sitemap
+sitemap:
+    pattern: /sitemap
+    controller: Front\Controller\Sitemap
+
 page:
   pattern: (*paths)
   controller: Front\Controller\Page

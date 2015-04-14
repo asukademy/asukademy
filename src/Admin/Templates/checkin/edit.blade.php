@@ -29,9 +29,8 @@
                     <th>方案</th>
                     <th>報名者</th>
                     <th>會員</th>
+                    <th>Email</th>
                     <th>電話</th>
-                    <th>組織單位</th>
-                    <th>職稱</th>
                     <th>發票</th>
                     <th>簽到</th>
                 </tr>
@@ -43,15 +42,10 @@
                     <td>{{{ $item->plan_title }}}</td>
                     <td>{{{ $item->name }}}</td>
                     <td>{{{ $item->user_name }}}</td>
+                    <td>{{{ $item->email }}}</td>
                     <td>
                         <div>{{{ $item->mobile }}}</div>
                         <div>{{{ $item->phone }}}</div>
-                    </td>
-                    <td>
-                        {{{ $item->organization }}}
-                    </td>
-                    <td>
-                        {{{ $item->title }}}
                     </td>
                     <td class="text-center">
                         <button type="button" class="btn btn-default btn-sm {{ $item->invoice ? 'btn-success' : '' }}" data-toggle="modal" data-target="#invoiceModal"

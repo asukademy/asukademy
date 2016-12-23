@@ -121,13 +121,13 @@ $titleSuffix = ($view->layout != 'index') ? ' | Asukademy 飛鳥學院' : '';
         <p class="uk-text-center social-buttons">
             <a target="_blank" class="uk-icon-button uk-icon-facebook" href="https://fb.me/asukademy"></a>
 
-            <a target="_blank" class="uk-icon-button uk-icon-github" href="https://github.com/asukademy"></a>
+            <a target="_blank" class="uk-icon-button uk-icon-github" href="http://the-allstars.com"></a>
 
             <a class="uk-icon-button uk-icon-envelope-o" href="mailto:service@asukademy.com"></a>
         </p>
 
         <p>
-            Copyright © 2014 Asukademy. All Rights Reserved.
+            Copyright © 2017 Asukademy. All Rights Reserved.
         </p>
         <p class="back">
             <a href="#" data-uk-smooth-scroll><span class="uk-icon-chevron-up"></span> Back to Top</a>
